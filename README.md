@@ -63,16 +63,15 @@ and optionally :
 	* From the command line `vagrant plugin install vagrant-proxyconf-1.5.2.gem`
 	* Last edit Vagrantfile and change config.proxy.http, config.proxy.https and config.proxy.no_proxy values to the right IP and port and user/password.
  
-4. Download source from GitHub,
-		if you have Git installed in your host then do :
+4. Download source from GitHub, if you have Git installed in your host then do :
 
-			`git clone https://github.com/sergiomt/centorion.git`
+`git clone https://github.com/sergiomt/centorion.git`
 
-		else download and unzip
+or else download and unzip
 
-			`https://github.com/sergiomt/centorion/archive/master.zip`
+`https://github.com/sergiomt/centorion/archive/master.zip`
 
-	* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
 
 5. Optional. Copy an SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
