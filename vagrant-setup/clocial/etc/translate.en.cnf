@@ -1,0 +1,11 @@
+src_dir=/usr/share/apache-tomcat-8.0.8/webapps/clocial
+dest_dir=/usr/share/apache-tomcat-8.0.8/webapps/en
+profile=clocial
+driver=org.postgresql.Driver
+dburl=jdbc\:postgresql\://127.0.0.1\:5432/clocial?allowEncodingChanges=true
+dbuser=clocial
+dbpassword=clocial
+language=en
+fileuser=
+filepassword=
+fileserver=

@@ -1,0 +1,13 @@
+dn: o=Clocial,dc=auth,dc=com
+o: Clocial
+objectClass: organization
+
+dn: ou=Users,o=Clocial,dc=auth,dc=com
+ou: Users
+description: All users in Clocial
+objectClass: organizationalUnit
+
+dn: ou=Avatars,o=Clocial,dc=auth,dc=com
+ou: Avatars
+description: All avatars in Clocial
+objectClass: organizationalUnit

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>clocial-web</display-name>
+    
+	<filter>
+		<display-name>Stripes Filter</display-name>
+		<filter-name>StripesFilter</filter-name>
+		<filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+		<init-param>
+			<param-name>ActionResolver.Packages</param-name>
+			<param-value>com.clocial.action</param-value>
+		</init-param>
+		<init-param>
+		  <param-name>LocalePicker.Locales</param-name>
+      <param-value>en,es</param-value>
+    </init-param>
+    <init-param>
+      <param-name>Interceptor.Classes</param-name>
+      <param-value>
+        com.clocial.action.LoginInterceptor,net.sourceforge.stripes.controller.BeforeAfterMethodInterceptor
+      </param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <filter-name>Encoding Filter</filter-name>
+    <filter-class>com.knowgate.stripes.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  
+  <filter>
+    <filter-name>Caching Filter</filter-name>
+    <filter-class>com.knowgate.stripes.CachingFilter</filter-class>
+  </filter>
+
+  <!--
+  <filter>
+    <filter-name>YOSFilter</filter-name>
+    <filter-class>com.knowgate.yahoo.YahooFilter</filter-class>
+    <init-param>
+      <param-name>oauth</param-name>
+      <param-value>oauth.properties</param-value>
+    </init-param>      
+    <init-param>
+      <param-name>oauthConnectionClass</param-name>
+      <param-value>net.oauth.client.httpclient4.HttpClient4</param-value>
+    </init-param>
+    <init-param>
+      <param-name>redirect</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+	-->
+
+	<filter-mapping>
+		<filter-name>StripesFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>StripesFilter</filter-name>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+  <filter-mapping>
+    <filter-name>Encoding Filter</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+
+  <!--
+  <filter-mapping>
+    <filter-name>YOSFilter</filter-name>
+    <servlet-name>YahooCallback</servlet-name>
+  </filter-mapping>
+  -->
+
+	<servlet>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+  <servlet>
+    <servlet-name>YUI JavaScript Combo Service</servlet-name>
+    <servlet-class>com.clocial.yahoo.JavascriptComboService</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DAO</servlet-name>
+    <servlet-class>com.clocial.action.DAO</servlet-class>
+    <init-param>
+      <param-name>rdbms</param-name>
+      <param-value>clocial</param-value>
+    </init-param>
+    <init-param>
+      <param-name>slog</param-name>
+      <param-value>logservice</param-value>
+    </init-param>
+    <init-param>
+      <param-name>blobs</param-name>
+      <param-value>amazons3</param-value>
+    </init-param>
+    <init-param>
+      <param-name>inmail</param-name>
+      <param-value>inmailservice</param-value>
+    </init-param>
+    <init-param>
+      <param-name>chat</param-name>
+      <param-value>chatservice</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+	</servlet>
+
+  <servlet>
+    <servlet-name>AutoCompleteSentence</servlet-name>
+    <servlet-class>com.clocial.servlets.AutoCompleteSentence</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>AutoCompleteState</servlet-name>
+    <servlet-class>com.clocial.servlets.AutoCompleteState</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ChatConversationBroker</servlet-name>
+    <servlet-class>com.clocial.servlets.ChatConversationBroker</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>FacebookCallback</servlet-name>
+    <servlet-class>com.clocial.servlets.FacebookCallback</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>FacebookSignIn</servlet-name>
+    <servlet-class>com.clocial.servlets.FacebookSignIn</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>InvitationReaded</servlet-name>
+    <servlet-class>com.clocial.servlets.InvitationReaded</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>MessageReaded</servlet-name>
+    <servlet-class>com.clocial.servlets.MessageReaded</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>PictureBlob</servlet-name>
+    <servlet-class>com.clocial.servlets.PictureBlob</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>PictureUpload</servlet-name>
+    <servlet-class>com.clocial.servlets.PictureUpload</servlet-class>
+  </servlet>
+
+  <!--
+  <servlet>
+    <servlet-name>YahooCallback</servlet-name>
+    <servlet-class>com.clocial.servlets.YahooCallback</servlet-class>
+  </servlet>
+  -->
+
+	<servlet-mapping>
+		<servlet-name>StripesDispatcher</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>YUI JavaScript Combo Service</servlet-name>
+    <url-pattern>/yuicombo/JavascriptComboService</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AutoCompleteSentence</servlet-name>
+    <url-pattern>/AutoCompleteSentence</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AutoCompleteState</servlet-name>
+    <url-pattern>/AutoCompleteState</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ChatConversationBroker</servlet-name>
+    <url-pattern>/ChatConversationBroker</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FacebookCallback</servlet-name>
+    <url-pattern>/FacebookCallback</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FacebookSignIn</servlet-name>
+    <url-pattern>/FacebookSignIn</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>InvitationReaded</servlet-name>
+    <url-pattern>/InvitationReaded</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>MessageReaded</servlet-name>
+    <url-pattern>/MessageReaded</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>PictureBlob</servlet-name>
+    <url-pattern>/PictureBlob</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>PictureUpload</servlet-name>
+    <url-pattern>/PictureUpload</url-pattern>
+  </servlet-mapping>
+
+	<!--
+  <servlet-mapping>
+    <servlet-name>YahooCallback</servlet-name>
+    <url-pattern>/YahooCallback</url-pattern>
+  </servlet-mapping>
+  -->
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!--
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>401</error-code>
+    <location>/401.html</location>
+  </error-page>
+  -->
+  
+</web-app>

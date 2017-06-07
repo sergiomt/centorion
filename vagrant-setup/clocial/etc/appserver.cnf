@@ -1,0 +1,5 @@
+threetiers=disabled
+java.naming.factory.initial=
+java.naming.provider.url=
+java.naming.factory.url.pkgs=
+jnp.socketFactory=

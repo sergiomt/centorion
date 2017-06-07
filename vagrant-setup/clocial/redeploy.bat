@@ -1,0 +1,1 @@
+plink -ssh -pw vagrant -m C:\Clocial\vagrant-setup\clocial\redeploy.sh vagrant@192.168.101.110

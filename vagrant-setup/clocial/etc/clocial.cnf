@@ -1,0 +1,24 @@
+# clocial configuration file
+# Wed May 1 20:51:17 CEST 2013
+queue=com.knowgate.ramqueue.RAMQueueProducer
+driver=org.postgresql.Driver
+dburl=jdbc\:postgresql\://127.0.0.1\:5432/clocialdev
+schema=
+dbuser=clocial
+dbpassword=clocial
+
+luceneindex=file:///opt/lucene/clocialdev
+
+mail.store.protocol=pop3
+mail.transport.protocol=smtp
+mail.incoming=my.inbox.com
+mail.outgoing=my.inbox.com
+mail.password=622|LkzUu-888
+mail.account=clocial@inbox.com
+mail.user=clocial@inbox.com
+mail.smtp.host=my.inbox.com
+mail.smtp.port=25
+
+initialcreditsperuser=50
+bonuscreditsperinvitation=5
+creditcostpercontact=5

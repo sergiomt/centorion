@@ -21,7 +21,6 @@
 /vagrant-setup/cache/*.rpm
 /vagrant-setup/cache/*.bz2
 /vagrant-setup/cache/*.zip
-/vagrant-setup/clocial
 /vagrant-setup/target
 *.log
 *.pbk
@@ -30,8 +29,5 @@
 id_dsa
 id_rsa
 ultraedit.prj
-clocial.sh
-clocial-readme.txt
-clocial-src.sh
-clocial-test-db.sh
+
 

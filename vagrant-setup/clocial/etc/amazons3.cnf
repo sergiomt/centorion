@@ -1,0 +1,7 @@
+# dbenvironment=/usr/share/db-6.0.30/bucket
+# Remove dbenvironment property and set region if you want to use Amazon S3 instead of Berkeley DB
+region=eu-west-1
+bucket=clocialtest
+package=com/clocial/blob/test
+accessKey=05GJRW9N9R1M1TJ9M202
+secretKey=

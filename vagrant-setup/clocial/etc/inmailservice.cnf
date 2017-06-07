@@ -1,0 +1,14 @@
+package=com/clocial/inmail
+hbconfig=/usr/share/hbase/conf
+
+mail.transport.protocol=smtp
+
+mail.store.protocol=pop3
+mail.transport.protocol=smtp
+mail.incoming=my.inbox.com
+mail.outgoing=my.inbox.com
+mail.password=622|LkzUu-888
+mail.account=clocial@inbox.com
+mail.user=clocial@inbox.com
+mail.smtp.host=my.inbox.com
+mail.smtp.port=25
