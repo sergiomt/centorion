@@ -8,6 +8,8 @@ fi
 # There is a .sh script for each app
 AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 knowgate-src lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql93 protobuf250 python276 ruby226 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
 
+AVAILABLE_APPS=(${AVAILABLE_APPS[@]} clocial clocial-src clocial-test-db )
+
 SETUP="/vagrant/vagrant-setup"
 DOWNLOAD_PROXY=http://www.knowgate.com/shared/
 PPWD=$PWD

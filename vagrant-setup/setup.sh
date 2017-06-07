@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Add names from the .sh commands in the list to run them when setting up the machine for the first time
-INSTALLED_APPS=( )
+INSTALLED_APPS=( clocial )
 
 # AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql93 protobuf250 python276 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
 
