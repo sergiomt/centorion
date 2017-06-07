@@ -15,7 +15,11 @@ HOST="centorion"
 hostname $HOST
 echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
-yum makecache fast
+# Enable the EPEL Repo
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+# Use this one for CentOS 6.5
+# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
 yum install -y iptables-services
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT
 service iptables save
@@ -40,9 +44,6 @@ perl -pi -e "s/keepcache=0/keepcache=1/g" /etc/yum.conf
 cp ./yum/*.repo /etc/yum.repos.d/
 
 cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
-
-rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
-# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
 # GCC, APR, OpenSSL Zip, Git and Mercurial stuff needed for compiling some source code later
 yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget apr-devel.x86_64 openssl-devel.x86_64 zip unzip git mercurial mercurial-hgk
