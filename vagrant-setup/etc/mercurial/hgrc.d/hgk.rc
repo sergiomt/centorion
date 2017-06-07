@@ -1,0 +1,7 @@
+[extensions]
+# enable hgk extension ('hg help' shows 'view' as a command)
+hgk=
+mq=
+
+[hgk]
+path=/usr/libexec/mercurial/hgk

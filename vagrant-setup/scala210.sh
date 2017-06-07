@@ -1,0 +1,1 @@
+yum localinstall -y http://www.scala-lang.org/files/archive/scala-2.10.6.rpm

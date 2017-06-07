@@ -1,0 +1,33 @@
+dn: dc=auth,dc=com
+dc: auth
+description: Root LDAP entry for auth.com
+objectClass: dcObject
+objectClass: organizationalUnit
+ou: rootobject
+
+dn: ou=Policies,dc=auth,dc=com
+ou: Policies
+description: All users in Clocial
+objectClass: organizationalUnit
+
+# Password policy
+# http://www.zytrax.com/books/ldap/ch6/ppolicy.html
+dn: cn=default,ou=Users,dc=auth,dc=com
+objectClass: top
+objectClass: device
+objectClass: pwdPolicy
+cn: default
+pwdAttribute: userPassword
+pwdMaxAge: 0
+pwdExpireWarning: 0
+pwdInHistory: 0
+pwdCheckQuality: 1
+pwdMinLength: 4
+pwdMaxFailure: 5
+pwdLockout: FALSE
+pwdLockoutDuration: 86400
+pwdGraceAuthNLimit: 0
+pwdFailureCountInterval: 0
+pwdMustChange: FALSE
+pwdAllowUserChange: TRUE
+pwdSafeModify: FALSE

@@ -1,0 +1,22 @@
+#!/bin/bash
+# description: Zookeeper Start Stop Restart
+# processname: zookeeper
+# chkconfig: 234 20 80
+JAVA_HOME=/usr/java/latest
+export JAVA_HOME
+ZOO_LOG_DIR=/usr/share/zookeeper/logs
+export ZOO_LOG_DIR
+
+case $1 in
+start)
+/bin/su -s /bin/bash hadoop /usr/share/zookeeper/bin/zkServer.sh start
+;;
+stop)
+/bin/su -s /bin/bash hadoop /usr/share/zookeeper/bin/zkServer.sh stop
+;;
+restart)
+/bin/su -s /bin/bash hadoop /usr/share/zookeeper/bin/zkServer.sh stop
+/bin/su -s /bin/bash hadoop /usr/share/zookeeper/bin/zkServer.sh start
+;;
+esac
+exit 0

@@ -1,0 +1,10 @@
+/yum
+*.bin
+*.jar
+*.tar
+*.tar.gz
+*.tgz
+*.rpm
+*.bz2
+*.zip
+

@@ -1,0 +1,25 @@
+#!/bin/bash
+# description: Slapd Start Stop Restart
+# processname: slapd
+# chkconfig: 234 20 80
+
+LD_LIBRARY_PATH="/usr/share/db-6.1.19/build_unix/.libs"
+export LD_LIBRARY_PATH
+
+case $1 in
+start)
+echo "starting slapd server"
+/usr/local/libexec/slapd -F /usr/local/etc/openldap/slapd.d
+;;
+stop)
+echo "stopping slapd server"
+kill -INT `cat /usr/local/var/run/slapd.pid`
+;;
+restart)
+echo "stopping slapd server"
+kill -INT `cat /usr/local/var/run/slapd.pid`
+echo "starting slapd server"
+/usr/local/libexec/slapd -F /usr/local/etc/openldap/slapd.d
+;;
+esac
+exit 0

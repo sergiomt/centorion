@@ -1,0 +1,5 @@
+Subsystem	sftp	internal-sftp
+Match Group tomcat
+	X11Forwarding no
+	AllowTcpForwarding no
+	ForceCommand internal-sftp

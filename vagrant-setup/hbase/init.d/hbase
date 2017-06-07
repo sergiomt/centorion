@@ -1,0 +1,26 @@
+#!/bin/bash
+# description: HBase Start Stop Restart
+# processname: hbase
+# chkconfig: 234 20 80
+HADOOP_HOME=/usr/share/hadoop
+export HADOOP_HOME
+HBASE_HOME=/usr/share/hbase
+export HBASE_HOME
+JAVA_HOME=/usr/java/latest
+export JAVA_HOME
+
+case $1 in
+start)
+rm -f $HBASE_HOME/logs/*
+/bin/su -s /bin/bash hadoop $HBASE_HOME/bin/start-hbase.sh
+;;
+stop)
+/bin/su -s /bin/bash hadoop $HBASE_HOME/bin/stop-hbase.sh
+;;
+restart)
+/bin/su -s /bin/bash hadoop $HBASE_HOME/bin/stop-hbase.sh
+rm -f $HBASE_HOME/logs/*
+/bin/su -s /bin/bash hadoop $HBASE_HOME/bin/start-hbase.sh
+;;
+esac
+exit 0

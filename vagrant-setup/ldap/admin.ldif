@@ -1,0 +1,25 @@
+version: 1
+
+dn: cn=admin,ou=Users,o=Clocial,dc=auth,dc=com
+cn: admin
+givenname: Admin
+l: Madrid
+mail: admin@clocial.com
+objectclass: top
+objectclass: inetOrgPerson
+ou: Users
+preferredlanguage: es
+sn: User
+uid: admin
+userpassword: secret
+
+dn: cn=admin,ou=Avatars,o=Clocial,dc=auth,dc=com
+cn: admin
+employeenumber: 1
+mail: admin@clocial.com
+objectclass: top
+objectclass: inetOrgPerson
+ou: Avatars
+sn: admin
+uid: admin
+userpassword: secret

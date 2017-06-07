@@ -1,0 +1,31 @@
+#!/bin/bash
+# description: Hadoop Start Stop Restart
+# processname: hadoop
+# chkconfig: 234 20 80
+JAVA_HOME=/usr/java/latest
+export JAVA_HOME
+HADOOP_HOME=/usr/share/hadoop
+export HADOOP_HOME
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$JAVA_HOME/bin
+HADOOP_CONF_LIB_NATIVE_DIR="/usr/share/hadoop/lib/native"
+export HADOOP_CONF_LIB_NATIVE_DIR
+
+case $1 in
+start)
+rm -f $HADOOP_HOME/logs/*.*
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/start-dfs.sh
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/start-yarn.sh
+;;
+stop)
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/stop-yarn.sh
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/stop-dfs.sh
+;;
+restart)
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/stop-yarn.sh
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/stop-dfs.sh
+rm -f $HADOOP_HOME/logs/*.*
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/start-dfs.sh
+/bin/su -s /bin/bash hadoop $HADOOP_HOME/sbin/start-yarn.sh
+;;
+esac
+exit 0
