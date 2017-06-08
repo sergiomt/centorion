@@ -30,7 +30,7 @@ else
 
 	iptables -A INPUT -p tcp --dport 10389 -j ACCEPT
 	service iptables save
-	service iptables restart
-	
+	systemctl restart iptables
+
 	service apacheds start default
 fi

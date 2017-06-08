@@ -18,6 +18,6 @@ else
 	iptables -A INPUT -p tcp --dport 9090 -j ACCEPT
 	iptables -A INPUT -p tcp --dport 9091 -j ACCEPT
 	service iptables save
-	service iptables restart
+	systemctl restart iptables
 	service openfire start
 fi

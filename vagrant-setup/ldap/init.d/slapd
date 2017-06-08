@@ -3,7 +3,7 @@
 # processname: slapd
 # chkconfig: 234 20 80
 
-LD_LIBRARY_PATH="/usr/share/db-6.1.19/build_unix/.libs"
+LD_LIBRARY_PATH="/usr/share/db-6.2.32/build_unix/.libs"
 export LD_LIBRARY_PATH
 
 case $1 in

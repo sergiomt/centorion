@@ -14,7 +14,7 @@ else
 	  	# Create a user for Play
 	  	groupadd play
 	  	useradd -d /usr/share/play/ -K MAIL_DIR=/dev/null -g play play
-	  	echo -e "play\nplay\n" | passwd play
+	  	echo -e "PlayFrm22\nPlayFrm22\n" | passwd play
 	  fi
 		wget_and_unzip http://downloads.typesafe.com/play/2.2.6/ play-2.2.6.zip
 		mv play-2.2.6 play
@@ -30,6 +30,6 @@ else
 		iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
 		iptables -A INPUT -p tcp --dport 9000 -j ACCEPT
 		service iptables save
-		service iptables restart
+		systemctl restart iptables
 		cd $PPWD
 fi

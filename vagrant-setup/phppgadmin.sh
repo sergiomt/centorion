@@ -13,6 +13,6 @@ else
 	else
 		yum install -y phpPgAdmin
 		cp -f /vagrant/vagrant-setup/pgsql/phpPgAdmin.conf /etc/httpd/conf.d/
-		service httpd restart
+		systemctl restart httpd.service
 	fi
 fi

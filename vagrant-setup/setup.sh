@@ -3,7 +3,7 @@
 # Add names from the .sh commands in the list to run them when setting up the machine for the first time
 INSTALLED_APPS=( clocial )
 
-# AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql93 protobuf250 python276 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
+# AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql96 protobuf250 python276 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
 
 cd /vagrant/vagrant-setup
 chmod a+x include.sh
@@ -15,11 +15,18 @@ HOST="centorion"
 hostname $HOST
 echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
-yum makecache fast
+# Enable the EPEL Repo
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+# Use this one for CentOS 6.5
+# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+systemctl stop firewalld
+systemctl mask firewalld
 yum install -y iptables-services
 iptables -A OUTPUT -p tcp --dport 25 -j REJECT
 service iptables save
-service iptables restart
+systemctl enable iptables
+systemctl restart iptables
 
 cd $SETUP
 
@@ -40,9 +47,6 @@ perl -pi -e "s/keepcache=0/keepcache=1/g" /etc/yum.conf
 cp ./yum/*.repo /etc/yum.repos.d/
 
 cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
-
-rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
-# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
 # GCC, APR, OpenSSL Zip, Git and Mercurial stuff needed for compiling some source code later
 yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget apr-devel.x86_64 openssl-devel.x86_64 zip unzip git mercurial mercurial-hgk
