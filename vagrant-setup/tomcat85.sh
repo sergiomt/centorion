@@ -18,7 +18,7 @@ else
 			# Create a user for running Tomcat
 			groupadd tomcat
 			useradd -d /usr/share/tomcat/ -K MAIL_DIR=/dev/null -g tomcat tomcat
-			echo -e "tomcat\ntomcat\n" | passwd tomcat
+			echo -e "tcatpassw8\ntcatpassw8\n" | passwd tomcat
 		fi
 		cp $SETUP/tomcat/init.d/tomcat /etc/init.d/tomcat
 		chmod 755 /etc/init.d/tomcat
@@ -54,7 +54,7 @@ else
 	  # Compile APR native libraries
 		tar -xzf tomcat-native.tar.gz
 		rm tomcat-native.tar.gz
-		cd tomcat-native-1.1.30-src/jni/native
+		cd tomcat-native-1.2.12-src/jni/native
 		./configure --with-apr=/usr --with-java-home=$JAVA_HOME && make && make install
 		cd ../../../..
 
@@ -79,7 +79,7 @@ else
 
 		iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 		service iptables save
-		service iptables restart
+		systemctl restart iptables
 	else
 		echo "Tomcat 8.5 requires Java 8.0. Please install it with java80.sh"
 	fi

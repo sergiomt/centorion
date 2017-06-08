@@ -297,9 +297,11 @@ The file transfer proxy needs to be disabled only if Open Fire client and
 server are both running on the same machine.
 
 -------------------------------------------------------------------------------
-# OPENLDAP 2.4
+# OpenLDAP 2.4
 
 OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.1 as database.
+
+If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well.
 
 A database with suffix dc=auth,dc=com is created at `/usr/local/var/auth-data`
 
@@ -311,6 +313,12 @@ Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com password secret
 
 http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
 http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
+
+-------------------------------------------------------------------------------
+
+Play Framework 2.2.6
+
+Should run under user play password PlayFrm22
 
 -------------------------------------------------------------------------------
 # RUBY 2.2.6, RAKE, BUNDLER
@@ -349,9 +357,9 @@ Listens at port 8080.
 
 Access Tomcat Manager by typing in your browser http://192.168.101.110:8080
 
-Use tomcat user for uploading files via SFTP
+Use tomcat user with password catpassw8 for uploading files via SFTP
 
-The User/Password for manager GUI is tomcat/tomcat
+The User/Password for manager GUI is tomcat/catpassw8
 
 Tomcat uses DCEVM as runtime for dynamic class reloading.
 

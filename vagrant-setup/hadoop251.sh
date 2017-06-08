@@ -77,13 +77,14 @@ else
 
 	# hadoop user must be authorized for SSH
 	perl -pi -e "s/#\s*Port 22/Port 22/g" /etc/ssh/sshd_config
-	service sshd restart
+	systemctl restart sshd.service
 	# if ! grep -q "\nPort 9001" "/etc/ssh/sshd_config"; then
 		# perl -pi -e "s/#\s*Port 22/Port 22\nPort 9001/g" /etc/ssh/sshd_config
 	# fi
 	# Port 9001 must be open
 	iptables -A INPUT -p tcp --dport 9001 -j ACCEPT
-	service iptables restart
+	service iptables save
+	systemctl restart iptables
 
 	if ! grep -q "\nJAVA_HOME" "/usr/share/hadoop/bin/hadoop"; then
 		perl -pi -e "s/DEFAULT_LIBEXEC_DIR=/JAVA_HOME=\x2Fusr\x2Fjava\x2Flatest\nDEFAULT_LIBEXEC_DIR=/g" /usr/share/hadoop/bin/hadoop
