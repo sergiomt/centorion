@@ -72,7 +72,7 @@ else
 		groupadd hadoop
 		adduser hadoop -K MAIL_DIR=/dev/null -g hadoop
 		# password login is disabled at /etc/ssh/sshd_config
-		# echo -e "hadoop\nhadoop\n" | passwd hadoop
+		# echo -e "Hadoop251\nHadoop251\n" | passwd hadoop
 	fi
 
 	# hadoop user must be authorized for SSH

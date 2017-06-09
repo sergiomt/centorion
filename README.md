@@ -189,6 +189,8 @@ The installation script copies native libraries to `/usr/local/lib`
 
 Ensure that port 9001 is added at `/etc/ssh/sshd_config`
 
+Runs under user hadoop
+
 Start and stop HDFS and Yarn with
 `sudo service hadoop [start|stop]`
 
