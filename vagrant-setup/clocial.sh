@@ -23,7 +23,7 @@ else
 		echo "Configuring Clocial set up"
 
 		cd $SETUP
-		DEPENDENCIES=( httpd pgsql93 db61 java80 scala211 ant194 maven321 hadoop251 zookeeper346 hbase112 openldap24 openfire393 tomcat85 tomcat-shared )
+		DEPENDENCIES=( httpd pgsql96 java80 db62 scala211 ant194 maven321 hadoop251 zookeeper346 hbase112 openldap24 openfire393 tomcat85 tomcat-shared )
 
 		cd $SETUP
 
