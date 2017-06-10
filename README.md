@@ -12,7 +12,7 @@ and optionally :
 
 - Ant 1.9.4
 - Apache Directory Service 2.0
-- Apache HTTPD 2.0 + PHP
+- Apache HTTPD 2.4.6 + PHP  5.4.16
 - Berkeley DB 6.1 with Java bindings
 - Cassandra 3.9 (requires Java 8 and Python 2.7)
 - Java 8.0 + JAI 1.1.3
@@ -22,7 +22,7 @@ and optionally :
 - MySQL 5.1 + phpMyAdmin
 - NodeJS 6.2.2 + Bower + Express
 - OpenLDAP 2.4 + phpLDAPAdmin
-- phpPgAdmin
+- phpPgAdmin 5.1.2
 - Play Framework 2.2.6
 - PostGIS 2.0
 - PostgreSQL 9.3
@@ -274,7 +274,7 @@ Start and stop with
 `sudo service postgresql-9.3 [start|stop]`
 
 -------------------------------------------------------------------------------
-# PHPPGADMIN
+# PHPPGADMIN 5.1.2
 
 Access from http://192.168.101.110/phpPgAdmin
 
@@ -301,9 +301,10 @@ server are both running on the same machine.
 -------------------------------------------------------------------------------
 # OpenLDAP 2.4
 
-OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.1 as database.
+OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
 
-If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well.
+If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well
+which can be accessed through:
 
 A database with suffix dc=auth,dc=com is created at `/usr/local/var/auth-data`
 
@@ -311,7 +312,7 @@ Manage service with:
 `sudo service slapd [start|stop]`
 
 phpLDAPAdmin is accessed from http://192.168.101.110/ldapadmin/
-Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com password secret
+Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com with password secret
 
 http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
 http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
