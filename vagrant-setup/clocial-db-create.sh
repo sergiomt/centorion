@@ -23,4 +23,4 @@ echo "Creating openfire database"
 su postgres -c "psql -c \"create database openfire with owner=clocial\""
 su postgres -c "psql -c \"grant all privileges on database openfire to clocial\""
 cat /opt/openfire/resources/database/openfire_postgresql.sql | su postgres -c "psql -d openfire"
-fi
+
