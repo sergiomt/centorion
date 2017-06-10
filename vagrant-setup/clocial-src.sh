@@ -69,22 +69,6 @@ then
 		cd ../clocial-web
 		mvn compile
 		mvn package
-		
-    if [ -d "/usr/share/tomcat" ]
-    then
-			# Create a symbolic link from Tomcat webapps to Maven target
-			# This is an alternative to creating a context with docBase=/vagrant/clocial/clocial-web/target/clocial-web-1.0
-			# if [ ! -h "/user/share/tomcat/webapps/clocial" ]
-			# then
-			#		ln -s /vagrant/clocial/clocial-web/target/clocial-web-1.0 /usr/share/tomcat/webapps/clocial
-			# fi
-			# Create context for clocial webapp
-			mkdir -p /usr/share/tomcat/conf/Catalina/localhost
-			cp $SETUP/clocial/conf/Catalina/localhost/clocial.xml /usr/share/tomcat/conf/Catalina/localhost
-			# Copy webapp configuration files
-			# cp -r -f $SETUP/clocial/webapps/conf/WEB-INF/* /usr/share/tomcat/webapps/clocial/WEB-INF
-			cp -r -f $SETUP/clocial/webapps/conf/WEB-INF/* /vagrant/clocial/clocial-web/target/clocial-web-1.0/WEB-INF
-		fi
 
 		# Check that all the .jar files have been generated
 
