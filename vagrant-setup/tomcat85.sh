@@ -15,7 +15,7 @@ else
 		if getent passwd tomcat > /dev/null 2>&1; then
 			echo "tomcat user already exists"
 		else
-			# Create a user for running Tomcat
+			echo "Creating user tomcat"
 			groupadd tomcat
 			useradd -d /usr/share/tomcat/ -K MAIL_DIR=/dev/null -g tomcat tomcat
 			echo -e "tcatpassw8\ntcatpassw8\n" | passwd tomcat
@@ -29,10 +29,11 @@ else
 			perl -pi -e 's/Subsystem/#Subsystem/g' /etc/ssh/sshd_config
 		fi
 		cat ./tomcat/etc/ssh/sshd_config >> /etc/ssh/sshd_config
-		service sshd restart
+		systemctl restart sshd.service
 		cd /usr/share
 		TOMCAT_FILE="apache-tomcat-8.5.15"
 		wget_and_untar http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.15/bin/ $TOMCAT_FILE.tar.gz tomcat.tar.gz
+		echo "Creating additional Tomcat directories"
 		if [ ! -d "/usr/share/tomcat" ]
 		then
 			mkdir tomcat
@@ -51,14 +52,25 @@ else
 		rm -r -f examples
 		cd ../bin
 
-	  # Compile APR native libraries
 		tar -xzf tomcat-native.tar.gz
 		rm tomcat-native.tar.gz
-		cd tomcat-native-1.2.12-src/jni/native
-		./configure --with-apr=/usr --with-java-home=$JAVA_HOME && make && make install
+		cd tomcat-native-1.2.12-src/native
+		echo "Compiling APR native libraries"
+		# Compile APR native libraries
+		OPENSSLVERSION=`openssl version`
+		echo "found $OPENSSLVERSION"
+		if [[ $OPENSSLVERSION == "OpenSSL 1.0.1"* ]]
+			then
+			# Native libraries require OpenSSL 1.0.2 but CentOS 7.3 comes with 1.0.1
+			# so upgrade OpenSSL to 1.0.2 before compiling
+			echo "Upgrading openssl to 1.0.2"
+			source $SETUP/openssl102.sh
+		fi
+		./configure --with-apr=/usr/ --with-java-home=$JAVA_HOME && make && make install
 		cd ../../../..
 
 		# Copy conf files
+		echo "Copying .conf files"
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml ./conf
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties ./conf
 		chown -Rf tomcat.tomcat .
@@ -66,20 +78,24 @@ else
 		# Use dcevm for dynamic class reloading on develeopment if available
 		if [ -d "$SETUP/tomcat/dcevm" ]
 			then
+			echo "Setting DCEVM as Java hot swap runtime"
 			mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/dcevm/*.* $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/hotswap/hotswap-agent-0.2.jar /usr/share/tomcat/lib
 		fi
 
+		echo "Opening port 8080"
+		iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+		service iptables save
+		systemctl restart iptables
+
 		# Start Tomcat at boot time
 		chkconfig --add tomcat
 		chkconfig --level 234 tomcat on
 		# Start Tomcat and check that everything was fine
+		echo "Starting tomcat service"
 		service tomcat start
 
-		iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-		service iptables save
-		systemctl restart iptables
 	else
 		echo "Tomcat 8.5 requires Java 8.0. Please install it with java80.sh"
 	fi

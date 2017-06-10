@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Begin machine provisioning"
+
 # Add names from the .sh commands in the list to run them when setting up the machine for the first time
 INSTALLED_APPS=( clocial )
 
@@ -15,7 +17,7 @@ HOST="centorion"
 hostname $HOST
 echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
-# Enable the EPEL Repo
+echo "Enabling EPEL Repo"
 rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
 
 systemctl stop firewalld
@@ -46,12 +48,17 @@ cp ./yum/*.repo /etc/yum.repos.d/
 
 cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
 
-# GCC, APR, OpenSSL Zip, Git and Mercurial stuff needed for compiling some source code later
-yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget apr-devel.x86_64 openssl-devel.x86_64 zip unzip git mercurial mercurial-hgk
+echo "Installing GCC, APR, ZIP"
+# GCC, APR, Git and Mercurial stuff needed for compiling some source code later
+yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget zip unzip
+echo "Installing OpenSSL 1.0.2"
+source $SETUP/openssl102.sh
+echo "Installing Git and Mercurial"
+yum install -y apr-devel.x86_64 git mercurial mercurial-hgk
 # Add Git config
-cp ./.ssh/config /home/vagrant/.ssh/
+cp $SETUP/.ssh/config /home/vagrant/.ssh/
 # Add Queues Extension to Mercurial
-cp --remove-destination ./etc/mercurial/hgrc.d/hgk.rc /etc/mercurial/hgrc.d/
+cp --remove-destination $SETUP/etc/mercurial/hgrc.d/hgk.rc /etc/mercurial/hgrc.d/
 
 if [ -d "$SETUP/.m2" ]
 	then
@@ -73,3 +80,5 @@ done
 cat /vagrant/vagrant-setup/.bashrc >> /home/vagrant/.bashrc
 
 cd $SETUP
+
+echo "Machine provisioning done!"

@@ -20,6 +20,14 @@ else
 	source $SETUP/hadoop251.sh
 	source $SETUP/zookeeper346.sh
 
+	if ps ax | grep -v grep | grep $SERVICE > /dev/null
+	then
+		echo "hadoop service is running"
+	else
+		echo "Starting hadoop service"
+		service hadoop start
+	fi
+	echo "Creating -hbase directory in HDFS"
 	su - hadoop -c "/usr/share/hadoop/bin/hadoop fs -mkdir /hbase"
 
 	cd /usr/share

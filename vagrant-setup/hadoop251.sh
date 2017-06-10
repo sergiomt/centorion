@@ -32,12 +32,14 @@ else
 		else
 			if [ -d "/usr/local/maven" ]
 			then
+				echo "Building from source"
 				# yum install -y cmake
 				# If Protocol Buffers is not installed then
 				# "[ERROR] Could not find goal 'protoc' in plugin"
 				# is raised when trying to execute mvn compile
 				if [ ! -d "/usr/share/protobuf" ]
 				then
+					echo "Installing Protocol Buffers"
 					source $SETUP/protobuf250.sh
 				fi
 				wget_and_untar https://archive.apache.org/dist/hadoop/core/$HADOOP/ $HADOOP-src.tar.gz
@@ -69,13 +71,15 @@ else
 	if getent passwd hadoop > /dev/null 2>&1; then
 		echo "hadoop user already exists"
 	else
+		echo "Creating hadoop user"
 		groupadd hadoop
 		adduser hadoop -K MAIL_DIR=/dev/null -g hadoop
 		# password login is disabled at /etc/ssh/sshd_config
-		# echo -e "hadoop\nhadoop\n" | passwd hadoop
+		# echo -e "Hadoop251\nHadoop251\n" | passwd hadoop
 	fi
 
 	# hadoop user must be authorized for SSH
+	echo "Authorising hadoop for SSH"
 	perl -pi -e "s/#\s*Port 22/Port 22/g" /etc/ssh/sshd_config
 	systemctl restart sshd.service
 	# if ! grep -q "\nPort 9001" "/etc/ssh/sshd_config"; then
@@ -86,6 +90,7 @@ else
 	service iptables save
 	systemctl restart iptables
 
+	echo "Setting DEFAULT_LIBEXEC_DIR and HADOOP_OPTS"
 	if ! grep -q "\nJAVA_HOME" "/usr/share/hadoop/bin/hadoop"; then
 		perl -pi -e "s/DEFAULT_LIBEXEC_DIR=/JAVA_HOME=\x2Fusr\x2Fjava\x2Flatest\nDEFAULT_LIBEXEC_DIR=/g" /usr/share/hadoop/bin/hadoop
 	fi
@@ -93,6 +98,7 @@ else
 		perl -pi -e "s/HADOOP_OPTS=\x22\x24HADOOP_OPTS \x24HADOOP_CLIENT_OPTS\x22/HADOOP_OPTS=\x22\x24HADOOP_OPTS \x24HADOOP_CLIENT_OPTS\x22\n    HADOOP_OPTS=\x22\x24HADOOP_OPTS -Djava\x2Elibrary\x2Epath=\x2Fusr\x2Fshare\x2Fhadoop\x2Flib\x2Fnative\x22/g" /usr/share/hadoop/bin/hadoop
 	fi
 
+	echo "Creating additional directories"
 	mkdir /usr/share/hadoop/logs
 	chown hadoop /usr/share/hadoop/logs
 	chgrp hadoop /usr/share/hadoop/logs
@@ -114,16 +120,19 @@ else
 	chown -Rf hadoop.hadoop hadoop
 
 	cd /usr/share/hadoop/bin
+	echo "Formatting HDFS namenode"
 	su - hadoop -c "hdfs namenode -format"
 	cd ../..
 
 	cp $SETUP/hadoop/init.d/hadoop /etc/init.d/hadoop
 	chmod 755 /etc/init.d/hadoop
 
+	echo "Starting hadoop service"
 	service hadoop start
 	
 	$JAVA_HOME/bin/jps
 	
+	echo "Creating HDFS /user dir"
 	su - hadoop -c "/usr/share/hadoop/bin/hadoop fs -mkdir /user"
 
 	cd $PPWD
