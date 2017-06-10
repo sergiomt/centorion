@@ -17,8 +17,6 @@ echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
 # Enable the EPEL Repo
 rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
-# Use this one for CentOS 6.5
-# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
 systemctl stop firewalld
 systemctl mask firewalld
@@ -30,8 +28,8 @@ systemctl restart iptables
 
 cd $SETUP
 
-# Deny external SSH access to postgres, tomcat and play users
-echo "DenyUsers postgres tomcat play" >> /etc/ssh/sshd_config
+# Deny external SSH access to postgres, tomcat, play and clocial users
+echo "DenyUsers postgres tomcat play clocial" >> /etc/ssh/sshd_config
 
 # No clear password authentication allowed
 perl -pi -e "s/#?PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config

@@ -40,7 +40,7 @@ else
 
 		echo "Creating directories"
 
-    if containsApp "db61" "${DEPENDENCIES[@]}"
+    if containsApp "db62" "${DEPENDENCIES[@]}"
     then
 			# Create directories for Berkeley DB files
 			mkdir -m 777 -p /opt/bdb/
@@ -62,7 +62,7 @@ else
 		echo "Creating PostgreSQL database"
 		
 		# Create PostgreSQL login role for it named clocial and database named clocialdev
-		if containsApp "pgsql93" "${DEPENDENCIES[@]}"
+		if containsApp "pgsql96" "${DEPENDENCIES[@]}"
 		then
 			echo "Creating user clocial"
 			adduser clocial
@@ -75,9 +75,9 @@ else
 		
 			# Create PostGIS 2.0 tables and functions in clocialdev database
       echo "Creating PostGIS spatial extensions at clocialdev database"
-			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.3/share/contrib/postgis-2.1/postgis.sql" > /dev/null
-			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.3/share/contrib/postgis-2.1/postgis_comments.sql" > /dev/null
-			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.3/share/contrib/postgis-2.1/spatial_ref_sys.sql" > /dev/null
+			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/postgis.sql" > /dev/null
+			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/postgis_comments.sql" > /dev/null
+			su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/spatial_ref_sys.sql" > /dev/null
 
 			if containsApp "openfire393" "${DEPENDENCIES[@]}"
 			then
