@@ -19,8 +19,6 @@ echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
 echo "Enabling EPEL Repo"
 rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
-# Use this one for CentOS 6.5
-# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 
 systemctl stop firewalld
 systemctl mask firewalld

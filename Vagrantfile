@@ -26,10 +26,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vs.vm.box = "vagrant-centos-73-x86_64-puppet"
     vs.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
 
-    # Use this box for CentOS 6.5 instead of 7.3
-    # vs.vm.box = "vagrant-centos-65-x86_64-minimal"
-    # vs.vm.box_url = "http://knowgate.com/shared/vagrant-centos-65-x86_64-minimal.box"
-
     # Vagrant will need to login once with its own insecure_private_key in order to change it at guest's ~/.ssh/authorized_keys
     vs.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
 
