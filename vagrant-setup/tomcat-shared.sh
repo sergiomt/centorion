@@ -10,9 +10,9 @@ if [ -d "/usr/share/tomcat" ]
 	source /vagrant/vagrant-setup/include.sh
 	cd $SLIB
 	# Copy Berkeley DB stub to shared loader folder
-	if [ -f "/usr/share/db-6.1.19/build_unix/db.jar" ]
+	if [ -f "/usr/share/db-6.2.32/build_unix/db.jar" ]
 	then
-	  cp /usr/share/db-6.1.19/build_unix/db.jar $SLIB
+	  cp /usr/share/db-6.2.32/build_unix/db.jar $SLIB
 	fi
 
   # Add Scala runtime to shared loader folder
@@ -59,11 +59,11 @@ if [ -d "/usr/share/tomcat" ]
 	  fi
 	done
 
-	LOG4J=apache-log4j-2.0.2-bin
-  wget_and_untar http://www.mirrorservice.org/sites/ftp.apache.org/logging/log4j/2.0.2/ $LOG4J.tar.gz
-  cp $LOG4J/log4j-core-2.0.2.jar $SLIB
-  cp $LOG4J/log4j-1.2-api-2.0.2.jar $SLIB
-  cp $LOG4J/log4j-api-2.0.2.jar $SLIB
+	LOG4J=apache-log4j-2.8.2-bin
+  wget_and_untar http://www.mirrorservice.org/sites/ftp.apache.org/logging/log4j/2.8.2/ $LOG4J.tar.gz
+  cp $LOG4J/log4j-core-2.8.2.jar $SLIB
+  cp $LOG4J/log4j-1.2-api-2.8.2.jar $SLIB
+  cp $LOG4J/log4j-api-2.8.2.jar $SLIB
 	rm -r -f $LOG4J
 
 	# Add SL4J to shared loader folder
@@ -73,13 +73,13 @@ if [ -d "/usr/share/tomcat" ]
 	rm -r -f slf4j-1.7.7
 
 	# Add PostgreSQL and PostGIS JDBC drivers to shared loader folder
-	if [ ! -f "postgresql-9.3-1101.jdbc4.jar" ]
+	if [ ! -f "postgresql-42.1.1.jar" ]
 	then
-	  wget_and_cp http://jdbc.postgresql.org/download/ postgresql-9.3-1101.jdbc4.jar $SLIB
+	  wget_and_cp https://jdbc.postgresql.org/download/ postgresql-42.1.1.jar $SLIB
   fi
 	if [ ! -f "postgis-jdbc-2.0.1.jar" ]
 		then
-	  wget_and_cp http://52north.org/maven/repo/releases/org/postgis/postgis-jdbc/2.0.1/ postgis-jdbc-2.0.1.jar $SLIB
+		wget_and_cp http://52north.org/maven/repo/releases/org/postgis/postgis-jdbc/2.1.3/ postgis-jdbc-2.1.3.jar $SLIB
 	fi
 
 	cd $PPWD
