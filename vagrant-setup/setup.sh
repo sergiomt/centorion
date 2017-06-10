@@ -30,8 +30,8 @@ systemctl restart iptables
 
 cd $SETUP
 
-echo "Denying external SSH access to postgres, tomcat and play users"
-echo "DenyUsers postgres tomcat play" >> /etc/ssh/sshd_config
+# Deny external SSH access to postgres, tomcat, play and clocial users
+echo "DenyUsers postgres tomcat play clocial" >> /etc/ssh/sshd_config
 
 # No clear password authentication allowed
 perl -pi -e "s/#?PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
@@ -51,8 +51,12 @@ cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
 echo "Installing GCC, APR, ZIP"
 # GCC, APR, Git and Mercurial stuff needed for compiling some source code later
 yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget zip unzip
+
 echo "Installing OpenSSL 1.0.2"
+yum remove -y openssl
 source $SETUP/openssl102.sh
+cp --remove-destination /usr/local/ssl/bin/openssl /usr/bin/openssl
+
 echo "Installing Git and Mercurial"
 yum install -y apr-devel.x86_64 git mercurial mercurial-hgk
 # Add Git config

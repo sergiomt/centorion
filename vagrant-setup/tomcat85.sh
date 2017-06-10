@@ -66,7 +66,11 @@ else
 			echo "Upgrading openssl to 1.0.2"
 			source $SETUP/openssl102.sh
 		fi
-		./configure --with-apr=/usr/ --with-java-home=$JAVA_HOME && make && make install
+		./configure --with-apr=/usr/ --with-java-home=$JAVA_HOME
+		# Dirty hack with openssl dynamic library to compile
+		cp /opt/puppetlabs/puppet/lib/libssl.so /usr/local/ssl/lib
+		make && make install
+		rm /usr/local/ssl/lib/libssl.so
 		cd ../../../..
 
 		# Copy conf files
