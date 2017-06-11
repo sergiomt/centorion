@@ -6,9 +6,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # There is a .sh script for each app
-AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 knowgate-src lamp httpd maven321 openfire393 openldap24 openssl102 play226 phppgadmin pgsql96 protobuf250 python276 ruby226 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 vsftpd zookeeper346 )
+AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 knowgate-src lamp httpd maven321 openfire393 openldap24 openssl102 play226 phppgadmin pgsql96 protobuf250 python276 ruby226 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
 
-AVAILABLE_APPS=(${AVAILABLE_APPS[@]} clocial clocial-src clocial-test-db clocial-context clocial-db-create )
+AVAILABLE_APPS=(${AVAILABLE_APPS[@]} tomcat-shared clocial clocial-src clocial-test-db clocial-context clocial-db-create )
 
 SETUP="/vagrant/vagrant-setup"
 DOWNLOAD_PROXY=http://www.knowgate.com/shared/
