@@ -85,7 +85,7 @@ else
 			echo "Setting DCEVM as Java hot swap runtime"
 			mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/dcevm/*.* $JAVA_HOME/jre/lib/amd64/dcevm
-			cp $SETUP/tomcat/hotswap/hotswap-agent-0.2.jar /usr/share/tomcat/lib
+			cp $SETUP/tomcat/hotswap/hotswap-agent-1.1.0.jar /usr/share/tomcat/lib
 		fi
 
 		echo "Opening port 8080"

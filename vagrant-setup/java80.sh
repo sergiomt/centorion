@@ -1,7 +1,7 @@
 #!/bin/bash
 
 JAVA=/usr/java
-JDK=$JAVA/jdk1.8.0_112
+JDK=$JAVA/jdk1.8.0_05
 
 # Install Java 8
 if [ -d "$JDK" ]
@@ -14,13 +14,20 @@ else
 	source /vagrant/vagrant-setup/include.sh
 
 	# Install Java 8
-	https://edelivery.oracle.com/akam/otn/java/jdk/8u112-b15/jdk-8u112-linux-x64.rpm
-	RPM=jdk-8u112-linux-x64.rpm
-	OTN=otn/java/jdk/8u112-b15
+
+	RPM=jdk-8u5-linux-x64.rpm
+	JDK=otn-pub/java/jdk/8u5-b13
+
+	# RPM=jdk-8u112-linux-x64.rpm
+	# OTN=otn/java/jdk/8u112-b15
+
+	# RPM=jdk-8u131-linux-x64.rpm
+	# OTN=otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163
+
 	if [ ! -f "$SETUP/cache/$RPM" ]
 		then
 		echo "Downloading JDK 8.0"
-		wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "https://edelivery.oracle.com/akam/$OTN/$RPM" -P $SETUP/cache
+		wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/$OTN/$RPM" -P $SETUP/cache
 	fi
 	rpm -Uvh $SETUP/cache/$RPM
 

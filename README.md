@@ -14,6 +14,7 @@ and optionally :
 - Apache Directory Service 2.0
 - Apache HTTPD 2.4.6 + PHP  5.4.16
 - Berkeley DB 6.1 with Java bindings
+- DCEVM
 - Cassandra 3.9 (requires Java 8 and Python 2.7)
 - Java 8.0 + JAI 1.1.3
 - Hadoop 2.5.1
@@ -105,6 +106,8 @@ or else download and unzip
 	`192.168.101.110 centorion`
 	to your `/etc/hosts` or `C:\Windows\Sytem32\drivers\etc\hosts`
 
+14. Optional. To save some disk space after install, you can delete the files at /vagrant/vagrant-setup/cache
+
 ## Troubleshooting
 
 In case you have made any change to Vagrantfile then validate it with:
@@ -140,18 +143,26 @@ Listens at port 10389
 Manage with: `service apacheds [start|stop] default`
 
 -------------------------------------------------------------------------------
-# BERKELEY DB 6.1
+# BERKELEY DB 6.2
 
-Berkeley DB requires Java 7 to be built but can run on Java 8.
-Java 7 will be installed by Berkeley DB shell script and uninstalled after build.
-Therefore it is recommended to install Berkeley DB before installing Java 8.
-
-It is installed at `/usr/share/db-6.1.19`
+It is installed at `/usr/share/db-6.2.32`
 
 Includes Java bindings
 
 -------------------------------------------------------------------------------
-# JAVA 8.0 + JAI 1.1.3
+
+# DCEVM
+
+Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
+because the JVM binaries for JDK 1.8.0_112 are already precompiled at
+tomcat\dcevm
+
+DCEVM is vey sensitive to any minor change in Java version,
+so check its homepage for compatibility before performing any change on Java.
+
+-------------------------------------------------------------------------------
+
+# JAVA 1.8.0_05 + JAI 1.1.3
 
 It is installed at `/usr/java/jdk1.8.0_05`
 
@@ -299,7 +310,7 @@ The file transfer proxy needs to be disabled only if Open Fire client and
 server are both running on the same machine.
 
 -------------------------------------------------------------------------------
-# OpenLDAP 2.4
+# OPENLDAP 2.4
 
 OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
 
@@ -319,7 +330,7 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 -------------------------------------------------------------------------------
 
-Play Framework 2.2.6
+PLAY FRAMEWORK 2.2.6
 
 Should run under user play password PlayFrm22
 
