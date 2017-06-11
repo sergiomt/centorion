@@ -18,7 +18,7 @@ else
 			# Create a user for running Tomcat
 			groupadd tomcat
 			useradd -d /usr/share/tomcat/ -K MAIL_DIR=/dev/null -g tomcat tomcat
-			echo -e "tomcat\ntomcat\n" | passwd tomcat
+			echo -e "catpassw8\ncatpassw8\n" | passwd tomcat
 		fi
 	  cp $SETUP/tomcat/init.d/tomcat /etc/init.d/tomcat
 	  chmod 755 /etc/init.d/tomcat
@@ -68,7 +68,7 @@ else
 	  	then
 	  	mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
 	  	cp $SETUP/tomcat/dcevm/*.* $JAVA_HOME/jre/lib/amd64/dcevm
-	  	cp $SETUP/tomcat/hotswap/hotswap-agent-0.2.jar /usr/share/tomcat/lib
+	  	cp $SETUP/tomcat/hotswap/hotswap-agent-1.1.0.jar /usr/share/tomcat/lib
 	  fi
 
 	  # Start Tomcat at boot time
@@ -79,7 +79,7 @@ else
 	  
 	  iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 	  service iptables save
-	  service iptables restart
+		systemctl restart iptables.service
 	else
 		echo "Tomcat 8.0 requires Java 8.0. Please install it with java80.sh"
 	fi
