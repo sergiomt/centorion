@@ -16,7 +16,7 @@ else
 	# Install Java 8
 
 	RPM=jdk-8u5-linux-x64.rpm
-	JDK=otn-pub/java/jdk/8u5-b13
+	OTN=otn-pub/java/jdk/8u5-b13
 
 	# RPM=jdk-8u112-linux-x64.rpm
 	# OTN=otn/java/jdk/8u112-b15
@@ -42,6 +42,7 @@ else
 	fi
 	cd $JDK
 	echo "Installing JAI 1.1.3"
+	JDK=
 	echo -e "y\n" | $SETUP/cache/jai-1_1_3-lib-linux-amd64-jdk.bin
 
 	cd /etc/alternatives

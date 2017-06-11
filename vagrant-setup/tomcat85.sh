@@ -91,7 +91,7 @@ else
 		echo "Opening port 8080"
 		iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 		service iptables save
-		systemctl restart iptables
+		systemctl restart iptables.service
 
 		# Start Tomcat at boot time
 		chkconfig --add tomcat
