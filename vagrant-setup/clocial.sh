@@ -59,12 +59,13 @@ else
 		chown tomcat /opt/lucene/clocialdev
 		chgrp tomcat /opt/lucene/clocialdev
 
-		echo "Creating PostgreSQL database"
-		
 		# Create PostgreSQL login role for it named clocial and database named clocialdev
 		if containsApp "pgsql96" "${DEPENDENCIES[@]}"
 		then
+			echo "Creating PostgreSQL database"
 			source $SETUP/clocial-db-create.sh
+		else
+			echo "Skipped PostgreSQL database creation"
 		fi
 
 		if containsApp "openldap24" "${DEPENDENCIES[@]}"
