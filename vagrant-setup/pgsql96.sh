@@ -10,7 +10,7 @@ if [ -d "/var/lib/pgsql" ]
 
 else
 
-	Run the following command to make PostgreSQL work if SELinux enabled on your system.
+	# Run the following command to make PostgreSQL work if SELinux enabled on your system.
 	# setsebool -P httpd_can_network_connect_db 1
 
 	yum install -y https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
