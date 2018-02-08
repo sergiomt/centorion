@@ -65,6 +65,7 @@ else
 				perl -pi -e "s/(\x2F\x2F)?\s*\x24servers->setValue\x28'login','attr','uid'\x29/\x24servers->setValue\x28'login','attr','dn'\x29/g" /etc/phpldapadmin/config.php
 				perl -pi -e "s/\x2F\x2F\s+\x24config->custom->appearance\x5B'hide_template_warning'\x5D = false/\x24config->custom->appearance\x5B'hide_template_warning'\x5D = true/g" /etc/phpldapadmin/config.php
 				perl -pi -e "s/Allow from 127\x2E0\x2E0\x2E1/Allow from all/g" /etc/httpd/conf.d/phpldapadmin.conf
+				perl -pi -e "s/Require local/Require all granted/g" /etc/httpd/conf.d/phpldapadmin.conf
 				systemctl restart httpd.service
 		fi
 	

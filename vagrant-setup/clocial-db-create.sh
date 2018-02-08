@@ -13,11 +13,13 @@ echo "Creating clocialdev database"
 su postgres -c "psql -c \"create database clocialdev with owner=clocial\""
 su postgres -c "psql -c \"grant all privileges on database clocialdev to clocial\""
 
-# Create PostGIS 2.0 tables and functions in clocialdev database
+# Create PostGIS 2.3 tables and functions in clocialdev database
 echo "Creating PostGIS spatial extensions at clocialdev database"
-su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/postgis.sql" > /dev/null
-su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/postgis_comments.sql" > /dev/null
-su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.1/spatial_ref_sys.sql" > /dev/null
+su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.3/postgis.sql" > /dev/null
+su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.3/postgis_comments.sql" > /dev/null
+su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.3/spatial_ref_sys.sql" > /dev/null
+su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.3/topology.sql" > /dev/null
+su postgres -c "psql -d clocialdev -f /usr/pgsql-9.6/share/contrib/postgis-2.3/topology_comments.sql" > /dev/null
 
 echo "Creating openfire database"
 su postgres -c "psql -c \"create database openfire with owner=clocial\""

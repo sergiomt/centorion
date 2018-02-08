@@ -2,10 +2,10 @@
 # Wed May 1 20:51:17 CEST 2013
 queue=com.knowgate.ramqueue.RAMQueueProducer
 driver=org.postgresql.Driver
-dburl=jdbc\:postgresql\://127.0.0.1\:5432/clocialdev
+uri=jdbc\:postgresql\://127.0.0.1\:5432/clocialdev
 schema=
-dbuser=clocial
-dbpassword=clocial
+user=clocial
+password=clocial
 
 luceneindex=file:///opt/lucene/clocialdev
 
