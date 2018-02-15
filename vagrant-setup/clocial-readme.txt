@@ -33,7 +33,7 @@ This will install:
 	- Tomcat 8.0
 	- OpenLDAP 2.4
 	- PostgreSQL 9.3
-	- Berkeley DB 6.0
+	- Berkeley DB 6.1
 	- HBase 0.98
 	- Open Fire
 
@@ -76,14 +76,6 @@ The project is fully mavenized.
 You must first compile and install the subprojects at knowgate repository and
 then the projects at clocial repository, in this order:
 
-mvn compile knowgate-core
-mvn install knowgate-core
-mvn compile knowgate-stripes
-mvn install knowgate-stripes
-mvn compile knowgate-extws
-mvn install knowgate-extws
-mvn compile knowgate-bulkmailer
-mvn install knowgate-bulkmailer
 mvn compile clocial-pojo
 mvn install clocial-pojo
 mvn compile clocial-scala

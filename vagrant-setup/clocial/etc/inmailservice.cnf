@@ -1,8 +1,6 @@
 package=com/clocial/inmail
 hbconfig=/usr/share/hbase/conf
 
-mail.transport.protocol=smtp
-
 mail.store.protocol=pop3
 mail.transport.protocol=smtp
 mail.incoming=my.inbox.com
