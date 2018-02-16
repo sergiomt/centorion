@@ -61,9 +61,10 @@ else
 	  # Copy conf files
 	  cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml ./conf
 	  cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties ./conf
+		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/log4j2.xml ./conf
 	  chown -Rf tomcat.tomcat .
 
-	  # Use dcevm for dynamic class reloading on develeopment if available
+	  # Use dcevm for dynamic class reloading on development if available
 	  if [ -d "$SETUP/tomcat/dcevm" ]
 	  	then
 	  	mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
