@@ -141,7 +141,7 @@ For each application there is a Bash shell script at /vagrant/vagrant-setup dire
 
 Most of these shell scripts must be execute as root by mean of:
 
-`sudo /vagrant/vagrant-setup/*scriptname*.sh`
+`sudo /vagrant/vagrant-setup/the_script_name.sh`
 
 Some applications require others so order of installation is important.
 
