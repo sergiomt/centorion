@@ -4,21 +4,26 @@
 A Vagrantfile plus a set of Bash scripts to configure
 a software development VM with :
 
-- CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.10
+- CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
 - Git
 - Mercurial with HGK and Extension Queues
 
 and optionally :
 
+- Android Studio 3.0.1
 - Ant 1.9.4
 - Apache Directory Service 2.0
 - Apache HTTPD 2.4.6 + PHP  5.4.16
 - Berkeley DB 6.1 with Java bindings
+- Cinnamon
 - DCEVM
+- Docker
 - Cassandra 3.9 (requires Java 8 and Python 2.7)
+- Eclipse 4.7 Oxygen
 - Java 8.0 + JAI 1.1.3
 - Hadoop 2.5.1
 - HBase 1.1.2
+- IntelliJ IDEA 3.4 Community
 - Maven 3.2.1
 - MySQL 5.1 + phpMyAdmin
 - NodeJS 6.2.2 + Bower + Express
@@ -26,15 +31,17 @@ and optionally :
 - phpPgAdmin 5.1.2
 - Play Framework 2.2.6
 - PostGIS 2.0
-- PostgreSQL 9.3
+- PostgreSQL 9.3 or 9.6
 - Protocol Buffers 2.5.0
 - Open Fire 3.9.3
 - Ruby 2.2.6
 - Scala 2.10 or 2.11
 - Solr 6.1.0
-- Tomcat 8.5
+- Tomcat 8.0 or 8.5
 - VSFTP
 - Zookeeper 3.4.6
+
+The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
 -------------------------------------------------------------------------------
 # SETUP
@@ -89,22 +96,20 @@ or else download and unzip
 	`192.168.101.110 centorion`
 	to your `/etc/hosts` or `C:\Windows\Sytem32\drivers\etc\hosts`
 
-9. After creating the virtual machine connect to it by doing:
+9. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh`
 
 	or for connecting using PuTTY read
 	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY)
 
-10. Once logged into the Vagrant VM, from directory /vagrant/vagrant-setup run the .sh scripts for installing the desired applications
+10. Once logged into the Vagrant VM, from directory /vagrant/vagrant-setup run the .sh scripts for installing the desired applications.
 
 11. You can also set what applications will be installed by default by changing INSTALLED_APPS in setup.sh
 
 12. The guest machine has the private IP address 192.168.101.110
 
-13. Add
-	`192.168.101.110 centorion`
-	to your `/etc/hosts` or `C:\Windows\Sytem32\drivers\etc\hosts`
+13. The base directory in the host is by default a shared folder between host and guest.
 
 14. Optional. To save some disk space after install, you can delete the files at /vagrant/vagrant-setup/cache
 
@@ -129,11 +134,29 @@ For trying to stablish an SSH connection with debug enabled use:
 At Vagrantfile, set `vb.gui = true` enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
 
 -------------------------------------------------------------------------------
-# CENTOS 7.3
 
-The password for root is vagrant
+# INSTALL APPLICATIONS ONE BY ONE
+
+For each application there is a Bash shell script at /vagrant/vagrant-setup directory on the guest.
+
+Most of these shell scripts must be execute as root by mean of:
+
+`sudo /vagrant/vagrant-setup/*scriptname*.sh`
+
+Some applications require others so order of installation is important.
+
+Most of the scripts will either inform you about missing dependencies on other scripts or install the required dependencies themselves.
+
+To fully automate application installation on machine creation, add the desired script names to INSTALLED_APPS variable in setup.sh
 
 -------------------------------------------------------------------------------
+
+# CENTOS 7.3
+
+The password for **root** is **vagrant**
+
+-------------------------------------------------------------------------------
+
 # APACHE DIRECTORY SERVICE 2.0
 
 It is installed at `/opt/apache-ds-2.0.0-M17`
@@ -143,6 +166,7 @@ Listens at port 10389
 Manage with: `service apacheds [start|stop] default`
 
 -------------------------------------------------------------------------------
+
 # BERKELEY DB 6.2
 
 It is installed at `/usr/share/db-6.2.32`
@@ -162,11 +186,22 @@ so check its homepage for compatibility before performing any change on Java.
 
 -------------------------------------------------------------------------------
 
+# DOCKER
+
+Docker is enabled to start on boot by default after install.
+To disable start on boot do
+`sudo systemctl disable docker`
+
+The user **vagrant** is added to **docker** group.
+
+-------------------------------------------------------------------------------
+
 # JAVA 1.8.0_05 + JAI 1.1.3
 
 It is installed at `/usr/java/jdk1.8.0_05`
 
 -------------------------------------------------------------------------------
+
 # CASSANDRA 3.9
 
 Cassandra 3.9 requires Java 8 or later.
@@ -191,6 +226,40 @@ Configuration documentation
 http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html
 
 -------------------------------------------------------------------------------
+
+# CINNAMON
+
+The version of Cinnamon installed is chosen by yum package installer.
+
+Installing Cinnamon will require at least one guest reboot and maybe more.
+
+**Before starting to install Cinnamon set `vb.gui = true` at Vagrantfile** to enable GUI.
+
+It is also recommended that you enable **3D acceleration** in VirtualBox screen settings, otherwise you'll get a "Cinnamon is using software rendering mode" warning you about degraded UI performance.
+
+A few GNOME applications are installed by default:
+
+* GNOME Terminal
+* GNOME System Monitor
+* GEdit
+* Sublime Text
+* Mozilla Firefox
+
+In order to install Cinnamon you must run once:
+`sudo cinnamon.sh`
+from /vagrant/vagrant-setup
+and after the script finishes executing reboot the guest virtual machine.
+
+-------------------------------------------------------------------------------
+
+# ECLIPSE 4.7 Oxygen
+
+Is installed at `/usr/share/eclipse`
+
+At /vagrant/vagrant-setup there are scripts for adding PyDev.
+
+-------------------------------------------------------------------------------
+
 # HADOOP 2.5.1
 
 Hadoop will be compiled from source in order to generate its native libraries.
@@ -210,6 +279,7 @@ Cluster Manager is at http://192.168.101.110:8088/
 Node HTTP address is http://192.168.101.110:8042/
 
 -------------------------------------------------------------------------------
+
 # HBASE 1.1.2
 
 It is installed in pseudo-distributed mode with unmanaged Zookeeper at
@@ -241,6 +311,13 @@ For hbase shell commands see
 https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 -------------------------------------------------------------------------------
+
+# INTELLIJ IDEA 3.4 COMMUNITY
+
+Is installed at `/usr/share/intellij`
+
+-------------------------------------------------------------------------------
+
 # MySQL 5.1
 
 root password is vagrant
@@ -255,6 +332,7 @@ Edit `/etc/httpd/conf.d/phpMyAdmin.conf` and `/etc/phpMyAdmin/config.inc.php`
 for allowing access to phpMyAdmin from outside local host
 
 -------------------------------------------------------------------------------
+
 # NODEJS 6.2.2
 
 Typescript quickstart files can be found at /vagrant/vagrant-setup/angular2
@@ -270,7 +348,8 @@ Access Browsersync at
 http://192.168.101.110:3001/
 
 -------------------------------------------------------------------------------
-# POSTGRESQL 9.3
+
+# POSTGRESQL 9.3 or 9.6
 
 It is installed at `/var/lib/pgsql`
 
@@ -285,11 +364,13 @@ Start and stop with
 `sudo service postgresql-9.3 [start|stop]`
 
 -------------------------------------------------------------------------------
+
 # PHPPGADMIN 5.1.2
 
 Access from http://192.168.101.110/phpPgAdmin
 
 -------------------------------------------------------------------------------
+
 # OPEN FIRE 3.9.3
 
 Start and stop Open Fire with sudo service openfire [start|stop]
@@ -310,6 +391,7 @@ The file transfer proxy needs to be disabled only if Open Fire client and
 server are both running on the same machine.
 
 -------------------------------------------------------------------------------
+
 # OPENLDAP 2.4
 
 OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
@@ -332,9 +414,10 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 PLAY FRAMEWORK 2.2.6
 
-Should run under user play password PlayFrm22
+Should run under user **play** password **PlayFrm22**
 
 -------------------------------------------------------------------------------
+
 # RUBY 2.2.6, RAKE, BUNDLER
 
 Ruby is installed at `/usr/local/rvm/rubies/ruby-2.1.0/`
@@ -346,6 +429,7 @@ RubyGems is installed at `/usr/local/rubygems`
 # SCALA 2.11.0
 
 -------------------------------------------------------------------------------
+
 # SOLR 6.1.0
 
 Solr 6.1 requires Java 8.
@@ -360,7 +444,8 @@ Create a collection by entering:
 `su - solr -c "/usr/share/solr/bin/solr create -c testcollection -n data_driven_schema_configs"`
 
 -------------------------------------------------------------------------------
-# TOMCAT 8.5
+
+# TOMCAT 8.0 or 8.5
 
 Start and stop with
 `sudo service tomcat [start|stop|restart]`
@@ -371,13 +456,14 @@ Listens at port 8080.
 
 Access Tomcat Manager by typing in your browser http://192.168.101.110:8080
 
-Use tomcat user with password catpassw8 for uploading files via SFTP
+Use **tomcat** user with password **catpassw8** for uploading files via SFTP
 
 The User/Password for manager GUI is tomcat/catpassw8
 
 Tomcat uses DCEVM as runtime for dynamic class reloading.
 
 -------------------------------------------------------------------------------
+
 # ZOOKEEPER 3.4.6
 
 Runs on port 2181

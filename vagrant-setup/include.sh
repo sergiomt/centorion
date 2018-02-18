@@ -92,3 +92,11 @@ wget_and_make_executable () {
 	fi
 	chmod a+x $SETUP/cache/$2
 }
+
+function isinstalled {
+  if yum list installed "$@" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}

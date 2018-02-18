@@ -7,7 +7,7 @@ if [ -f "/usr/src/Python-2.7.6" ]
 then
 
 	python --version
-	echo "already installed, nothing done."
+	echo "already installed. Nothing done!"
 
 else
 

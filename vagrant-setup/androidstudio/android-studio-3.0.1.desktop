@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Android Studio 3.0.1
+Comment=Android Studio 3.0.1
+Exec=/usr/bin/studio
+Icon=/usr/share/android-studio/bin/studio.png
+Categories=Application;Development;Kotlin;IDE
+Version=1.0
+Type=Application
+Terminal=0
