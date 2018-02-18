@@ -181,7 +181,7 @@ Manage with: `service apacheds [start|stop] default`
 
 -------------------------------------------------------------------------------
 
-APACHE HTTPD WITH PHP
+# APACHE HTTPD WITH PHP
 
 [Installation Script](vagrant-setup/httpd.sh)
 
