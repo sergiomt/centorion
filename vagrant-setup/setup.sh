@@ -5,7 +5,10 @@ echo "Begin machine provisioning"
 # Add names from the .sh commands in the list to run them when setting up the machine for the first time
 INSTALLED_APPS=( )
 
-# AVAILABLE_APPS=( ant194 ads200 cassandra39 db61 dcevm java80 hbase112 hadoop251 lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql96 protobuf250 python276 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
+# Add the desired of these applications to the list above
+# Applications will be installed in order of appearance,
+# so do not put them in alphabetical order.
+# AVAILABLE_APPS=( ant194 ads200 cassandra39 cinnamon db61 dcevm eclipse47 java80 hbase112 hadoop251 intellij34 lamp httpd maven321 openfire393 openldap24 play226 phppgadmin pgsql96 protobuf250 python276 sbt013 scala210 scala211 selenium242 solr610 tomcat80 tomcat85 tomcat-shared vsftpd zookeeper346 )
 
 cd /vagrant/vagrant-setup
 chmod a+x include.sh

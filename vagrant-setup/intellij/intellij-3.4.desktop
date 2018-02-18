@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=IntelliJ 3.4
+Comment=IntelliJ IDEA 3.4 Community
+Exec=/usr/bin/idea
+Icon=/usr/share/intellij/bin/idea.png
+Categories=Application;Development;Java;IDE
+Version=1.0
+Type=Application
+Terminal=0
