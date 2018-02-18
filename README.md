@@ -196,12 +196,6 @@ The user **vagrant** is added to **docker** group.
 
 -------------------------------------------------------------------------------
 
-# JAVA 1.8.0_05 + JAI 1.1.3
-
-It is installed at `/usr/java/jdk1.8.0_05`
-
--------------------------------------------------------------------------------
-
 # CASSANDRA 3.9
 
 Cassandra 3.9 requires Java 8 or later.
@@ -314,7 +308,18 @@ https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 # INTELLIJ IDEA 3.4 COMMUNITY
 
-Is installed at `/usr/share/intellij`
+After the initial setup **you must upgrade to the latest JDK** following [these](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-selecting-the-jdk-version-the-ide-will-run-under) instructions.
+IntelliJ Open File dialogs won't work with Java 1.8.0_05.
+
+The IDE is installed at `/usr/share/intellij`
+
+Start it with `idea` from any location (the symbolic link points to /usr/share/intellij/bin/idea.sh
+
+-------------------------------------------------------------------------------
+
+# JAVA 1.8.0_05 + JAI 1.1.3
+
+It is installed at `/usr/java/jdk1.8.0_05`
 
 -------------------------------------------------------------------------------
 
