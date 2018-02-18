@@ -159,7 +159,7 @@ The password for **root** and **vagrant** users is **vagrant**
 
 # ANDROID STUDIO 3.0.1
 
-[Script](blob/master/vagrant-setup/androidstudio301.sh)
+[Script](vagrant-setup/androidstudio301.sh)
 
 -------------------------------------------------------------------------------
 
