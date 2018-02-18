@@ -10,37 +10,36 @@ a software development VM with :
 
 and optionally :
 
-- Android Studio 3.0.1
-- Ant 1.9.4
-- Apache Directory Service 2.0
-- Apache HTTPD 2.4.6 + PHP  5.4.16
-- Berkeley DB 6.0, 6.1 or 6.2 with Java bindings
-- Cinnamon
-- DCEVM
-- Docker
-- Cassandra 3.9 (requires Java 8 and Python 2.7)
-- Eclipse 4.7 Oxygen
-- Java 8.0 + JAI 1.1.3
-- Hadoop 2.5.1
-- HBase 1.1.2
-- IntelliJ IDEA 3.4 Community
-- LAMP (MySQL + PHP + phpMyAdmin)
-- Maven 3.2.1
-- MySQL 5.6 + phpMyAdmin
-- NodeJS 6.2.2 + Bower + Express
-- OpenLDAP 2.4 + phpLDAPAdmin
-- phpPgAdmin 5.1.2
-- Play Framework 2.2.6
-- PostGIS 2.0 or 2.4
-- PostgreSQL 9.3 or 9.6
-- Protocol Buffers 2.5.0
-- Open Fire 3.9.3
-- Ruby 2.2.6
-- Scala 2.10 or 2.11
-- Solr 6.1.0
-- Tomcat 8.0 or 8.5
-- VSFTP
-- Zookeeper 3.4.6
+- [Android Studio 3.0.1](#android-studio-301)
+- [Ant 1.9.4](#ant-194)
+- [Apache Directory Service 2.0](#apache-directory-service-20)
+- [Apache HTTPD 2.4.6 + PHP 5.4.16](#apache-httpd-with-php)
+- [Berkeley DB](#berkeley-db-60-61-or-62) 6.0, 6.1 or 6.2 with Java bindings
+- [Cinnamon](#cinnamon)
+- [DCEVM](#dcevm)
+- [Docker](#docker)
+- [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
+- [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
+- [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
+- [HBase 1.1.2](#hbase-112) (requires Hadoop)
+- [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
+- [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
+- [Maven 3.2.1](vagrant-setup/maven321.sh)
+- [MySQL 5.6 + phpMyAdmin](#mysql-5639)
+- [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
+- [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
+- [phpPgAdmin 5.1.2](#phppgadmin)
+- [Play Framework 2.2.6](#play-framework-226)
+- [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
+- [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
+- [Open Fire 3.9.3](#open-fire-393)
+- [Ruby 2.2.6](#ruby-226-rake-bundler)
+- [Scala 2.10 or 2.11](#scala-210-or-211)
+- [Solr 6.1.0](#solr-610)
+- [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
+- [VSFTP](vagrant-setup/vsftpd.sh)
+- [Zookeeper 3.4.6](#zookeeper-346)
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
@@ -179,6 +178,12 @@ It is installed at `/opt/apache-ds-2.0.0-M17`
 Listens at port 10389
 
 Manage with: `service apacheds [start|stop] default`
+
+-------------------------------------------------------------------------------
+
+APACHE HTTPD WITH PHP
+
+[Installation Script](vagrant-setup/httpd.sh)
 
 -------------------------------------------------------------------------------
 
@@ -470,7 +475,7 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 -------------------------------------------------------------------------------
 
-PLAY FRAMEWORK 2.2.6
+# PLAY FRAMEWORK 2.2.6
 
 [Installation Script](vagrant-setup/play226.sh)
 
