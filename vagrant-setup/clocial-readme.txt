@@ -29,12 +29,13 @@ sudo /vagrant/vagrant-setup/clocial.sh > dev/null
 This will install:
 
 	- Java 8.0
-	- Scala 2.10
+	- Scala 2.11
 	- Tomcat 8.0
 	- OpenLDAP 2.4
-	- PostgreSQL 9.3
+	- PostgreSQL 9.6
 	- Berkeley DB 6.1
-	- HBase 0.98
+	- Hadoop 2.5.1
+	- HBase 1.1.2
 	- Open Fire
 
 After installing the base software you'll probably want to download the source code
@@ -88,13 +89,11 @@ More information on Git
 
 Git Repos are located at
 
-posh@git.knowgate.co.uk:/srv/git/sandbox.git
-posh@git.knowgate.co.uk:/srv/git/knowgate.git
-posh@git.knowgate.co.uk:/srv/git/clocial.git
+https://github.com/sergiomt/clocial
 
-To clone the master branch of an existing repo do:
+To clone the master branch do:
 
-git clone posh@git.knowgate.co.uk:/srv/git/knowgate.git
+git clone https://github.com/sergiomt/clocial.git
 
 To get only one file do:
 git fetch
@@ -119,15 +118,6 @@ git push origin master
 To remove a file do:
 
 git rm filename.txt
-
-To create a new repo do:
-
-cd Project_Root
-git init
-git add . 
-git commit -m 'first seed commit'
-git remote add origin posh@git.knowgate.co.uk:/srv/git/<reponame>.git
-git push origin master
 
 -------------------------------------------------------------------------------
 CONFIGURING OPEN FIRE
