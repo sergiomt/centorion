@@ -14,7 +14,7 @@ and optionally :
 - Ant 1.9.4
 - Apache Directory Service 2.0
 - Apache HTTPD 2.4.6 + PHP  5.4.16
-- Berkeley DB 6.1 with Java bindings
+- Berkeley DB 6.0, 6.1 or 6.2 with Java bindings
 - Cinnamon
 - DCEVM
 - Docker
@@ -24,13 +24,14 @@ and optionally :
 - Hadoop 2.5.1
 - HBase 1.1.2
 - IntelliJ IDEA 3.4 Community
+- LAMP (MySQL + PHP + phpMyAdmin)
 - Maven 3.2.1
-- MySQL 5.1 + phpMyAdmin
+- MySQL 5.6 + phpMyAdmin
 - NodeJS 6.2.2 + Bower + Express
 - OpenLDAP 2.4 + phpLDAPAdmin
 - phpPgAdmin 5.1.2
 - Play Framework 2.2.6
-- PostGIS 2.0
+- PostGIS 2.0 or 2.4
 - PostgreSQL 9.3 or 9.6
 - Protocol Buffers 2.5.0
 - Open Fire 3.9.3
@@ -147,7 +148,7 @@ Some applications require others so order of installation is important.
 
 Most of the scripts will either inform you about missing dependencies on other scripts or install the required dependencies themselves.
 
-To fully automate application installation on machine creation, add the desired script names to INSTALLED_APPS variable in setup.sh
+To fully automate application installation on machine creation, add the desired script names to `INSTALLED_APPS` variable in [setup.sh](vagrant-setup/setup.sh)
 
 -------------------------------------------------------------------------------
 
@@ -159,15 +160,19 @@ The password for **root** and **vagrant** users is **vagrant**
 
 # ANDROID STUDIO 3.0.1
 
-[Script](vagrant-setup/androidstudio301.sh)
+[Installation Script](vagrant-setup/androidstudio301.sh)
 
 -------------------------------------------------------------------------------
 
 # ANT 1.9.4
 
+[Installation Script](vagrant-setup/ant194.sh)
+
 -------------------------------------------------------------------------------
 
 # APACHE DIRECTORY SERVICE 2.0
+
+[Installation Script](vagrant-setup/ads200.sh)
 
 It is installed at `/opt/apache-ds-2.0.0-M17`
 
@@ -177,9 +182,11 @@ Manage with: `service apacheds [start|stop] default`
 
 -------------------------------------------------------------------------------
 
-# BERKELEY DB 6.2
+# BERKELEY DB 6.0, 6.1 OR 6.2
 
-It is installed at `/usr/share/db-6.2.32`
+Installation Scripts [6.0](vagrant-setup/db60.sh), [6.1](vagrant-setup/db61.sh), [6.2](vagrant-setup/db62.sh),
+
+Latest version 6.2 is installed at `/usr/share/db-6.2.32`
 
 Includes Java bindings
 
@@ -188,8 +195,8 @@ Includes Java bindings
 # DCEVM
 
 Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
-because the JVM binaries for JDK 1.8.0_112 are already precompiled at
-tomcat\dcevm
+because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
+[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
 
 DCEVM is vey sensitive to any minor change in Java version,
 so check its homepage for compatibility before performing any change on Java.
@@ -197,6 +204,8 @@ so check its homepage for compatibility before performing any change on Java.
 -------------------------------------------------------------------------------
 
 # DOCKER
+
+[Installation Script](vagrant-setup/docker.sh)
 
 Docker is enabled to start on boot by default after install.
 To disable start on boot do
@@ -207,6 +216,8 @@ The user **vagrant** is added to **docker** group.
 -------------------------------------------------------------------------------
 
 # CASSANDRA 3.9
+
+[Installation Script](vagrant-setup/cassandra39.sh)
 
 Cassandra 3.9 requires Java 8 or later.
 
@@ -233,6 +244,8 @@ http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html
 
 # CINNAMON
 
+[Installation Script](vagrant-setup/cinnamon.sh)
+
 The version of Cinnamon installed is chosen by yum package installer.
 
 Installing Cinnamon will require at least one guest reboot and maybe more.
@@ -258,6 +271,8 @@ and after the script finishes executing reboot the guest virtual machine.
 
 # ECLIPSE 4.7 Oxygen
 
+[Installation Script](vagrant-setup/eclipse47.sh)
+
 Is installed at `/usr/share/eclipse`
 
 At /vagrant/vagrant-setup there are scripts for adding PyDev.
@@ -265,6 +280,8 @@ At /vagrant/vagrant-setup there are scripts for adding PyDev.
 -------------------------------------------------------------------------------
 
 # HADOOP 2.5.1
+
+[Installation Script](vagrant-setup/hadoop251.sh)
 
 Hadoop will be compiled from source in order to generate its native libraries.
 Protocol Buffers will be installed as a side effect of installing Hadoop.
@@ -285,6 +302,8 @@ Node HTTP address is http://192.168.101.110:8042/
 -------------------------------------------------------------------------------
 
 # HBASE 1.1.2
+
+[Installation Script](vagrant-setup/hbase112.sh)
 
 It is installed in pseudo-distributed mode with unmanaged Zookeeper at
 `/usr/share/hbase`
@@ -318,6 +337,8 @@ https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 # INTELLIJ IDEA 3.4 COMMUNITY
 
+[Installation Script](vagrant-setup/intellij34.sh)
+
 After the initial setup **you must upgrade to the latest JDK** following [these](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-selecting-the-jdk-version-the-ide-will-run-under) instructions.
 IntelliJ Open File dialogs won't work with Java 1.8.0_05.
 
@@ -329,13 +350,23 @@ Start it with `idea` from any location (the symbolic link points to /usr/share/i
 
 # JAVA 1.8.0_05 + JAI 1.1.3
 
+[Installation Script](vagrant-setup/java80.sh)
+
 It is installed at `/usr/java/jdk1.8.0_05`
 
 -------------------------------------------------------------------------------
 
-# MySQL 5.1
+# LAMP
 
-root password is vagrant
+[Installation Script](vagrant-setup/lamp.sh)
+
+-------------------------------------------------------------------------------
+
+# MySQL 5.6.39
+
+[Installation Script](vagrant-setup/mysql.sh)
+
+**root** password is **vagrant**
 
 root remote login is disabled
 
@@ -349,6 +380,8 @@ for allowing access to phpMyAdmin from outside local host
 -------------------------------------------------------------------------------
 
 # NODEJS 6.2.2
+
+[Installation Script](vagrant-setup/nodejs622.sh)
 
 Typescript quickstart files can be found at /vagrant/vagrant-setup/angular2
 
@@ -366,6 +399,8 @@ http://192.168.101.110:3001/
 
 # POSTGRESQL 9.3 or 9.6
 
+Installation Scripts [9.3](pgsql93.sh), [9.6](pgsql96.sh)
+
 It is installed at `/var/lib/pgsql`
 
 SSH login for user postgres is disabled at `/etc/ssh/sshd_config`
@@ -377,10 +412,14 @@ see `/var/lib/pgsql/9.3/data/pg_hba.conf` and `postgresql.conf`
 
 Start and stop with
 `sudo service postgresql-9.3 [start|stop]`
+or
+`sudo systemctl [start|stop] postgresql-9.6.service`
 
 -------------------------------------------------------------------------------
 
-# PHPPGADMIN 5.1.2
+# PHPPGADMIN
+
+[Installation Script](vagrant-setup/phppgadmin.sh)
 
 Access from http://192.168.101.110/phpPgAdmin
 
@@ -388,13 +427,15 @@ Access from http://192.168.101.110/phpPgAdmin
 
 # OPEN FIRE 3.9.3
 
+[Installation Script](vagrant-setup/openfire393.sh)
+
 Start and stop Open Fire with sudo service openfire [start|stop]
 
 After setup it is needed to do an initial setup using web administration console.
 
 The web administration console can be accessed at http://192.168.101.110:9090
 
-Set user admin and password 0p3nFir3
+Set user admin and password **0p3nFir3**
 
 At Server Settings > File Transfer Proxy Settings,
 it is neccessary to disable file transfer proxy on port 7777
@@ -408,6 +449,8 @@ server are both running on the same machine.
 -------------------------------------------------------------------------------
 
 # OPENLDAP 2.4
+
+[Installation Script](vagrant-setup/openldap24.sh)
 
 OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
 
@@ -429,11 +472,15 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 PLAY FRAMEWORK 2.2.6
 
+[Installation Script](vagrant-setup/play226.sh)
+
 Should run under user **play** password **PlayFrm22**
 
 -------------------------------------------------------------------------------
 
 # RUBY 2.2.6, RAKE, BUNDLER
+
+[Installation Script](vagrant-setup/ruby226.sh)
 
 Ruby is installed at `/usr/local/rvm/rubies/ruby-2.1.0/`
 
@@ -441,11 +488,15 @@ RubyGems is installed at `/usr/local/rubygems`
 
 -------------------------------------------------------------------------------
 
-# SCALA 2.11.0
+# SCALA 2.10 or 2.11
+
+Installation Scripts [2.10](vagrant-setup/scala210.sh), [2.11](vagrant-setup/scala211.sh)
 
 -------------------------------------------------------------------------------
 
 # SOLR 6.1.0
+
+[Installation Script](vagrant-setup/solr610.sh)
 
 Solr 6.1 requires Java 8.
 
@@ -462,6 +513,10 @@ Create a collection by entering:
 
 # TOMCAT 8.0 or 8.5
 
+Installation Scripts [8.0](vagrant-setup/tomcat80.sh), [8.5](vagrant-setup/tomcat85.sh)
+
+Tomcat 8.5 requires [Open SSL 1.0.2](vagrant-setup/openssl102.sh).
+
 Start and stop with
 `sudo service tomcat [start|stop|restart]`
 
@@ -473,13 +528,18 @@ Access Tomcat Manager by typing in your browser http://192.168.101.110:8080
 
 Use **tomcat** user with password **catpassw8** for uploading files via SFTP
 
-The User/Password for manager GUI is tomcat/catpassw8
+The User/Password for manager GUI is **tomcat/catpassw8**
 
 Tomcat uses DCEVM as runtime for dynamic class reloading.
+To use standard JRE edit [init.d/tomcat](vagrant-setup/tomcat/init.d/tomcat) and remove
+`-XXaltjvm=dcevm -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.1.0.jar=autoHotswap=true`
+from `JAVA_OPTS`
 
 -------------------------------------------------------------------------------
 
 # ZOOKEEPER 3.4.6
+
+[Installation Script](vagrant-setup/zookeeper346.sh)
 
 Runs on port 2181
 

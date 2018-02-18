@@ -1,18 +1,30 @@
 #!/bin/bash
 
-# MySQL
-yum install -y mysql-server
-chkconfig mysqld on
-service mysqld start
-mysql_install_db
-# Harden the installation a bit by changeing MySQL root password to "vagrant"
-echo -e "\nY\nvagrant\nvagrant\nY\nY\nY\nY\n" | /usr/bin/mysql_secure_installation
+if [[ $EUID -eq 0 ]]
+then
+	SETUP="/vagrant/vagrant-setup"
+	source $SETUP/include.sh
 
-# PHP
-yum install -y php-mysql.x86_64
+	# Apache HTTP Server
+	source httpd.sh
 
-#phpMyAdmin
-# wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-# rpm -ivh epel-release*
-# rm epel-release-6-8.noarch.rpm
-yum install -y phpmyadmin
+	# MySQL
+	source mysql51.sh
+
+	# PHP
+	yum install -y php-mysql.x86_64
+
+	# phpMyAdmin
+	HTTPD=`which httpd`
+	if [[ $HTTPD == "*no httpd*" ]]
+		then
+		echo "No httpd service found, skipping phpMyAdmin setup"
+	else
+		yum install -y phpmyadmin
+	fi
+
+else
+
+	echo "LAMP stack must be installed as root. Type sudo ./lamp.sh for executing the script."
+
+fi
