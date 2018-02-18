@@ -10,6 +10,7 @@ a software development VM with :
 
 and optionally :
 
+- Android Studio 3.0.1
 - Ant 1.9.4
 - Apache Directory Service 2.0
 - Apache HTTPD 2.4.6 + PHP  5.4.16
