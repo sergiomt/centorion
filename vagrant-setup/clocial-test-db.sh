@@ -3,9 +3,9 @@
 JAVA_HOME=/usr/java/latest
 SHARE=/usr/share
 SHARED=$SHARE/tomcat/shared/lib
-WEBINF=/vagrant/clocial/clocial-web/target/clocial-web-1.0/WEB-INF/lib
+WEBINF=/vagrant/workspace/clocial/clocial-web/target/clocial-web-1.0/WEB-INF/lib
 M2REPO=/home/vagrant/.m2/repository
-TARGET=/vagrant/clocial/clocial-pojo/target
+TARGET=/vagrant/workspace/clocial/clocial-pojo/target
 BDBBUCKET=/opt/bdb/bucket
 
 sudo $JAVA_HOME/bin/java -cp $SHARED/*:$WEBINF/* com.knowgate.debug.DebugFile
