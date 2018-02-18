@@ -16,6 +16,7 @@ and optionally :
 - Berkeley DB 6.1 with Java bindings
 - Cinnamon
 - DCEVM
+- Docker
 - Cassandra 3.9 (requires Java 8 and Python 2.7)
 - Eclipse 4.7 Oxygen
 - Java 8.0 + JAI 1.1.3
@@ -184,6 +185,16 @@ so check its homepage for compatibility before performing any change on Java.
 
 -------------------------------------------------------------------------------
 
+# DOCKER
+
+Docker is enabled to start on boot by default after install.
+To disable start on boot do
+`sudo systemctl disable docker`
+
+The user **vagrant** is added to **docker** group.
+
+-------------------------------------------------------------------------------
+
 # JAVA 1.8.0_05 + JAI 1.1.3
 
 It is installed at `/usr/java/jdk1.8.0_05`
@@ -221,9 +232,9 @@ The version of Cinnamon installed is chosen by yum package installer.
 
 Installing Cinnamon will require at least one guest reboot and maybe more.
 
-Before starting to install Cinnamon set `vb.gui = true` at Vagrantfile to enable GUI.
+**Before starting to install Cinnamon set `vb.gui = true` at Vagrantfile** to enable GUI.
 
-It is also recommended that you enable 3D acceleration in VirtualBox screen settings, otherwise you'll get a "Cinnamon is using software rendering mode" warning you about degraded UI performance.
+It is also recommended that you enable **3D acceleration** in VirtualBox screen settings, otherwise you'll get a "Cinnamon is using software rendering mode" warning you about degraded UI performance.
 
 A few GNOME applications are installed by default:
 
