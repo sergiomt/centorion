@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
-# CentOrion
+# ![CentOrion](cylon-icon.png "CentOrion") CentOrion
 
 A Vagrantfile plus a set of Bash scripts to configure
 a software development VM with :
