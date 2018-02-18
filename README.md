@@ -153,7 +153,17 @@ To fully automate application installation on machine creation, add the desired 
 
 # CENTOS 7.3
 
-The password for **root** is **vagrant**
+The password for **root** and **vagrant** users is **vagrant**
+
+-------------------------------------------------------------------------------
+
+# ANDROID STUDIO 3.0.1
+
+[Script](blob/master/vagrant-setup/androidstudio301.sh)
+
+-------------------------------------------------------------------------------
+
+# ANT 1.9.4
 
 -------------------------------------------------------------------------------
 
