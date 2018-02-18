@@ -16,6 +16,7 @@ then
 	# sudo systemctl enable gdm.service
 	
 	yum -y install libnm-gtk
+	yum -y install gtk-murrine-engine
 	yum -y install cinnamon
 	
 	# Microsoft core fonts
