@@ -21,6 +21,7 @@ Then it is possible to install selectively the following applications.
 - [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
 - [Cinnamon](#cinnamon)
 - [DCEVM](#dcevm)
+- [Django 1.11.10](#django-11110)
 - [Docker](#docker)
 - [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
 - [Erlang](#erlang)
@@ -265,6 +266,33 @@ because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled 
 
 DCEVM is vey sensitive to any minor change in Java version,
 so check its homepage for compatibility before performing any change on Java.
+
+-------------------------------------------------------------------------------
+
+# DJANGO 1.11.10
+
+[Installation Script](vagrant-setup/django.sh)
+
+Django is installed with the `virtualenv` tool. This tool allows to create virtual Python environments where you can install any Python packages you want without affecting the rest of the system.
+
+Python projects are put at `/home/vagrant/pythonprojects` where a default environment called `env1` is atomatically created. Then Django is installed on the env1 virtualenvironment.
+
+`virtualenv` does not work properly on folders shared between the host and the guest, read [here](https://github.com/gratipay/gratipay.com/issues/2327) the gory details.
+
+Before using any virtualenvironment you must activate it with
+`source environment_name/bin/activate`
+
+To create a new project in an evironment type:
+`django-admin startproject projectname`
+
+To bootstrap the database (which uses SQLite by default) type:
+`python manage.py migrate`
+
+You can create an administrative user by typing:
+`python manage.py createsuperuser`
+
+Once you have a user, you can start up the Django development server. You should only use this for development purposes. Run:
+`python manage.py runserver 0.0.0.0:8000`
 
 -------------------------------------------------------------------------------
 
