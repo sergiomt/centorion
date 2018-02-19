@@ -49,11 +49,11 @@ Then it is possible to install selectively the following applications.
 
 1. Ensure that virtualization is enabled at your BIOS.
 
-2. Install Oracle Virtual Box 5.1 or higher.
+2. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
 
-3. Install Vagrant 1.9 or higher.
+3. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
-	* If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
+	* Optional. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
 	* From your host command line do
 		`SET HTTP_PROXY=http://_XXX.XXX.XXX.XXX_:_port_`
 		`SET HTTPS_PROXY=ttp://_XXX.XXX.XXX.XXX_:_port_`
@@ -76,11 +76,11 @@ Then it is possible to install selectively the following applications.
 
 `git clone https://github.com/sergiomt/centorion.git`
 
-or else download and unzip
+* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+
+Or if you do not have Git in your host then download and unzip
 
 `https://github.com/sergiomt/centorion/archive/master.zip`
-
-* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
 
 5. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
