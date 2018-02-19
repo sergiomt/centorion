@@ -82,37 +82,37 @@ or else download and unzip
 
 * If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
 
-5. Optional. Copy an SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+5. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-6. Optional. Edit `setup.sh file .
+6. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-7. Open a command prompt at the directory of this readme file and type:
+7. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+
+8. Open a command prompt at the directory of this readme file and type:
 
 	`vagrant up`
 
 	That will create a virtual machine from scratch.
 	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
 
-8. In the meantime, add
+9. In the meantime, add the line
 	`192.168.101.110 centorion`
-	to your `/etc/hosts` or `C:\Windows\Sytem32\drivers\etc\hosts`
+	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
-9. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+10. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh`
 
 	or for connecting using PuTTY read
-	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY)
+	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-10. Once logged into the Vagrant VM, from directory /vagrant/vagrant-setup run the .sh scripts for installing the desired applications.
-
-11. You can also set what applications will be installed by default by changing INSTALLED_APPS in setup.sh
+11. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
 12. The guest machine has the private IP address 192.168.101.110
 
 13. The base directory in the host is by default a shared folder between host and guest.
 
-14. Optional. To save some disk space after install, you can delete the files at /vagrant/vagrant-setup/cache
+14. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 ## Troubleshooting
 
