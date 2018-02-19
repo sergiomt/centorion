@@ -298,7 +298,7 @@ You can test installation by typing in a command shell:
 
 Which should create an interactive groovy shell where you can type Groovy statements.
 
-Or to run the <<..\..\../subprojects/groovy-console/src/spec/doc/groovy-console.adoc,Swing interactive console>> type:
+Or to run the Swing interactive console type:
 
 `groovyConsole`
 
