@@ -18,11 +18,12 @@ Then it is possible to install selectively the following applications.
 - [Apache Directory Service 2.0](#apache-directory-service-20)
 - [Apache HTTPD 2.4.6 + PHP 5.4.16](#apache-httpd-with-php)
 - [Berkeley DB](#berkeley-db-60-61-or-62) 6.0, 6.1 or 6.2 with Java bindings
+- [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
 - [Cinnamon](#cinnamon)
 - [DCEVM](#dcevm)
 - [Docker](#docker)
-- [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
 - [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- Erlang (#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
@@ -38,6 +39,7 @@ Then it is possible to install selectively the following applications.
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
 - [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
 - [Open Fire 3.9.3](#open-fire-393)
+- [RabbitMQ 3.7.3](#rabbitmq-373)
 - [Ruby 2.2.6](#ruby-226-rake-bundler)
 - [Scala 2.10 or 2.11](#scala-210-or-211)
 - [Solr 6.1.0](#solr-610)
@@ -286,6 +288,12 @@ At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 
 -------------------------------------------------------------------------------
 
+# ERLANG
+
+[Installation Script](vagrant-setup/erlang.sh)
+
+-------------------------------------------------------------------------------
+
 # GROOVY 2.4.13
 
 [Installation Script](vagrant-setup/groovy24.sh)
@@ -504,6 +512,17 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 [Installation Script](vagrant-setup/play226.sh)
 
 Should run under user **play** password **PlayFrm22**
+
+-------------------------------------------------------------------------------
+
+RABBITMQ 3.7.3
+
+[Installation Script](vagrant-setup/rabbitmq373.sh)
+
+Requires Erlang which is automatically installed if not already present.
+
+For additional configuration steps that might be required read
+https://www.rabbitmq.com/install-rpm.html
 
 -------------------------------------------------------------------------------
 
