@@ -1,14 +1,17 @@
 -------------------------------------------------------------------------------
 # ![CentOrion](cylon-icon.png "CentOrion") CentOrion
 
-A Vagrantfile plus a set of Bash scripts to configure
-a software development VM with :
+A Vagrantfile plus a set of Bash scripts to full automate the configuration of a software development or server Linux VM.
+
+This allows the distribution of virtual machines with very small file size (under 15Mb) compared to the tens of gigabytes required for a VM image.
+
+The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
 - CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
 - Git
 - Mercurial with HGK and Extension Queues
 
-and optionally :
+Then it is possible to install selectively the following applications.
 
 - [Android Studio 3.0.1](#android-studio-301)
 - [Ant 1.9.4](#ant-194)
@@ -40,8 +43,6 @@ and optionally :
 - [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
 - [VSFTP](vagrant-setup/vsftpd.sh)
 - [Zookeeper 3.4.6](#zookeeper-346)
-
-The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
 -------------------------------------------------------------------------------
 # SETUP
