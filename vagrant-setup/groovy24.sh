@@ -1,13 +1,13 @@
 #!/bin/bash
 
-if [ -z ${GROOVY_HOME+x} ]
+if [ -z "$GROOVY_HOME" ]
 	then
 
 	echo "Groovy is already installed, nothing done!"
 
 else
 
-	if [ -z ${JAVA_HOME+x} ]
+	if [ -z "$JAVA_HOME" ]
 	then
 		echo "Warning: JAVA_HOME is not set. Have you installed already Java?"
 	fi
