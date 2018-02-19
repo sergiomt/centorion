@@ -27,6 +27,7 @@ Then it is possible to install selectively the following applications.
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
+- [Groovy 2.4.13](#groovy-2413)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
@@ -196,27 +197,6 @@ Latest version 6.2 is installed at `/usr/share/db-6.2.32`
 
 Includes Java bindings
 
--------------------------------------------------------------------------------
-
-# DCEVM
-
-Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
-because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
-[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
-
-DCEVM is vey sensitive to any minor change in Java version,
-so check its homepage for compatibility before performing any change on Java.
-
--------------------------------------------------------------------------------
-
-# DOCKER
-
-[Installation Script](vagrant-setup/docker.sh)
-
-Docker is enabled to start on boot by default after install.
-To disable start on boot do
-`sudo systemctl disable docker`
-
 The user **vagrant** is added to **docker** group.
 
 -------------------------------------------------------------------------------
@@ -275,13 +255,56 @@ and after the script finishes executing reboot the guest virtual machine.
 
 -------------------------------------------------------------------------------
 
+# DCEVM
+
+Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
+because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
+[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
+
+DCEVM is vey sensitive to any minor change in Java version,
+so check its homepage for compatibility before performing any change on Java.
+
+-------------------------------------------------------------------------------
+
+# DOCKER
+
+[Installation Script](vagrant-setup/docker.sh)
+
+Docker is enabled to start on boot by default after install.
+To disable start on boot do
+`sudo systemctl disable docker`
+
+-------------------------------------------------------------------------------
+
 # ECLIPSE 4.7 Oxygen
 
 [Installation Script](vagrant-setup/eclipse47.sh)
 
 Is installed at `/usr/share/eclipse`
 
-At /vagrant/vagrant-setup there are scripts for adding PyDev.
+At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
+
+-------------------------------------------------------------------------------
+
+# GROOVY 2.4.13
+
+[Installation Script](vagrant-setup/groovy24.sh)
+
+Is installed at `/usr/local/groovy`
+
+You can test installation by typing in a command shell:
+
+`/usr/local/groovy/bin/groovysh`
+
+Which should create an interactive groovy shell where you can type Groovy statements.
+
+Or to run the <<..\..\../subprojects/groovy-console/src/spec/doc/groovy-console.adoc,Swing interactive console>> type:
+
+`groovyConsole`
+
+To run a specific Groovy script type:
+
+`groovy SomeScript`
 
 -------------------------------------------------------------------------------
 
