@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # From RHEL Extra Packages for Enterprise Linux (EPEL) repo
-# install GDAL and JSON PostGIS 2.0 dependencies not available from yum 
+# install GDAL and JSON PostGIS 2.4 dependencies not available from yum 
 
 if [ -d "/var/lib/pgsql" ]
 	then
@@ -20,7 +20,7 @@ else
 	chkconfig postgresql-9.6 on
 	/usr/pgsql-9.6/bin/postgresql96-setup initdb
 
-	# Install PostGIS 2.0
+	# Install PostGIS 2.4
 	yum install -y postgis2_96
 
 	# Make server listen to any client address

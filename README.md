@@ -1,58 +1,65 @@
-------------------------------------------------------------------------------
-# CentOrion
+-------------------------------------------------------------------------------
+# ![CentOrion](cylon-icon.png "CentOrion") CentOrion
 
-A Vagrantfile plus a set of Bash scripts to configure
-a software development VM with :
+A Vagrantfile plus a set of Bash scripts to full automate the configuration of a software development or server Linux VM.
 
-- CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
-- Git
-- Mercurial with HGK and Extension Queues
-
-and optionally :
-
-- Android Studio 3.0.1
-- Ant 1.9.4
-- Apache Directory Service 2.0
-- Apache HTTPD 2.4.6 + PHP  5.4.16
-- Berkeley DB 6.1 with Java bindings
-- Cinnamon
-- DCEVM
-- Docker
-- Cassandra 3.9 (requires Java 8 and Python 2.7)
-- Eclipse 4.7 Oxygen
-- Java 8.0 + JAI 1.1.3
-- Hadoop 2.5.1
-- HBase 1.1.2
-- IntelliJ IDEA 3.4 Community
-- Maven 3.2.1
-- MySQL 5.1 + phpMyAdmin
-- NodeJS 6.2.2 + Bower + Express
-- OpenLDAP 2.4 + phpLDAPAdmin
-- phpPgAdmin 5.1.2
-- Play Framework 2.2.6
-- PostGIS 2.0
-- PostgreSQL 9.3 or 9.6
-- Protocol Buffers 2.5.0
-- Open Fire 3.9.3
-- Ruby 2.2.6
-- Scala 2.10 or 2.11
-- Solr 6.1.0
-- Tomcat 8.0 or 8.5
-- VSFTP
-- Zookeeper 3.4.6
+This allows the distribution of virtual machines with very small file size (under 15Mb) compared to the tens of gigabytes required for a VM image.
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
+
+- [CentOS 7.3](#centos-73) + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
+- [Git](#git)
+- Mercurial with HGK and Extension Queues
+
+Then it is possible to install selectively the following applications.
+
+- [Android Studio 3.0.1](#android-studio-301)
+- [Ant 1.9.4](#ant-194)
+- [Apache Directory Service 2.0](#apache-directory-service-20)
+- [Apache HTTPD 2.4.6 + PHP 5.4.16](#apache-httpd-with-php)
+- [Berkeley DB](#berkeley-db-60-61-or-62) 6.0, 6.1 or 6.2 with Java bindings
+- [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
+- [Cinnamon](#cinnamon)
+- [DCEVM](#dcevm)
+- [Django 1.11.10](#django-11110)
+- [Docker](#docker)
+- [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- [Erlang](#erlang)
+- [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
+- [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
+- [HBase 1.1.2](#hbase-112) (requires Hadoop)
+- [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
+- [John The Ripper 1.8.0](#john-the-ripper-180)
+- [Groovy 2.4.13](#groovy-2413)
+- [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
+- [Maven 3.2.1](vagrant-setup/maven321.sh)
+- [MySQL 5.6 + phpMyAdmin](#mysql-5639)
+- [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
+- [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
+- [phpPgAdmin 5.1.2](#phppgadmin)
+- [Play Framework 2.2.6](#play-framework-226)
+- [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
+- [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
+- [Open Fire 3.9.3](#open-fire-393)
+- [Oracle Express 11g2](#oracle11g)
+- [RabbitMQ 3.7.3](#rabbitmq-373)
+- [Ruby 2.2.6](#ruby-226-rake-bundler)
+- [Scala 2.10 or 2.11](#scala-210-or-211)
+- [Solr 6.1.0](#solr-610)
+- [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
+- [VSFTP](vagrant-setup/vsftpd.sh)
+- [Zookeeper 3.4.6](#zookeeper-346)
 
 -------------------------------------------------------------------------------
 # SETUP
 
 1. Ensure that virtualization is enabled at your BIOS.
 
-2. Install Oracle Virtual Box 5.1 or higher.
+2. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
 
-3. Install Vagrant 1.9 or higher.
+3. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
-	* If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
+	* Optional. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
 	* From your host command line do
 		`SET HTTP_PROXY=http://_XXX.XXX.XXX.XXX_:_port_`
 		`SET HTTPS_PROXY=ttp://_XXX.XXX.XXX.XXX_:_port_`
@@ -75,43 +82,43 @@ The default install creates a minimal CentOS 7 virtual machine to start building
 
 `git clone https://github.com/sergiomt/centorion.git`
 
-or else download and unzip
+* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+
+Or if you do not have Git in your host then download and unzip
 
 `https://github.com/sergiomt/centorion/archive/master.zip`
 
-* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+5. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-5. Optional. Copy an SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+6. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-6. Optional. Edit `setup.sh file .
+7. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
 
-7. Open a command prompt at the directory of this readme file and type:
+8. Open a command prompt at the directory of this readme file and type:
 
 	`vagrant up`
 
 	That will create a virtual machine from scratch.
 	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
 
-8. In the meantime, add
+9. In the meantime, add the line
 	`192.168.101.110 centorion`
-	to your `/etc/hosts` or `C:\Windows\Sytem32\drivers\etc\hosts`
+	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
-9. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+10. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh`
 
 	or for connecting using PuTTY read
-	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY)
+	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-10. Once logged into the Vagrant VM, from directory /vagrant/vagrant-setup run the .sh scripts for installing the desired applications.
-
-11. You can also set what applications will be installed by default by changing INSTALLED_APPS in setup.sh
+11. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
 12. The guest machine has the private IP address 192.168.101.110
 
 13. The base directory in the host is by default a shared folder between host and guest.
 
-14. Optional. To save some disk space after install, you can delete the files at /vagrant/vagrant-setup/cache
+14. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 ## Troubleshooting
 
@@ -141,23 +148,37 @@ For each application there is a Bash shell script at /vagrant/vagrant-setup dire
 
 Most of these shell scripts must be execute as root by mean of:
 
-`sudo /vagrant/vagrant-setup/*scriptname*.sh`
+`sudo /vagrant/vagrant-setup/the_script_name.sh`
 
 Some applications require others so order of installation is important.
 
 Most of the scripts will either inform you about missing dependencies on other scripts or install the required dependencies themselves.
 
-To fully automate application installation on machine creation, add the desired script names to INSTALLED_APPS variable in setup.sh
+To fully automate application installation on machine creation, add the desired script names to `INSTALLED_APPS` variable in [setup.sh](vagrant-setup/setup.sh)
 
 -------------------------------------------------------------------------------
 
 # CENTOS 7.3
 
-The password for **root** is **vagrant**
+The password for **root** and **vagrant** users is **vagrant**
+
+-------------------------------------------------------------------------------
+
+# ANDROID STUDIO 3.0.1
+
+[Installation Script](vagrant-setup/androidstudio301.sh)
+
+-------------------------------------------------------------------------------
+
+# ANT 1.9.4
+
+[Installation Script](vagrant-setup/ant194.sh)
 
 -------------------------------------------------------------------------------
 
 # APACHE DIRECTORY SERVICE 2.0
+
+[Installation Script](vagrant-setup/ads200.sh)
 
 It is installed at `/opt/apache-ds-2.0.0-M17`
 
@@ -167,42 +188,27 @@ Manage with: `service apacheds [start|stop] default`
 
 -------------------------------------------------------------------------------
 
-# BERKELEY DB 6.2
+# APACHE HTTPD WITH PHP
 
-It is installed at `/usr/share/db-6.2.32`
+[Installation Script](vagrant-setup/httpd.sh)
+
+-------------------------------------------------------------------------------
+
+# BERKELEY DB 6.0, 6.1 OR 6.2
+
+Installation Scripts [6.0](vagrant-setup/db60.sh), [6.1](vagrant-setup/db61.sh), [6.2](vagrant-setup/db62.sh),
+
+Latest version 6.2 is installed at `/usr/share/db-6.2.32`
 
 Includes Java bindings
-
--------------------------------------------------------------------------------
-
-# DCEVM
-
-Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
-because the JVM binaries for JDK 1.8.0_112 are already precompiled at
-tomcat\dcevm
-
-DCEVM is vey sensitive to any minor change in Java version,
-so check its homepage for compatibility before performing any change on Java.
-
--------------------------------------------------------------------------------
-
-# DOCKER
-
-Docker is enabled to start on boot by default after install.
-To disable start on boot do
-`sudo systemctl disable docker`
 
 The user **vagrant** is added to **docker** group.
 
 -------------------------------------------------------------------------------
 
-# JAVA 1.8.0_05 + JAI 1.1.3
-
-It is installed at `/usr/java/jdk1.8.0_05`
-
--------------------------------------------------------------------------------
-
 # CASSANDRA 3.9
+
+[Installation Script](vagrant-setup/cassandra39.sh)
 
 Cassandra 3.9 requires Java 8 or later.
 
@@ -229,6 +235,8 @@ http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html
 
 # CINNAMON
 
+[Installation Script](vagrant-setup/cinnamon.sh)
+
 The version of Cinnamon installed is chosen by yum package installer.
 
 Installing Cinnamon will require at least one guest reboot and maybe more.
@@ -252,15 +260,114 @@ and after the script finishes executing reboot the guest virtual machine.
 
 -------------------------------------------------------------------------------
 
+# DCEVM
+
+Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
+because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
+[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
+
+DCEVM is vey sensitive to any minor change in Java version,
+so check its homepage for compatibility before performing any change on Java.
+
+-------------------------------------------------------------------------------
+
+# DJANGO 1.11.10
+
+[Installation Script](vagrant-setup/django.sh)
+
+Django is installed with the `virtualenv` tool. This tool allows to create virtual Python environments where you can install any Python packages you want without affecting the rest of the system.
+
+Python projects are put at `/home/vagrant/pythonprojects` where a default environment called `env1` is atomatically created. Then Django is installed on the env1 virtualenvironment.
+
+`virtualenv` does not work properly on folders shared between the host and the guest, read [here](https://github.com/gratipay/gratipay.com/issues/2327) the gory details.
+
+Before using any virtualenvironment you must activate it with
+`source environment_name/bin/activate`
+
+To create a new project in an evironment type:
+`django-admin startproject projectname`
+
+To bootstrap the database (which uses SQLite by default) type:
+`python manage.py migrate`
+
+You can create an administrative user by typing:
+`python manage.py createsuperuser`
+
+Once you have a user, you can start up the Django development server. You should only use this for development purposes. Run:
+`python manage.py runserver 0.0.0.0:8000`
+
+-------------------------------------------------------------------------------
+
+# DOCKER
+
+[Installation Script](vagrant-setup/docker.sh)
+
+Docker is enabled to start on boot by default after install.
+To disable start on boot do
+`sudo systemctl disable docker`
+
+-------------------------------------------------------------------------------
+
 # ECLIPSE 4.7 Oxygen
+
+[Installation Script](vagrant-setup/eclipse47.sh)
 
 Is installed at `/usr/share/eclipse`
 
-At /vagrant/vagrant-setup there are scripts for adding PyDev.
+At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
+
+-------------------------------------------------------------------------------
+
+# ERLANG
+
+[Installation Script](vagrant-setup/erlang.sh)
+
+
+-------------------------------------------------------------------------------
+
+# GIT
+
+To [use an SSH key on Github](https://help.github.com/articles/connecting-to-github-with-ssh/) instead of user/password, save the private key at ~/.ssh add this to ~/.ssh/config
+
+Host www.github.com
+   HostName github.com
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+   IdentityFile ~/.ssh/id_dsa
+   User git
+
+then execute
+`git config core.sshCommand "ssh -i ~/.ssh/id_dsa -F /dev/null"`
+
+last in your shell run [addsshagentkey.sh](vagrant-setup/addsshagentkey.sh)
+
+-------------------------------------------------------------------------------
+
+# GROOVY 2.4.13
+
+[Installation Script](vagrant-setup/groovy24.sh)
+
+Is installed at `/usr/local/groovy`
+
+You can test installation by typing in a command shell:
+
+`/usr/local/groovy/bin/groovysh`
+
+Which should create an interactive groovy shell where you can type Groovy statements.
+
+Or to run the Swing interactive console type:
+
+`groovyConsole`
+
+To run a specific Groovy script type:
+
+`groovy SomeScript`
 
 -------------------------------------------------------------------------------
 
 # HADOOP 2.5.1
+
+[Installation Script](vagrant-setup/hadoop251.sh)
 
 Hadoop will be compiled from source in order to generate its native libraries.
 Protocol Buffers will be installed as a side effect of installing Hadoop.
@@ -281,6 +388,8 @@ Node HTTP address is http://192.168.101.110:8042/
 -------------------------------------------------------------------------------
 
 # HBASE 1.1.2
+
+[Installation Script](vagrant-setup/hbase112.sh)
 
 It is installed in pseudo-distributed mode with unmanaged Zookeeper at
 `/usr/share/hbase`
@@ -314,13 +423,50 @@ https://learnhbase.wordpress.com/2013/03/02/hbase-shell-commands/
 
 # INTELLIJ IDEA 3.4 COMMUNITY
 
-Is installed at `/usr/share/intellij`
+[Installation Script](vagrant-setup/intellij34.sh)
+
+After the initial setup **you must upgrade to the latest JDK** following [these](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-selecting-the-jdk-version-the-ide-will-run-under) instructions.
+IntelliJ Open File dialogs won't work with Java 1.8.0_05.
+
+The IDE is installed at `/usr/share/intellij`
+
+Start it with `idea` from any location (the symbolic link points to /usr/share/intellij/bin/idea.sh
 
 -------------------------------------------------------------------------------
 
-# MySQL 5.1
+# JAVA 1.8.0_05 + JAI 1.1.3
 
-root password is vagrant
+[Installation Script](vagrant-setup/java80.sh)
+
+It is installed at `/usr/java/jdk1.8.0_05`
+
+-------------------------------------------------------------------------------
+
+JOHN THE RIPPER 1.8.0
+
+[Installation Script](vagrant-setup/johntheripper180.sh)
+
+It is installed at `/usr/share/john`
+
+Test installation by executing
+`/usr/share/john/run/john --test`
+
+To get extra charset files download and uncompress
+http://www.openwall.com/john/j/john-extra-20130529.tar.xz
+
+-------------------------------------------------------------------------------
+
+# LAMP
+
+[Installation Script](vagrant-setup/lamp.sh)
+
+-------------------------------------------------------------------------------
+
+# MySQL 5.6.39
+
+[Installation Script](vagrant-setup/mysql.sh)
+
+**root** password is **vagrant**
 
 root remote login is disabled
 
@@ -334,6 +480,8 @@ for allowing access to phpMyAdmin from outside local host
 -------------------------------------------------------------------------------
 
 # NODEJS 6.2.2
+
+[Installation Script](vagrant-setup/nodejs622.sh)
 
 Typescript quickstart files can be found at /vagrant/vagrant-setup/angular2
 
@@ -349,7 +497,19 @@ http://192.168.101.110:3001/
 
 -------------------------------------------------------------------------------
 
+# ORACLE 11G
+
+Before running the install script you must have an Oracle OTN account to download
+http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+and save it at `/vagrant/vagrant-setup/cache`
+
+[Installation Script](vagrant-setup/oracle11g2.sh)
+
+-------------------------------------------------------------------------------
+
 # POSTGRESQL 9.3 or 9.6
+
+Installation Scripts [9.3](pgsql93.sh), [9.6](pgsql96.sh)
 
 It is installed at `/var/lib/pgsql`
 
@@ -362,10 +522,14 @@ see `/var/lib/pgsql/9.3/data/pg_hba.conf` and `postgresql.conf`
 
 Start and stop with
 `sudo service postgresql-9.3 [start|stop]`
+or
+`sudo systemctl [start|stop] postgresql-9.6.service`
 
 -------------------------------------------------------------------------------
 
-# PHPPGADMIN 5.1.2
+# PHPPGADMIN
+
+[Installation Script](vagrant-setup/phppgadmin.sh)
 
 Access from http://192.168.101.110/phpPgAdmin
 
@@ -373,13 +537,15 @@ Access from http://192.168.101.110/phpPgAdmin
 
 # OPEN FIRE 3.9.3
 
+[Installation Script](vagrant-setup/openfire393.sh)
+
 Start and stop Open Fire with sudo service openfire [start|stop]
 
 After setup it is needed to do an initial setup using web administration console.
 
 The web administration console can be accessed at http://192.168.101.110:9090
 
-Set user admin and password 0p3nFir3
+Set user admin and password **0p3nFir3**
 
 At Server Settings > File Transfer Proxy Settings,
 it is neccessary to disable file transfer proxy on port 7777
@@ -393,6 +559,8 @@ server are both running on the same machine.
 -------------------------------------------------------------------------------
 
 # OPENLDAP 2.4
+
+[Installation Script](vagrant-setup/openldap24.sh)
 
 OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
 
@@ -412,13 +580,28 @@ http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 -------------------------------------------------------------------------------
 
-PLAY FRAMEWORK 2.2.6
+# PLAY FRAMEWORK 2.2.6
+
+[Installation Script](vagrant-setup/play226.sh)
 
 Should run under user **play** password **PlayFrm22**
 
 -------------------------------------------------------------------------------
 
+RABBITMQ 3.7.3
+
+[Installation Script](vagrant-setup/rabbitmq373.sh)
+
+Requires Erlang which is automatically installed if not already present.
+
+For additional configuration steps that might be required read
+https://www.rabbitmq.com/install-rpm.html
+
+-------------------------------------------------------------------------------
+
 # RUBY 2.2.6, RAKE, BUNDLER
+
+[Installation Script](vagrant-setup/ruby226.sh)
 
 Ruby is installed at `/usr/local/rvm/rubies/ruby-2.1.0/`
 
@@ -426,11 +609,15 @@ RubyGems is installed at `/usr/local/rubygems`
 
 -------------------------------------------------------------------------------
 
-# SCALA 2.11.0
+# SCALA 2.10 or 2.11
+
+Installation Scripts [2.10](vagrant-setup/scala210.sh), [2.11](vagrant-setup/scala211.sh)
 
 -------------------------------------------------------------------------------
 
 # SOLR 6.1.0
+
+[Installation Script](vagrant-setup/solr610.sh)
 
 Solr 6.1 requires Java 8.
 
@@ -447,6 +634,10 @@ Create a collection by entering:
 
 # TOMCAT 8.0 or 8.5
 
+Installation Scripts [8.0](vagrant-setup/tomcat80.sh), [8.5](vagrant-setup/tomcat85.sh)
+
+Tomcat 8.5 requires [Open SSL 1.0.2](vagrant-setup/openssl102.sh).
+
 Start and stop with
 `sudo service tomcat [start|stop|restart]`
 
@@ -458,13 +649,18 @@ Access Tomcat Manager by typing in your browser http://192.168.101.110:8080
 
 Use **tomcat** user with password **catpassw8** for uploading files via SFTP
 
-The User/Password for manager GUI is tomcat/catpassw8
+The User/Password for manager GUI is **tomcat/catpassw8**
 
 Tomcat uses DCEVM as runtime for dynamic class reloading.
+To use standard JRE edit [init.d/tomcat](vagrant-setup/tomcat/init.d/tomcat) and remove
+`-XXaltjvm=dcevm -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.1.0.jar=autoHotswap=true`
+from `JAVA_OPTS`
 
 -------------------------------------------------------------------------------
 
 # ZOOKEEPER 3.4.6
+
+[Installation Script](vagrant-setup/zookeeper346.sh)
 
 Runs on port 2181
 

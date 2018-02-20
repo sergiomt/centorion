@@ -41,10 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     vs.vm.provider "virtualbox" do |vb|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
-      vb.gui = false
+      vb.gui = true
       # Use VBoxManage to customize the VM.
       vb.customize ["modifyvm", :id, "--cpus", "2"]
-      vb.customize ["modifyvm", :id, "--memory", "4096"]
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
   end
 
