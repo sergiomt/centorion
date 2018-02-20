@@ -7,8 +7,8 @@ This allows the distribution of virtual machines with very small file size (unde
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
-- CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
-- Git
+- [CentOS 7.3](#centos-73) + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
+- [Git](#git)
 - Mercurial with HGK and Extension Queues
 
 Then it is possible to install selectively the following applications.
@@ -321,6 +321,20 @@ At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 # ERLANG
 
 [Installation Script](vagrant-setup/erlang.sh)
+
+
+-------------------------------------------------------------------------------
+
+# GIT
+
+To [use an SSH key on Github](https://help.github.com/articles/connecting-to-github-with-ssh/) instead of user/password, save the private key at ~/.ssh add this to ~/.ssh/config
+
+Host www.github.com
+   HostName github.com
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+   IdentityFile ~/.ssh/id_dsa
+   User git
 
 -------------------------------------------------------------------------------
 
