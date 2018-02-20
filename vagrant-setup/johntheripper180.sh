@@ -14,6 +14,7 @@ then
 	chown -R vagrant.vagrant john
 	cd john/src
 	su vagrant -c "make clean linux-x86-64"
+	cd PPWD
 
 else
 
