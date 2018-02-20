@@ -24,6 +24,6 @@ then
 
 else
 
-	echo "Django must be installed as root. Type sudo ./erlang.sh for executing the script."
+	echo "Django must be installed as root. Type sudo ./django.sh for executing the script."
 
 fi

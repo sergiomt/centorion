@@ -478,7 +478,7 @@ http://192.168.101.110:3001/
 
 -------------------------------------------------------------------------------
 
-ORACLE 11G
+# ORACLE 11G
 
 Before running the install script you must have an Oracle OTN account to download
 http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
