@@ -336,6 +336,9 @@ Host www.github.com
    IdentityFile ~/.ssh/id_dsa
    User git
 
+then execute
+`git config core.sshCommand "ssh -i ~/.ssh/id_dsa -F /dev/null"`
+
 -------------------------------------------------------------------------------
 
 # GROOVY 2.4.13
