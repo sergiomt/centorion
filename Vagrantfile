@@ -71,7 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     nd.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
 
     nd.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
-    nd.vm.provision "shell", path: "vagrant-setup/setup-openshift-node.sh"
+    nd.vm.provision "shell", path: "vagrant-setup/setup-openshift-node1.sh"
 
     config.vm.network "private_network", ip: "192.168.101.112"
 
