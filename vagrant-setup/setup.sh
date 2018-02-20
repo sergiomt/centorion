@@ -21,7 +21,7 @@ hostname $HOST
 echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
 echo "Enabling EPEL Repo"
-rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
 
 systemctl stop firewalld
 systemctl mask firewalld
