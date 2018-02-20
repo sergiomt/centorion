@@ -29,6 +29,7 @@ Then it is possible to install selectively the following applications.
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
+- [John The Ripper 1.8.0](#john-the-ripper-180)
 - [Groovy 2.4.13](#groovy-2413)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
@@ -40,6 +41,7 @@ Then it is possible to install selectively the following applications.
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
 - [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
 - [Open Fire 3.9.3](#open-fire-393)
+- [Oracle Express 11g2](#oracle11g)
 - [RabbitMQ 3.7.3](#rabbitmq-373)
 - [Ruby 2.2.6](#ruby-226-rake-bundler)
 - [Scala 2.10 or 2.11](#scala-210-or-211)
@@ -421,6 +423,20 @@ It is installed at `/usr/java/jdk1.8.0_05`
 
 -------------------------------------------------------------------------------
 
+JOHN THE RIPPER 1.8.0
+
+[Installation Script](vagrant-setup/johntheripper180.sh)
+
+It is installed at `/usr/share/john`
+
+Test installation by executing
+`/usr/share/john/run/john --test`
+
+To get extra charset files download and uncompress
+http://www.openwall.com/john/j/john-extra-20130529.tar.xz
+
+-------------------------------------------------------------------------------
+
 # LAMP
 
 [Installation Script](vagrant-setup/lamp.sh)
@@ -459,6 +475,16 @@ to start de server
 
 Access Browsersync at
 http://192.168.101.110:3001/
+
+-------------------------------------------------------------------------------
+
+ORACLE 11G
+
+Before running the install script you must have an Oracle OTN account to download
+http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+and save it at `/vagrant/vagrant-setup/cache`
+
+[Installation Script](vagrant-setup/oracle11g2.sh)
 
 -------------------------------------------------------------------------------
 
