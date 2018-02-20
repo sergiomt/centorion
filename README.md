@@ -341,6 +341,18 @@ then execute
 
 last in your shell run [addsshagentkey.sh](vagrant-setup/addsshagentkey.sh)
 
+To use Meld as merge tool execute
+`sudo yum install meld`
+and add this to your `.gitconfig` file.
+`
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+`
+
 -------------------------------------------------------------------------------
 
 # GROOVY 2.4.13

@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sed '/== vagrant insecure public key$/d' /home/vagrant/.ssh/authorized_keys
   EOC
 
-  config.vm.define "CentOrion" do |vs|
+  config.vm.define "CentOrion" , primary: true do |vs|
 
     # Every Vagrant virtual environment requires a box to build off of.
     # This is CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
@@ -41,10 +41,44 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     vs.vm.provider "virtualbox" do |vb|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
-      vb.gui = false
+      vb.gui = true
       # Use VBoxManage to customize the VM.
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.customize ["modifyvm", :id, "--memory", "4096"]
+    end
+  end
+
+  config.vm.define "openshift-master" do |ms|
+
+    ms.vm.box = "vagrant-centos-73-x86_64-puppet"
+    ms.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
+
+    ms.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
+    ms.vm.provision "shell", path: "vagrant-setup/setup-openshift-master.sh"
+
+    config.vm.network "private_network", ip: "192.168.101.111"
+
+    ms.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+  end
+
+  config.vm.define "openshift-master" do |nd|
+
+    nd.vm.box = "vagrant-centos-73-x86_64-puppet"
+    nd.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
+
+    nd.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
+    nd.vm.provision "shell", path: "vagrant-setup/setup-openshift-node.sh"
+
+    config.vm.network "private_network", ip: "192.168.101.112"
+
+    nd.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
   end
 

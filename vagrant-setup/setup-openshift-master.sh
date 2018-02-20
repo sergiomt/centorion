@@ -16,7 +16,7 @@ source include.sh
 
 # Set host name
 cat ./etc/hosts >> /etc/hosts
-HOST="centorion"
+HOST="openshift-master"
 hostname $HOST
 echo -e "NETWORKING=yes\nHOSTNAME=${HOST}" > /etc/sysconfig/network
 
@@ -33,9 +33,6 @@ systemctl restart iptables
 
 cd $SETUP
 
-# Deny external SSH access to postgres, tomcat, play and clocial users
-echo "DenyUsers postgres tomcat play clocial" >> /etc/ssh/sshd_config
-
 # No clear password authentication allowed
 perl -pi -e "s/#?PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 perl -pi -e "s/#?PermitRootLogin yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
@@ -51,19 +48,18 @@ cp ./yum/*.repo /etc/yum.repos.d/
 
 cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
 
-echo "Installing GCC, APR, ZIP"
+echo "Installing Ansible, GCC, ZIP"
 # GCC, APR, Git and Mercurial stuff needed for compiling some source code later
-yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget zip unzip
+yum install -y gcc gcc-c++ libtool make cmake bzip2 gzip lzo-devel zlib-devel wget zip unzip ansible
 
 echo "Installing OpenSSL 1.0.2"
 yum remove -y openssl
 source $SETUP/openssl102.sh
 cp --remove-destination /usr/local/ssl/bin/openssl /usr/bin/openssl
 
-echo "Installing Git and Mercurial"
+echo "Installing APR, Git and Mercurial"
 yum install -y apr-devel.x86_64 git mercurial mercurial-hgk
-# Add Git config
-cp $SETUP/.ssh/config /home/vagrant/.ssh/
+
 # Add Queues Extension to Mercurial
 cp --remove-destination $SETUP/etc/mercurial/hgrc.d/hgk.rc /etc/mercurial/hgrc.d/
 
@@ -71,6 +67,10 @@ if [ -d "$SETUP/.m2" ]
 	then
 	cp -r $SETUP/.m2 /root
 fi
+
+mkdir -p ~/.config/openshift
+cp $SETUP/openshift/installer.cfg.yml ~/.config/openshift
+atomic-openshift-installer install
 
 cd $SETUP
 for APP in "${AVAILABLE_APPS[@]}"
@@ -88,4 +88,4 @@ cat /vagrant/vagrant-setup/.bashrc >> /home/vagrant/.bashrc
 
 cd $SETUP
 
-echo "Machine provisioning done!"
+echo "Openshift master provisioning done!"
