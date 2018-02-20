@@ -339,6 +339,8 @@ Host www.github.com
 then execute
 `git config core.sshCommand "ssh -i ~/.ssh/id_dsa -F /dev/null"`
 
+last in your shell run [addsshagentkey.sh](vagrant-setup/addsshagentkey.sh)
+
 -------------------------------------------------------------------------------
 
 # GROOVY 2.4.13
