@@ -41,10 +41,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     vs.vm.provider "virtualbox" do |vb|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
-      vb.gui = true
+      vb.gui = false
       # Use VBoxManage to customize the VM.
       vb.customize ["modifyvm", :id, "--cpus", "2"]
-      vb.customize ["modifyvm", :id, "--memory", "4096"]
+      vb.customize ["modifyvm", :id, "--memory", "600"]
     end
   end
 
@@ -65,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "openshift-master" do |nd|
+  config.vm.define "openshift-node1" do |nd|
 
     nd.vm.box = "vagrant-centos-73-x86_64-puppet"
     nd.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"

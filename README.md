@@ -96,7 +96,7 @@ Or if you do not have Git in your host then download and unzip
 
 8. Open a command prompt at the directory of this readme file and type:
 
-	`vagrant up`
+	`vagrant up CentOrion`
 
 	That will create a virtual machine from scratch.
 	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
@@ -107,7 +107,7 @@ Or if you do not have Git in your host then download and unzip
 
 10. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
-	`vagrant ssh`
+	`vagrant ssh CentOrion`
 
 	or for connecting using PuTTY read
 	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
@@ -128,7 +128,7 @@ In case you have made any change to Vagrantfile then validate it with:
 
 In case you need a full debug trace during VM creation you may use:
 
-	`vagrant up -- debug > vagrant_debug.log 2>&1`
+	`vagrant up machine_name -- debug > vagrant_debug.log 2>&1`
 
 For watching your SSH configuration use:
 
