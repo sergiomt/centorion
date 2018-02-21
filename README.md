@@ -511,11 +511,44 @@ http://192.168.101.110:3001/
 
 # ORACLE 11G
 
+## Prerequisites
+
 Before running the install script you must have an Oracle OTN account to download
 http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
 and save it at `/vagrant/vagrant-setup/cache`
 
+Oracle Database needs a swap space of at least 2048 Mb which is more that the default of 1279 Mb that comes out of the box. 
+So before you begin and with the VM halted, you must add a new virtual hard disk from Virtualbox by right clicking on the machine and then Configuration -> Storage.
+Click on the icon of a hard drive with a + sign and add a new disk of 2Gb fixed size.
+
+After adding the new hard disk do `vagrant up machine_name`
+
+Once logged in type:
+
+`sudo vgdisplay`
+this will display the volume group information showing something like:
+VG Name **cl**
+
+Then execute
+`sudo fdisk -l`
+to list the available drives.
+You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
+
+Now execute:
+`
+sudo pvcreate /dev/sdb
+sudo vgextend cl /dev/sdb
+sudo lvextend -L+2G /dev/cl/swap
+`
+this will add 2Gb to the swap space.
+
+Now you can start installation by running the provided Bash script.
+
 [Installation Script](vagrant-setup/oracle11g2.sh)
+
+## Post installation configuration
+
+As part of the installation process, the script will automatically initiate oracle-xe configure which will interactively ask you questions about which ports must be used and whether Oracle must start on boot or not.
 
 -------------------------------------------------------------------------------
 

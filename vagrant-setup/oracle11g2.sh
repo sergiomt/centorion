@@ -18,12 +18,12 @@ then
 	if [ -f "$SETUP/cache/oracle-xe-11.2.0-1.0.x86_64.rpm.zip" ]
 	then
 
-		# yum -y install libaio bc flex
+		yum -y install libaio bc flex net-tools
 		unzip $SETUP/cache/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
 		rpm -ivh Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm
 		chmod -R ugo+w Disk1
 		rm -r Disk1
-		# sudo /etc/init.d/oracle-xe configure
+		/etc/init.d/oracle-xe configure
 
 	else
 
