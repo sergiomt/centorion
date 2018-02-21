@@ -509,6 +509,51 @@ http://192.168.101.110:3001/
 
 -------------------------------------------------------------------------------
 
+# OPEN FIRE 3.9.3
+
+[Installation Script](vagrant-setup/openfire393.sh)
+
+Start and stop Open Fire with sudo service openfire [start|stop]
+
+After setup it is needed to do an initial setup using web administration console.
+
+The web administration console can be accessed at http://192.168.101.110:9090
+
+Set user admin and password **0p3nFir3**
+
+At Server Settings > File Transfer Proxy Settings,
+it is neccessary to disable file transfer proxy on port 7777
+If file transfer proxy is not disabled then when trying to connect
+the following error is shown:
+"couldn't setup local SOCKS5 proxy on port 7777"
+
+The file transfer proxy needs to be disabled only if Open Fire client and
+server are both running on the same machine.
+
+-------------------------------------------------------------------------------
+
+# OPENLDAP 2.4
+
+[Installation Script](vagrant-setup/openldap24.sh)
+
+OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
+
+If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well
+which can be accessed through:
+
+A database with suffix dc=auth,dc=com is created at `/usr/local/var/auth-data`
+
+Manage service with:
+`sudo service slapd [start|stop]`
+
+phpLDAPAdmin is accessed from http://192.168.101.110/ldapadmin/
+Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com with password secret
+
+http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
+http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
+
+-------------------------------------------------------------------------------
+
 # ORACLE 11G
 
 ## Prerequisites
@@ -552,6 +597,12 @@ Now you can start installation by running the provided Bash script.
 
 As part of the installation process, the script will automatically initiate oracle-xe configure which will interactively ask you questions about which ports must be used and whether Oracle must start on boot or not.
 
+If you are using a GUI like Cinnamon then you can also install **SQL Developer**.
+As for the database, you need an OTN account to download SQL Developer from
+http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html
+Then install it with
+`rpm -Uhv sqldeveloper-(build number)-1.noarch.rpm`
+
 -------------------------------------------------------------------------------
 
 # POSTGRESQL 9.3 or 9.6
@@ -579,51 +630,6 @@ or
 [Installation Script](vagrant-setup/phppgadmin.sh)
 
 Access from http://192.168.101.110/phpPgAdmin
-
--------------------------------------------------------------------------------
-
-# OPEN FIRE 3.9.3
-
-[Installation Script](vagrant-setup/openfire393.sh)
-
-Start and stop Open Fire with sudo service openfire [start|stop]
-
-After setup it is needed to do an initial setup using web administration console.
-
-The web administration console can be accessed at http://192.168.101.110:9090
-
-Set user admin and password **0p3nFir3**
-
-At Server Settings > File Transfer Proxy Settings,
-it is neccessary to disable file transfer proxy on port 7777
-If file transfer proxy is not disabled then when trying to connect
-the following error is shown:
-"couldn't setup local SOCKS5 proxy on port 7777"
-
-The file transfer proxy needs to be disabled only if Open Fire client and
-server are both running on the same machine.
-
--------------------------------------------------------------------------------
-
-# OPENLDAP 2.4
-
-[Installation Script](vagrant-setup/openldap24.sh)
-
-OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
-
-If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well
-which can be accessed through:
-
-A database with suffix dc=auth,dc=com is created at `/usr/local/var/auth-data`
-
-Manage service with:
-`sudo service slapd [start|stop]`
-
-phpLDAPAdmin is accessed from http://192.168.101.110/ldapadmin/
-Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com with password secret
-
-http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
-http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
 
 -------------------------------------------------------------------------------
 
