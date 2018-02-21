@@ -544,6 +544,8 @@ this will add 2Gb to the swap space.
 
 Now you can start installation by running the provided Bash script.
 
+## Install
+
 [Installation Script](vagrant-setup/oracle11g2.sh)
 
 ## Post installation configuration
