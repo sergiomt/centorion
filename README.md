@@ -56,7 +56,7 @@ Then it is possible to install selectively the following applications.
 
 1. Ensure that virtualization is enabled at your BIOS.
 
-2. Ensure that you have an ssh client in your host. If your host is Linux most probably is already there. If your host is Windows then install PuTTY,Cygwin or Git to get an ssh client as a side effect. Check that ssh executable is in your path. 
+2. Ensure that you have an ssh client in your host. If your host is Linux most probably is already there. If your host is Windows then install PuTTY, Cygwin or Git to get an ssh client as a side effect. Check that ssh executable is in your PATH.
 
 3. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
 
@@ -83,13 +83,13 @@ Then it is possible to install selectively the following applications.
  
 5. Download source from GitHub, if you have Git installed in your host then do :
 
-`git clone https://github.com/sergiomt/centorion.git`
+	`git clone https://github.com/sergiomt/centorion.git`
 
-* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+	* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
 
-Or if you do not have Git in your host then download and unzip
+	Or if you do not have Git in your host then download and unzip
 
-`https://github.com/sergiomt/centorion/archive/master.zip`
+	`https://github.com/sergiomt/centorion/archive/master.zip`
 
 6. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
@@ -101,29 +101,27 @@ Or if you do not have Git in your host then download and unzip
 
 	`vagrant up CentOrion`
 
-That will create a virtual machine from scratch.
-It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
+	That will create a virtual machine from scratch.
+	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
 
-If your are setting up an Openshift cluster then your command must be:
+	If your are setting up an Openshift cluster then your command must be:
 
-`vagrant up openshift-master openshift-node1`
+	`vagrant up openshift-master openshift-node1`
 
 10. In the meantime, add the line
-`192.168.101.110 centorion`
-to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
+	`192.168.101.110 centorion`
+	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
-If you are setting up an Openshift cluster then add:
-`
-192.168.101.111 openshift-master
-192.168.101.112 openshift-node1
-`
+	If you are setting up an Openshift cluster then add at hosts:
+	`192.168.101.111 openshift-master`
+	`192.168.101.112 openshift-node1`
 
 11. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh CentOrion`
 
-or for connecting using PuTTY read
-[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
+	or for connecting using PuTTY read
+	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
 12. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
