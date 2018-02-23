@@ -576,6 +576,7 @@ After having executed from the host:
 you must log into the openshift-master virtual machine by doing:
 `vagrant ssh openshift-master`
 from the host and then inside the guest master execute:
+
 `sudo /vagrant/vagrant-setup/openshift-ansible.sh`
 
 After install, you can log into Openshift at:
