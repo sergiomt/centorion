@@ -2,6 +2,8 @@
 
 echo "Begin Openshift node provisioning"
 
+INSTALLED_APPS=( java80 )
+
 SETUP=/vagrant/vagrant-setup
 
 cd $SETUP

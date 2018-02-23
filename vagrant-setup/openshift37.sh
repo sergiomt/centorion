@@ -3,14 +3,6 @@
 SETUP=/vagrant/vagrant-setup
 PPWD=$PWD
 
-# Add names from the .sh commands in the list to run them when setting up the machine for the first time
-INSTALLED_APPS=( )
-
-# Add the desired of these applications to the list above
-# Applications will be installed in order of appearance,
-# so do not put them in alphabetical order.
-# AVAILABLE_APPS=( ant194 ads200 androidstudio301 cassandra39 cinnamon db60 db61 db62 dcevm django docker eclipse47 erlang groovy24 hadoop251 hbase112 httpd intellij34 java80 johntheripper180 lamp maven321 mysql nodejs622 openfire393 openldap24 openssl102 oracle11g2 play226 phppgadmin pgsql93 pgsql96 protobuf250 python276 ruby187 ruby226 sbt013 scala210 scala211 selenium242 solr610 spark152 tomcat80 tomcat85 vsftpd zookeeper346 )
-
 cd $SETUP
 chmod a+x include.sh
 source include.sh
@@ -108,5 +100,6 @@ cd $SETUP
 done
 
 cat /vagrant/vagrant-setup/.bashrc >> /home/vagrant/.bashrc
+cat /vagrant/vagrant-setup/.bashrc >> /root/.bashrc
 
 cd $PPWD

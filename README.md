@@ -40,6 +40,7 @@ Then it is possible to install selectively the following applications.
 - [Play Framework 2.2.6](#play-framework-226)
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
 - [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
+- [Openshift 3.7.1](#openshift-371)
 - [Open Fire 3.9.3](#open-fire-393)
 - [Oracle Express 11g2](#oracle-11g)
 - [RabbitMQ 3.7.3](#rabbitmq-373)
@@ -55,9 +56,11 @@ Then it is possible to install selectively the following applications.
 
 1. Ensure that virtualization is enabled at your BIOS.
 
-2. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
+2. Ensure that you have an ssh client in your host. If your host is Linux most probably is already there. If your host is Windows then install PuTTY,Cygwin or Git to get an ssh client as a side effect. Check that ssh executable is in your path. 
 
-3. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
+3. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
+
+4. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
 	* Optional. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
 	* From your host command line do
@@ -78,7 +81,7 @@ Then it is possible to install selectively the following applications.
 	* From the command line `vagrant plugin install vagrant-proxyconf-1.5.2.gem`
 	* Last edit Vagrantfile and change config.proxy.http, config.proxy.https and config.proxy.no_proxy values to the right IP and port and user/password.
  
-4. Download source from GitHub, if you have Git installed in your host then do :
+5. Download source from GitHub, if you have Git installed in your host then do :
 
 `git clone https://github.com/sergiomt/centorion.git`
 
@@ -88,37 +91,47 @@ Or if you do not have Git in your host then download and unzip
 
 `https://github.com/sergiomt/centorion/archive/master.zip`
 
-5. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
+6. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-6. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+7. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-7. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+8. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
 
-8. Open a command prompt at the directory of this readme file and type:
+9. Open a command prompt at the directory of this README file and type:
 
 	`vagrant up CentOrion`
 
-	That will create a virtual machine from scratch.
-	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
+That will create a virtual machine from scratch.
+It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
 
-9. In the meantime, add the line
-	`192.168.101.110 centorion`
-	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
+If your are setting up an Openshift cluster then your command must be:
 
-10. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+`vagrant up openshift-master openshift-node1`
+
+10. In the meantime, add the line
+`192.168.101.110 centorion`
+to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
+
+If you are setting up an Openshift cluster then add:
+`
+192.168.101.111 openshift-master
+192.168.101.112 openshift-node1
+`
+
+11. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh CentOrion`
 
-	or for connecting using PuTTY read
-	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
+or for connecting using PuTTY read
+[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-11. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
+12. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
-12. The guest machine has the private IP address 192.168.101.110
+13. The guest machine has the private IP address 192.168.101.110
 
-13. The base directory in the host is by default a shared folder between host and guest.
+14. The base directory in the host is by default a shared folder between host and guest.
 
-14. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
+15. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 ## Troubleshooting
 
@@ -551,6 +564,23 @@ Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com with password secret
 
 http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
 http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
+
+-------------------------------------------------------------------------------
+
+# OPENSHIFT 3.7.1
+
+The default setup will create an Openshift cluster with one master and one node.
+
+After having executed from the host:
+`vagrant up openshift-master openshift-node1`
+you must log into the openshift-master virtual machine by doing:
+`vagrant ssh openshift-master`
+from the host and then inside the guest master execute:
+`sudo /vagrant/vagrant-setup/openshift-ansible.sh`
+
+After install, you can log into Openshift at:
+https://192.168.101.111:8443/console/
+with user **admin** and password **admin"
 
 -------------------------------------------------------------------------------
 
