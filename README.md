@@ -113,6 +113,7 @@ Then it is possible to install selectively the following applications.
 	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
 	If you are setting up an Openshift cluster then add at hosts:
+
 	`192.168.101.111 openshift-master`
 	`192.168.101.112 openshift-node1`
 
