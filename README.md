@@ -35,14 +35,14 @@ Then it is possible to install selectively the following applications.
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
 - [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
+- [Open Fire 3.9.3](#open-fire-393)
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
+- [Openshift 3.7.1](#openshift-371)
+- [Oracle Express 11g2](#oracle-11g)
 - [phpPgAdmin 5.1.2](#phppgadmin)
 - [Play Framework 2.2.6](#play-framework-226)
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
 - [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
-- [Openshift 3.7.1](#openshift-371)
-- [Open Fire 3.9.3](#open-fire-393)
-- [Oracle Express 11g2](#oracle-11g)
 - [RabbitMQ 3.7.3](#rabbitmq-373)
 - [Ruby 2.2.6](#ruby-226-rake-bundler)
 - [Scala 2.10 or 2.11](#scala-210-or-211)
@@ -115,6 +115,7 @@ Then it is possible to install selectively the following applications.
 	If you are setting up an Openshift cluster then add at hosts:
 
 	`192.168.101.111 openshift-master`
+
 	`192.168.101.112 openshift-node1`
 
 11. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
