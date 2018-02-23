@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vs.vm.provision "shell", path: "vagrant-setup/setup.sh"
 
     # Create a private network, which allows host-only access to the machine using a specific IP.
-    config.vm.network "private_network", ip: "192.168.101.110"
+    vs.vm.network "private_network", ip: "192.168.101.110"
     
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on your network.
@@ -41,14 +41,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     vs.vm.provider "virtualbox" do |vb|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
-      vb.gui = false
+      vb.gui = true
       # Use VBoxManage to customize the VM.
       vb.customize ["modifyvm", :id, "--cpus", "2"]
-      vb.customize ["modifyvm", :id, "--memory", "600"]
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
     end
   end
 
-  config.vm.define "openshift-master" do |ms|
+  config.vm.define "openshift-master" , autostart: false do |ms|
 
     ms.vm.box = "vagrant-centos-73-x86_64-puppet"
     ms.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
@@ -56,7 +56,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ms.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
     ms.vm.provision "shell", path: "vagrant-setup/setup-openshift-master.sh"
 
-    config.vm.network "private_network", ip: "192.168.101.111"
+    ms.vm.network "private_network", ip: "192.168.101.111"
 
     ms.vm.provider "virtualbox" do |vb|
       vb.gui = false
@@ -65,7 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "openshift-node1" do |nd|
+  config.vm.define "openshift-node1" , autostart: false do |nd|
 
     nd.vm.box = "vagrant-centos-73-x86_64-puppet"
     nd.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
@@ -73,7 +73,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     nd.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
     nd.vm.provision "shell", path: "vagrant-setup/setup-openshift-node1.sh"
 
-    config.vm.network "private_network", ip: "192.168.101.112"
+    nd.vm.network "private_network", ip: "192.168.101.112"
 
     nd.vm.provider "virtualbox" do |vb|
       vb.gui = false
