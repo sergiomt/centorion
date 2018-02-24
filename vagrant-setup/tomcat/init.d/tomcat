@@ -20,9 +20,6 @@ export JAVA_OPTS
 case $1 in
 start)
 rm -f $CATALINA_HOME/logs/*.*
-rm -f /tmp/javatrc.?.txt
-rm -f /tmp/javatrc.??.txt
-rm -f /tmp/javatrc.???.txt
 /bin/su -s /bin/bash tomcat $CATALINA_HOME/bin/startup.sh
 ;;
 stop)
