@@ -35,13 +35,14 @@ Then it is possible to install selectively the following applications.
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
 - [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
+- [Open Fire 3.9.3](#open-fire-393)
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
+- [Openshift 3.7.1](#openshift-371)
+- [Oracle Express 11g2](#oracle-11g)
 - [phpPgAdmin 5.1.2](#phppgadmin)
 - [Play Framework 2.2.6](#play-framework-226)
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
 - [Protocol Buffers 2.5.0](vagrant-setup/protobuf250.sh)
-- [Open Fire 3.9.3](#open-fire-393)
-- [Oracle Express 11g2](#oracle11g)
 - [RabbitMQ 3.7.3](#rabbitmq-373)
 - [Ruby 2.2.6](#ruby-226-rake-bundler)
 - [Scala 2.10 or 2.11](#scala-210-or-211)
@@ -55,9 +56,11 @@ Then it is possible to install selectively the following applications.
 
 1. Ensure that virtualization is enabled at your BIOS.
 
-2. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
+2. Ensure that you have an ssh client in your host. If your host is Linux most probably is already there. If your host is Windows then install PuTTY, Cygwin or Git to get an ssh client as a side effect. Check that ssh executable is in your PATH.
 
-3. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
+3. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
+
+4. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
 	* Optional. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
 	* From your host command line do
@@ -78,47 +81,57 @@ Then it is possible to install selectively the following applications.
 	* From the command line `vagrant plugin install vagrant-proxyconf-1.5.2.gem`
 	* Last edit Vagrantfile and change config.proxy.http, config.proxy.https and config.proxy.no_proxy values to the right IP and port and user/password.
  
-4. Download source from GitHub, if you have Git installed in your host then do :
+5. Download source from GitHub, if you have Git installed in your host then do :
 
-`git clone https://github.com/sergiomt/centorion.git`
+	`git clone https://github.com/sergiomt/centorion.git`
 
-* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
+	* If you are using a proxy, you will have to configure it for Git by doing `git config --global http.proxy http://_proxyuser_:_proxypwd_@_XXX.XXX.XXX.XXX_:_port_`
 
-Or if you do not have Git in your host then download and unzip
+	Or if you do not have Git in your host then download and unzip
 
-`https://github.com/sergiomt/centorion/archive/master.zip`
+	`https://github.com/sergiomt/centorion/archive/master.zip`
 
-5. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
+6. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-6. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+7. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-7. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+8. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
 
-8. Open a command prompt at the directory of this readme file and type:
+9. Open a command prompt at the directory of this README file and type:
 
-	`vagrant up`
+	`vagrant up CentOrion`
 
 	That will create a virtual machine from scratch.
 	It will usually take from 5 to 10 minutes depending on the speed of your Internet connection.
 
-9. In the meantime, add the line
+	If your are setting up an Openshift cluster then your command must be:
+
+	`vagrant up openshift-master openshift-node1`
+
+10. In the meantime, add the line
 	`192.168.101.110 centorion`
 	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
-10. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+	If you are setting up an Openshift cluster then add at hosts:
 
-	`vagrant ssh`
+	`192.168.101.111 openshift-master`
+
+	`192.168.101.112 openshift-node1`
+
+11. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+
+	`vagrant ssh CentOrion`
 
 	or for connecting using PuTTY read
 	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-11. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
+12. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
-12. The guest machine has the private IP address 192.168.101.110
+13. The guest machine has the private IP address 192.168.101.110
 
-13. The base directory in the host is by default a shared folder between host and guest.
+14. The base directory in the host is by default a shared folder between host and guest.
 
-14. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
+15. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 ## Troubleshooting
 
@@ -128,7 +141,7 @@ In case you have made any change to Vagrantfile then validate it with:
 
 In case you need a full debug trace during VM creation you may use:
 
-	`vagrant up -- debug > vagrant_debug.log 2>&1`
+	`vagrant up machine_name -- debug > vagrant_debug.log 2>&1`
 
 For watching your SSH configuration use:
 
@@ -509,44 +522,6 @@ http://192.168.101.110:3001/
 
 -------------------------------------------------------------------------------
 
-# ORACLE 11G
-
-Before running the install script you must have an Oracle OTN account to download
-http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
-and save it at `/vagrant/vagrant-setup/cache`
-
-[Installation Script](vagrant-setup/oracle11g2.sh)
-
--------------------------------------------------------------------------------
-
-# POSTGRESQL 9.3 or 9.6
-
-Installation Scripts [9.3](pgsql93.sh), [9.6](pgsql96.sh)
-
-It is installed at `/var/lib/pgsql`
-
-SSH login for user postgres is disabled at `/etc/ssh/sshd_config`
-
-User postgres does not have password, do not set password for postgres user,
-use ident method within the server and another role for external access with pgAdmin.
-Server is configured to accept connections from any client address,
-see `/var/lib/pgsql/9.3/data/pg_hba.conf` and `postgresql.conf`
-
-Start and stop with
-`sudo service postgresql-9.3 [start|stop]`
-or
-`sudo systemctl [start|stop] postgresql-9.6.service`
-
--------------------------------------------------------------------------------
-
-# PHPPGADMIN
-
-[Installation Script](vagrant-setup/phppgadmin.sh)
-
-Access from http://192.168.101.110/phpPgAdmin
-
--------------------------------------------------------------------------------
-
 # OPEN FIRE 3.9.3
 
 [Installation Script](vagrant-setup/openfire393.sh)
@@ -589,6 +564,103 @@ Login to phpLDAPAdmin as cn=Manager,dc=auth,dc=com with password secret
 
 http://www.yolinux.com/TUTORIALS/LinuxTutorialLDAP-SLAPD-LDIF-V2-config.html
 http://www.openldap.org/lists/openldap-technical/201403/msg00001.html
+
+-------------------------------------------------------------------------------
+
+# OPENSHIFT 3.7.1
+
+The default setup will create an Openshift cluster with one master and one node.
+
+After having executed from the host:
+`vagrant up openshift-master openshift-node1`
+you must log into the openshift-master virtual machine by doing:
+`vagrant ssh openshift-master`
+from the host and then inside the guest master execute:
+
+`sudo /vagrant/vagrant-setup/openshift-ansible.sh`
+
+After install, you can log into Openshift at:
+https://192.168.101.111:8443/console/
+with user **admin** and password **admin"
+
+-------------------------------------------------------------------------------
+
+# ORACLE 11G
+
+## Prerequisites
+
+Before running the install script you must have an Oracle OTN account to download
+http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+and save it at `/vagrant/vagrant-setup/cache`
+
+Oracle Database needs a swap space of at least 2048 Mb which is more that the default of 1279 Mb that comes out of the box. 
+So before you begin and with the VM halted, you must add a new virtual hard disk from Virtualbox by right clicking on the machine and then Configuration -> Storage.
+Click on the icon of a hard drive with a + sign and add a new disk of 2Gb fixed size.
+
+After adding the new hard disk do `vagrant up machine_name`
+
+Once logged in type:
+
+`sudo vgdisplay`
+this will display the volume group information showing something like:
+VG Name **cl**
+
+Then execute
+`sudo fdisk -l`
+to list the available drives.
+You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
+
+Now execute:
+`
+sudo pvcreate /dev/sdb
+sudo vgextend cl /dev/sdb
+sudo lvextend -L+2G /dev/cl/swap
+`
+this will add 2Gb to the swap space.
+
+Now you can start installation by running the provided Bash script.
+
+## Install
+
+[Installation Script](vagrant-setup/oracle11g2.sh)
+
+## Post installation configuration
+
+As part of the installation process, the script will automatically initiate oracle-xe configure which will interactively ask you questions about which ports must be used and whether Oracle must start on boot or not.
+
+If you are using a GUI like Cinnamon then you can also install **SQL Developer**.
+As for the database, you need an OTN account to download SQL Developer from
+http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html
+Then install it with
+`rpm -Uhv sqldeveloper-(build number)-1.noarch.rpm`
+
+-------------------------------------------------------------------------------
+
+# POSTGRESQL 9.3 or 9.6
+
+Installation Scripts [9.3](pgsql93.sh), [9.6](pgsql96.sh)
+
+It is installed at `/var/lib/pgsql`
+
+SSH login for user postgres is disabled at `/etc/ssh/sshd_config`
+
+User postgres does not have password, do not set password for postgres user,
+use ident method within the server and another role for external access with pgAdmin.
+Server is configured to accept connections from any client address,
+see `/var/lib/pgsql/9.3/data/pg_hba.conf` and `postgresql.conf`
+
+Start and stop with
+`sudo service postgresql-9.3 [start|stop]`
+or
+`sudo systemctl [start|stop] postgresql-9.6.service`
+
+-------------------------------------------------------------------------------
+
+# PHPPGADMIN
+
+[Installation Script](vagrant-setup/phppgadmin.sh)
+
+Access from http://192.168.101.110/phpPgAdmin
 
 -------------------------------------------------------------------------------
 

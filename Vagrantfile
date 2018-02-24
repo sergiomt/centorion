@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sed '/== vagrant insecure public key$/d' /home/vagrant/.ssh/authorized_keys
   EOC
 
-  config.vm.define "CentOrion" do |vs|
+  config.vm.define "CentOrion" , primary: true do |vs|
 
     # Every Vagrant virtual environment requires a box to build off of.
     # This is CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vs.vm.provision "shell", path: "vagrant-setup/setup.sh"
 
     # Create a private network, which allows host-only access to the machine using a specific IP.
-    config.vm.network "private_network", ip: "192.168.101.110"
+    vs.vm.network "private_network", ip: "192.168.101.110"
     
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on your network.
@@ -43,6 +43,40 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
       vb.gui = true
       # Use VBoxManage to customize the VM.
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+  end
+
+  config.vm.define "openshift-master" , autostart: false do |ms|
+
+    ms.vm.box = "vagrant-centos-73-x86_64-puppet"
+    ms.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
+
+    ms.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
+    ms.vm.provision "shell", path: "vagrant-setup/setup-openshift-master.sh"
+
+    ms.vm.network "private_network", ip: "192.168.101.111"
+
+    ms.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+  end
+
+  config.vm.define "openshift-node1" , autostart: false do |nd|
+
+    nd.vm.box = "vagrant-centos-73-x86_64-puppet"
+    nd.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
+
+    nd.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
+    nd.vm.provision "shell", path: "vagrant-setup/setup-openshift-node1.sh"
+
+    nd.vm.network "private_network", ip: "192.168.101.112"
+
+    nd.vm.provider "virtualbox" do |vb|
+      vb.gui = false
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.customize ["modifyvm", :id, "--memory", "2048"]
     end

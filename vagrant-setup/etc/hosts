@@ -1,4 +1,6 @@
 192.168.101.110   centorion
+192.168.101.111   openshift-master
+192.168.101.112   openshift-node1
 173.194.67.95     maps.googleapis.com
 151.101.112.215   repo.maven.apache.org
 152.19.134.198    mirrors.fedoraproject.org

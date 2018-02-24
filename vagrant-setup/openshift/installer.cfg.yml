@@ -1,0 +1,26 @@
+version: v2 
+variant: openshift-enterprise 
+variant_version: 3.7 
+ansible_log_path: /tmp/ansible.log 
+deployment:
+  ansible_ssh_user: root 
+  hosts: 
+  - ip: 192.168.101.111
+    hostname: openshift-master
+    roles: 
+      - master
+      - node
+    containerized: true
+    connect_to: 192.168.101.111
+  - ip: 192.168.101.112
+    hostname: openshift-node1
+    node_labels: {'region': 'infra'} 
+    roles:
+      - node
+    connect_to: 192.168.101.112
+  roles:
+    master:
+      master_variable1: "value1" 
+      master_variable2: "value2"
+    node:
+      node_variable1: "value1"
