@@ -5,6 +5,7 @@
 JAVA_HOME=/usr/java/default
 export JAVA_HOME
 HADOOP_HOME=/usr/share/hadoop
+# HADOOP_HOME=/usr/share/hbase
 export HADOOP_HOME
 PATH=$JAVA_HOME/bin:$PATH
 export PATH
