@@ -31,6 +31,7 @@ Then it is possible to install selectively the following applications.
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
 - [Kotlin](#kotlin) (requires SDKMAN)
+- [Gradle 3.4.1](#gradle-341)
 - [Groovy 2.4.13](#groovy-2413) (requires Java 8)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
@@ -332,12 +333,14 @@ Is installed at `/usr/share/eclipse`
 
 At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 
+Scala 2.10 or 2.11 require an [older releases of the Scala IDE for Eclipse](http://scala-ide.org/download/prev-stable.html)
+To install Scala IDE 4.5.0 for Scala 2.11.8 use this [installation Script](vagrant-setup/eclipse/scalaide211.sh) after having installed Eclipse.
+
 -------------------------------------------------------------------------------
 
 # ERLANG
 
 [Installation Script](vagrant-setup/erlang.sh)
-
 
 -------------------------------------------------------------------------------
 
@@ -368,6 +371,14 @@ and add this to your `.gitconfig` file.
 [difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
 `
+
+-------------------------------------------------------------------------------
+
+# GRADLE 3.4.1
+
+[Installation Script](vagrant-setup/gradle341.sh)
+
+Is installed at `/usr/local/gradle`
 
 -------------------------------------------------------------------------------
 
