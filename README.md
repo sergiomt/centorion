@@ -20,7 +20,7 @@ Then it is possible to install selectively the following applications.
 - [Berkeley DB](#berkeley-db-60-61-or-62) 6.0, 6.1 or 6.2 with Java bindings
 - [Cassandra 3.9](#cassandra-39) (requires Java 8 and Python 2.7)
 - [Cinnamon](#cinnamon)
-- [DCEVM](#dcevm)
+- [DCEVM](#dcevm) (requires Java 8)
 - [Django 1.11.10](#django-11110)
 - [Docker](#docker)
 - [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
@@ -30,7 +30,9 @@ Then it is possible to install selectively the following applications.
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
-- [Groovy 2.4.13](#groovy-2413)
+- [Kotlin](#kotlin) (requires SDKMAN)
+- [Gradle 3.4.1](#gradle-341)
+- [Groovy 2.4.13](#groovy-2413) (requires Java 8)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
@@ -46,6 +48,8 @@ Then it is possible to install selectively the following applications.
 - [RabbitMQ 3.7.3](#rabbitmq-373)
 - [Ruby 2.2.6](#ruby-226-rake-bundler)
 - [Scala 2.10 or 2.11](#scala-210-or-211)
+- [SDKMAN](#sdkman)
+- [Selenium 2.42](#selenium-242)
 - [Solr 6.1.0](#solr-610)
 - [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
 - [VSFTP](vagrant-setup/vsftpd.sh)
@@ -329,12 +333,14 @@ Is installed at `/usr/share/eclipse`
 
 At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 
+Scala 2.10 or 2.11 require an [older releases of the Scala IDE for Eclipse](http://scala-ide.org/download/prev-stable.html)
+To install Scala IDE 4.5.0 for Scala 2.11.8 use this [installation Script](vagrant-setup/eclipse/scalaide211.sh) after having installed Eclipse.
+
 -------------------------------------------------------------------------------
 
 # ERLANG
 
 [Installation Script](vagrant-setup/erlang.sh)
-
 
 -------------------------------------------------------------------------------
 
@@ -365,6 +371,14 @@ and add this to your `.gitconfig` file.
 [difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
 `
+
+-------------------------------------------------------------------------------
+
+# GRADLE 3.4.1
+
+[Installation Script](vagrant-setup/gradle341.sh)
+
+Is installed at `/usr/local/gradle`
 
 -------------------------------------------------------------------------------
 
@@ -463,7 +477,9 @@ Start it with `idea` from any location (the symbolic link points to /usr/share/i
 
 [Installation Script](vagrant-setup/java80.sh)
 
-It is installed at `/usr/java/jdk1.8.0_05`
+By default, it is installed at `/usr/java/jdk1.8.0_05`
+
+To change the minor version which is installed, edit the installation script and change JDK, RPM and OTN variables.
 
 -------------------------------------------------------------------------------
 
@@ -478,6 +494,12 @@ Test installation by executing
 
 To get extra charset files download and uncompress
 http://www.openwall.com/john/j/john-extra-20130529.tar.xz
+
+-------------------------------------------------------------------------------
+
+# KOTLIN
+
+[Installation Script](vagrant-setup/kotlin.sh)
 
 -------------------------------------------------------------------------------
 
@@ -696,6 +718,24 @@ RubyGems is installed at `/usr/local/rubygems`
 # SCALA 2.10 or 2.11
 
 Installation Scripts [2.10](vagrant-setup/scala210.sh), [2.11](vagrant-setup/scala211.sh)
+
+-------------------------------------------------------------------------------
+
+# SDKMAN
+
+[Installation Script](vagrant-setup/sdkman.sh)
+
+-------------------------------------------------------------------------------
+
+# SELENIUM 2.42
+
+[Installation Script](vagrant-setup/selenium242.sh)
+
+To start Selenium Server execute:
+
+`Xvfb :1 -screen 0 800x600x24&`
+`export DISPLAY=localhost:1.0`
+`java -jar selenium-server-standalone-2.42.2.jar &`
 
 -------------------------------------------------------------------------------
 
