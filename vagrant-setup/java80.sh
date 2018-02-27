@@ -24,6 +24,9 @@ else
 	# RPM=jdk-8u131-linux-x64.rpm
 	# OTN=otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163
 
+	# RPM=jdk-8u162-linux-x64.rpm
+	# OTN=otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1
+
 	if [ ! -f "$SETUP/cache/$RPM" ]
 		then
 		echo "Downloading JDK 8.0"

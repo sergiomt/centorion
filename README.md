@@ -477,7 +477,9 @@ Start it with `idea` from any location (the symbolic link points to /usr/share/i
 
 [Installation Script](vagrant-setup/java80.sh)
 
-It is installed at `/usr/java/jdk1.8.0_05`
+By default, it is installed at `/usr/java/jdk1.8.0_05`
+
+To change the minor version which is installed, edit the installation script and change JDK, RPM and OTN variables.
 
 -------------------------------------------------------------------------------
 
