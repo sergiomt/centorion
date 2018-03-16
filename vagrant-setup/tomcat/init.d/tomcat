@@ -14,6 +14,7 @@ CATALINA_HOME=/usr/share/tomcat
 # -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs are Berkeley DB libraries
 # -Djava.library.path=/usr/share/hbase/lib/native/Linux-amd64-64 are Hadoop libraries
 # -Dlog4j.configurationFile=/usr/share/tomcat/conf/log4j2.xml is Log4J configuration file
+# -XXaltjvm=dcevm -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.1.0.jar=autoHotswap=true are options for DCEVM dynamic class reloading
 JAVA_OPTS="-Xms512m -Dcatalina.home=$CATALINA_HOME -Djava.library.path=/usr/local/apr/lib:/usr/share/hbase/lib/native/Linux-amd64-64 -Dlog4j.configurationFile=/usr/share/tomcat/conf/log4j2.xml"
 export JAVA_OPTS
 

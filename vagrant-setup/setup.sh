@@ -66,6 +66,9 @@ yum install -y apr-devel.x86_64 git mercurial mercurial-hgk
 cp $SETUP/.ssh/config /home/vagrant/.ssh/
 # Add Queues Extension to Mercurial
 cp --remove-destination $SETUP/etc/mercurial/hgrc.d/hgk.rc /etc/mercurial/hgrc.d/
+cp --remove-destination $SETUP/mercurial/.hgrc /root
+cp --remove-destination $SETUP/mercurial/.hgrc /home/vagrant
+chown vagrant:vagrant /home/vagrant/.hgrc
 
 if [ -d "$SETUP/.m2" ]
 	then

@@ -280,10 +280,10 @@ and after the script finishes executing reboot the guest virtual machine.
 # DCEVM
 
 Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
-because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
-[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
+because the JVM binaries for JDK 1.8.0_05, 1.8.0_112 and 1.8.0_162 are already
+precompiled at [tomcat/dcevm](vagrant-setup/tomcat/dcevm)
 
-DCEVM is vey sensitive to any minor change in Java version,
+DCEVM is very sensitive to any minor change in Java version,
 so check its homepage for compatibility before performing any change on Java.
 
 -------------------------------------------------------------------------------
