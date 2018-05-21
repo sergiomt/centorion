@@ -510,7 +510,7 @@ http://www.openwall.com/john/j/john-extra-20130529.tar.xz
 
 -------------------------------------------------------------------------------
 
-# Nagios 4.1.1
+# NAGIOS 4.1.1
 
 [Installation Script](vagrant-setup/nagios411.sh)
 
@@ -518,9 +518,13 @@ It is installed at `/usr/share/nagios`
 
 The installation includes plugins 2.1.1 and NRPE 2.15.
 
+Should run under user **nagios** password **nagpasswd4**
+
 To access Nagios through its web interface open URL
 
 http://192.168.101.110/nagios
+
+User **nagiosadmin** password **nagpasswd4**
 
 To configure Nagios contacts, edit the contacts configuration:
 
