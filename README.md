@@ -36,6 +36,7 @@ Then it is possible to install selectively the following applications.
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
+- [Nagios 4.1.1](#nagios-411)
 - [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
 - [Open Fire 3.9.3](#open-fire-393)
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
@@ -506,6 +507,49 @@ http://www.openwall.com/john/j/john-extra-20130529.tar.xz
 # LAMP
 
 [Installation Script](vagrant-setup/lamp.sh)
+
+-------------------------------------------------------------------------------
+
+# Nagios 4.1.1
+
+[Installation Script](vagrant-setup/nagios411.sh)
+
+It is installed at `/usr/share/nagios`
+
+The installation includes plugins 2.1.1 and NRPE 2.15.
+
+To access Nagios through its web interface open URL
+
+http://192.168.101.110/nagios
+
+To configure Nagios contacts, edit the contacts configuration:
+
+`sudo vi /usr/local/nagios/etc/objects/contacts.cfg`
+
+Find the email directive, and replace its value (the highlighted part) with your own email address:
+
+`email	nagios@localhost	; <<***** CHANGE THIS TO YOUR EMAIL ADDRESS **`
+
+To restrict Access by IP Address
+
+Edit the Apache configuration file:
+
+`sudo vi /etc/httpd/conf.d/nagios.conf`
+
+Find and comment the following two lines by adding # symbols in front of them:
+
+`Order allow,deny`
+`Allow from all`
+
+Then uncomment the following lines, by deleting the # symbols, and add the IP addresses or ranges (space delimited) that you want to allow to in the Allow from line:
+
+`#  Order deny,allow`
+`#  Deny from all`
+`#  Allow from 127.0.0.1`
+
+As these lines will appear twice in the configuration file, so you will need to perform these steps once more.
+
+Save and exit.
 
 -------------------------------------------------------------------------------
 
