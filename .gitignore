@@ -1,5 +1,6 @@
 /.m2
 /.ssh
+/.Trash-1000
 /.vagrant
 /.vagrant(copy)
 /cache
@@ -22,7 +23,6 @@
 /vagrant-setup/cache/*.rpm
 /vagrant-setup/cache/*.bz2
 /vagrant-setup/cache/*.zip
-/vagrant-setup/target
 *.log
 *.pbk
 *.ppk
