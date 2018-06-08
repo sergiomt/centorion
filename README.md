@@ -24,6 +24,7 @@ Then it is possible to install selectively the following applications.
 - [Django 1.11.10](#django-11110)
 - [Docker](#docker)
 - [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- [Editix XML Editor](#editix-xml-ediotr)
 - [Erlang](#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
@@ -336,6 +337,18 @@ At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 
 Scala 2.10 or 2.11 require an [older releases of the Scala IDE for Eclipse](http://scala-ide.org/download/prev-stable.html)
 To install Scala IDE 4.5.0 for Scala 2.11.8 use this [installation Script](vagrant-setup/eclipse/scalaide211.sh) after having installed Eclipse.
+
+-------------------------------------------------------------------------------
+
+EDITIX XML EDITOR
+
+[Installation Script](vagrant-setup/editix.sh)
+
+Requires Ant.
+
+It is installed at `/usr/share/editix`
+
+Launch with `ant run`
 
 -------------------------------------------------------------------------------
 
