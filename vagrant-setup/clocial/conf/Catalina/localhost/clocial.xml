@@ -1,2 +1,44 @@
-<Context docBase="/vagrant/workspace/clocial/clocial-web/target/clocial-web-1.0">
+<Context docBase="/vagrant/workspace/clocial/clocial-web/src/main/webapp">
+<Resources>
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/knowgate/knowgate-base/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/knowgate/knowgate-extws/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/knowgate/knowgate-stripes/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/knowgate/knowgate-xhtml/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/jdo/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/core/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/queues/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/bdb/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/file/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/hbase/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/inmemory/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/jdbc/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/s3/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/java-adaptor/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/judal/scala-adaptor/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-models/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-services/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-proxies/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-scala/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-web/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+  </Resources>
 </Context>
