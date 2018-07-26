@@ -1,7 +1,7 @@
 #!/bin/bash
 
 JAVA=/usr/java
-JDK=$JAVA/jdk1.8.0_05
+JDK=$JAVA/jdk1.8.0_162
 
 # Install Java 8
 if [ -d "$JDK" ]
@@ -15,8 +15,8 @@ else
 
 	# Install Java 8
 
-	RPM=jdk-8u5-linux-x64.rpm
-	OTN=otn-pub/java/jdk/8u5-b13
+	# RPM=jdk-8u5-linux-x64.rpm
+	# OTN=otn-pub/java/jdk/8u5-b13
 
 	# RPM=jdk-8u112-linux-x64.rpm
 	# OTN=otn/java/jdk/8u112-b15
@@ -24,8 +24,8 @@ else
 	# RPM=jdk-8u131-linux-x64.rpm
 	# OTN=otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163
 
-	# RPM=jdk-8u162-linux-x64.rpm
-	# OTN=otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1
+	RPM=jdk-8u162-linux-x64.rpm
+	OTN=otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1
 
 	if [ ! -f "$SETUP/cache/$RPM" ]
 		then

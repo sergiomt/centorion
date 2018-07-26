@@ -82,6 +82,12 @@ if [ -d "/usr/share/tomcat" ]
 		wget_and_cp http://52north.org/maven/repo/releases/org/postgis/postgis-jdbc/2.1.3/ postgis-jdbc-2.1.3.jar $SLIB
 	fi
 
+	# Stripes
+	wget_and_cp http://central.maven.org/maven2/net/sourceforge/stripes/stripes/1.7.0-beta4/ stripes-1.7.0-beta4.jar $SLIB
+
+	# JDO
+	wget_and_cp http://repo1.maven.org/maven2/javax/jdo/jdo-api/3.1/ jdo-api-3.1.jar $SLIB
+	
 	cd $PPWD
 
 else
