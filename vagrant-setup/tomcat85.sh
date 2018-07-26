@@ -20,7 +20,7 @@ else
 			useradd -d /usr/share/tomcat/ -K MAIL_DIR=/dev/null -g tomcat tomcat
 			echo -e "tcatpassw8\ntcatpassw8\n" | passwd tomcat
 		fi
-		cp $SETUP/tomcat/init.d/tomcat /etc/init.d/tomcat
+		cp --remove-destination $SETUP/tomcat/init.d/tomcat /etc/init.d/tomcat
 		chmod 755 /etc/init.d/tomcat
 		# Disallow Tomcat user to login via SSH but allow SFTP 
 		# http://en.wikibooks.org/wiki/OpenSSH/Cookbook/SFTP
@@ -31,8 +31,8 @@ else
 		cat ./tomcat/etc/ssh/sshd_config >> /etc/ssh/sshd_config
 		systemctl restart sshd.service
 		cd /usr/share
-		TOMCAT_FILE="apache-tomcat-8.5.15"
-		wget_and_untar http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.15/bin/ $TOMCAT_FILE.tar.gz tomcat.tar.gz
+		TOMCAT_FILE="apache-tomcat-8.5.32"
+		wget_and_untar http://mirror.vorboss.net/apache/tomcat/tomcat-8/v8.5.32/bin/ $TOMCAT_FILE.tar.gz tomcat.tar.gz
 		echo "Creating additional Tomcat directories"
 		if [ ! -d "/usr/share/tomcat" ]
 		then
@@ -54,7 +54,7 @@ else
 
 		tar -xzf tomcat-native.tar.gz
 		rm tomcat-native.tar.gz
-		cd tomcat-native-1.2.12-src/native
+		cd tomcat-native-1.2.17-src/native
 		echo "Compiling APR native libraries"
 		# Compile APR native libraries
 		OPENSSLVERSION=`openssl version`
@@ -86,7 +86,7 @@ else
 			echo "Setting DCEVM as Java hot swap runtime"
 			mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/dcevm/*.* $JAVA_HOME/jre/lib/amd64/dcevm
-			cp $SETUP/tomcat/hotswap/hotswap-agent-1.1.0.jar /usr/share/tomcat/lib
+			cp $SETUP/tomcat/hotswap/hotswap-agent-1.3.0.jar /usr/share/tomcat/lib
 		fi
 
 		echo "Opening port 8080"
