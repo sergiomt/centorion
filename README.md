@@ -24,18 +24,23 @@ Then it is possible to install selectively the following applications.
 - [Django 1.11.10](#django-11110)
 - [Docker](#docker)
 - [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- [Editix XML Editor](#editix-xml-ediotr)
+- [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
+- [Kibana 6](#kibana-6)
 - [Kotlin](#kotlin) (requires SDKMAN)
 - [Gradle 3.4.1](#gradle-341)
 - [Groovy 2.4.13](#groovy-2413) (requires Java 8)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
+- [Logstash](#logstash)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
+- [Nagios 4.1.1](#nagios-411)
 - [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
 - [Open Fire 3.9.3](#open-fire-393)
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
@@ -280,10 +285,10 @@ and after the script finishes executing reboot the guest virtual machine.
 # DCEVM
 
 Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
-because the JVM binaries for JDK 1.8.0_05 and 1.8.0_112 are already precompiled at
-[tomcat/dcevm](vagrant-setup/tomcat/dcevm)
+because the JVM binaries for JDK 1.8.0_05, 1.8.0_112 and 1.8.0_162 are already
+precompiled at [tomcat/dcevm](vagrant-setup/tomcat/dcevm)
 
-DCEVM is vey sensitive to any minor change in Java version,
+DCEVM is very sensitive to any minor change in Java version,
 so check its homepage for compatibility before performing any change on Java.
 
 -------------------------------------------------------------------------------
@@ -335,6 +340,70 @@ At `/vagrant/vagrant-setup/eclipse` there are scripts for adding PyDev.
 
 Scala 2.10 or 2.11 require an [older releases of the Scala IDE for Eclipse](http://scala-ide.org/download/prev-stable.html)
 To install Scala IDE 4.5.0 for Scala 2.11.8 use this [installation Script](vagrant-setup/eclipse/scalaide211.sh) after having installed Eclipse.
+
+-------------------------------------------------------------------------------
+
+EDITIX XML EDITOR
+
+[Installation Script](vagrant-setup/editix.sh)
+
+Requires Ant.
+
+It is installed at `/usr/share/editix`
+
+Launch with `ant run`
+
+-------------------------------------------------------------------------------
+
+# ELASTICSEARCH 6 WITH X-PACK
+
+[Installation Script](vagrant-setup/elasticsearch6.sh)
+
+It's installed at `/usr/share/elasticsearch`
+
+To configure Elasticsearch to start automatically when the system boots up, run the following commands:
+
+`sudo /bin/systemctl daemon-reload`
+`sudo /bin/systemctl enable elasticsearch.service`
+
+Elasticsearch can be started and stopped as follows:
+
+`sudo systemctl start elasticsearch.service`
+`sudo systemctl stop elasticsearch.service`
+
+These commands provide no feedback as to whether Elasticsearch was started successfully or not. Instead, this information will be written in the log files located in `/var/log/elasticsearch/`.
+
+By default the Elasticsearch service doesn’t log information in the `systemd` journal. To enable `journalctl` logging, the `--quiet` option must be removed from the ExecStart command line in the `elasticsearch.service` file.
+
+When systemd logging is enabled, the logging information are available using the `journalctl` commands:
+
+To tail the journal:
+
+`sudo journalctl -f`
+
+To list journal entries for the elasticsearch service:
+
+`sudo journalctl --unit elasticsearch`
+
+To list journal entries for the elasticsearch service starting from a given time:
+
+`sudo journalctl --unit elasticsearch --since  "2016-10-30 18:17:16"`
+
+Check man `journalctl` or https://www.freedesktop.org/software/systemd/man/journalctl.html for more command line options.
+
+You can test that your Elasticsearch node is running by sending an HTTP request to port 9200 on localhost: `GET /` which should give a JSON object as response.
+
+Elasticsearch defaults to using /etc/elasticsearch for runtime configuration. The ownership of this directory and all files in this directory are set to root:elasticsearch on package installation and the directory has the setgid flag set so that any files and subdirectories created under /etc/elasticsearch are created with this ownership as well (e.g., if a keystore is created using the keystore tool). It is expected that this be maintained so that the Elasticsearch process can read the files under this directory via the group permissions.
+
+Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in Configuring Elasticsearch.
+
+The RPM also has a system configuration file `/etc/sysconfig/elasticsearch`. 
+
+Read more at:
+
+* [Configuring Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html)
+* [Important Elasticsearch configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html)
+* [Important System Configuration](https://www.elastic.co/guide/en/elasticsearch/reference/current/system-config.html)
 
 -------------------------------------------------------------------------------
 
@@ -497,6 +566,33 @@ http://www.openwall.com/john/j/john-extra-20130529.tar.xz
 
 -------------------------------------------------------------------------------
 
+# KIBANA 6
+
+[Installation Script](vagrant-setup/kibana6.sh)
+
+It is installed at `/usr/share/kibana`
+
+To configure Kibana to start automatically when the system boots up, run the following commands:
+
+`sudo /bin/systemctl daemon-reload`
+`sudo /bin/systemctl enable kibana.service`
+
+Kibana can be started and stopped as follows:
+
+`sudo systemctl [start|stop] kibana.service`
+
+Kibana loads its configuration from the `/etc/kibana/kibana.yml` file by default. The format of this config file is explained in [Configuring Kibana](https://www.elastic.co/guide/en/kibana/6.2/settings.html).
+
+Kibana is a web application that you access through port 5601. All you need to do is point your web browser at the machine where Kibana is running and specify the port number. For example, http://localhost:5601 or http://192.168.101.110:5601
+
+When you access Kibana, the Discover page loads by default with the default index pattern selected. The time filter is set to the last 15 minutes and the search query is set to match-all (\*).
+
+Before you can start using Kibana, you need to tell it which Elasticsearch indices you want to explore. The first time you access Kibana, you are prompted to define an index pattern that matches the name of one or more of your indices. You can add index patterns at any time from the Management tab.
+
+By default, Kibana connects to the Elasticsearch instance running on localhost. To connect to a different Elasticsearch instance, modify the Elasticsearch URL in the kibana.yml configuration file and restart Kibana.
+
+-------------------------------------------------------------------------------
+
 # KOTLIN
 
 [Installation Script](vagrant-setup/kotlin.sh)
@@ -506,6 +602,65 @@ http://www.openwall.com/john/j/john-extra-20130529.tar.xz
 # LAMP
 
 [Installation Script](vagrant-setup/lamp.sh)
+
+-------------------------------------------------------------------------------
+
+# LOGSTASH
+
+[Installation Script](vagrant-setup/logstash6.sh)
+
+Start and stop service with
+
+`sudo systemctl [start|stop] logstash.service`
+
+See also [Running Logstash from the Command Line](https://www.elastic.co/guide/en/logstash/6.2/running-logstash-command-line.html)
+
+-------------------------------------------------------------------------------
+
+# NAGIOS 4.1.1
+
+[Installation Script](vagrant-setup/nagios411.sh)
+
+It is installed at `/usr/share/nagios`
+
+The installation includes plugins 2.1.1 and NRPE 2.15.
+
+Should run under user **nagios** password **nagpasswd4**
+
+To access Nagios through its web interface open URL
+
+http://192.168.101.110/nagios
+
+User **nagiosadmin** password **nagpasswd4**
+
+To configure Nagios contacts, edit the contacts configuration:
+
+`sudo vi /usr/local/nagios/etc/objects/contacts.cfg`
+
+Find the email directive, and replace its value (the highlighted part) with your own email address:
+
+`email	nagios@localhost	; <<***** CHANGE THIS TO YOUR EMAIL ADDRESS **`
+
+To restrict Access by IP Address
+
+Edit the Apache configuration file:
+
+`sudo vi /etc/httpd/conf.d/nagios.conf`
+
+Find and comment the following two lines by adding # symbols in front of them:
+
+`Order allow,deny`
+`Allow from all`
+
+Then uncomment the following lines, by deleting the # symbols, and add the IP addresses or ranges (space delimited) that you want to allow to in the Allow from line:
+
+`#  Order deny,allow`
+`#  Deny from all`
+`#  Allow from 127.0.0.1`
+
+As these lines will appear twice in the configuration file, so you will need to perform these steps once more.
+
+Save and exit.
 
 -------------------------------------------------------------------------------
 

@@ -8,7 +8,7 @@ INSTALLED_APPS=( clocial )
 # Add the desired of these applications to the list above
 # Applications will be installed in order of appearance,
 # so do not put them in alphabetical order.
-# AVAILABLE_APPS=( ant194 ads200 androidstudio301 cassandra39 cinnamon db60 db61 db62 dcevm django docker eclipse47 erlang groovy24 hadoop251 hbase112 httpd intellij34 java80 johntheripper180 lamp maven321 mysql nodejs622 openfire393 openldap24 openssl102 oracle11g2 play226 phppgadmin pgsql93 pgsql96 protobuf250 python276 ruby187 ruby226 sbt013 scala210 scala211 sdkman selenium242 solr610 spark152 tomcat80 tomcat85 vsftpd zookeeper346 )
+# AVAILABLE_APPS=( ant194 ads200 androidstudio301 cassandra39 cinnamon db60 db61 db62 dcevm django docker eclipse47 editix elasticsearch6 erlang groovy24 hadoop251 hbase112 httpd intellij34 java80 johntheripper180 kibana6 kotlin lamp maven353 mysql nagios411 nodejs622 openfire393 openldap24 openssl102 oracle11g2 play226 phppgadmin pgsql93 pgsql96 protobuf250 python276 ruby187 ruby226 sbt013 scala210 scala211 sdkman selenium242 solr610 spark152 tomcat80 tomcat85 vsftpd zookeeper346 )
 
 cd /vagrant/vagrant-setup
 chmod a+x include.sh
@@ -66,6 +66,9 @@ yum install -y apr-devel.x86_64 git mercurial mercurial-hgk
 cp $SETUP/.ssh/config /home/vagrant/.ssh/
 # Add Queues Extension to Mercurial
 cp --remove-destination $SETUP/etc/mercurial/hgrc.d/hgk.rc /etc/mercurial/hgrc.d/
+cp --remove-destination $SETUP/mercurial/.hgrc /root
+cp --remove-destination $SETUP/mercurial/.hgrc /home/vagrant
+chown vagrant:vagrant /home/vagrant/.hgrc
 
 if [ -d "$SETUP/.m2" ]
 	then
