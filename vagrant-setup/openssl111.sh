@@ -7,8 +7,8 @@ SETUP="/vagrant/vagrant-setup"
 source $SETUP/include.sh
 
 cd /usr/local/src
-wget_and_untar https://www.openssl.org/source/ openssl-1.0.2-latest.tar.gz
-cd openssl-1.0.2l
+wget_and_untar https://www.openssl.org/source/ openssl-1.1.1-pre8.tar.gz
+cd openssl-1.1.1-pre8
 ./config
 make
 make install
