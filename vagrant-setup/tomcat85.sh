@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# http://www.davidghedini.com/pg/entry/install_tomcat_7_on_centos
 if [ -d "/usr/share/tomcat" ]
 	then
 
@@ -28,7 +27,7 @@ else
 		then
 			perl -pi -e 's/Subsystem/#Subsystem/g' /etc/ssh/sshd_config
 		fi
-		cat ./tomcat/etc/ssh/sshd_config >> /etc/ssh/sshd_config
+		# cat $SETUP/tomcat/etc/ssh/sshd_config >> /etc/ssh/sshd_config
 		systemctl restart sshd.service
 		cd /usr/share
 		TOMCAT_FILE="apache-tomcat-8.5.32"
@@ -62,15 +61,12 @@ else
 		if [[ $OPENSSLVERSION == "OpenSSL 1.0.1"* ]]
 			then
 			# Native libraries require OpenSSL 1.0.2 but CentOS 7.3 comes with 1.0.1
-			# so upgrade OpenSSL to 1.0.2 before compiling
-			echo "Upgrading openssl to 1.0.2"
-			source $SETUP/openssl102.sh
+			# so upgrade OpenSSL to 1.1.1 before compiling
+			echo "Upgrading openssl to 1.1.1"
+			source $SETUP/openssl111.sh
 		fi
-		./configure --with-apr=/usr/ --with-java-home=$JAVA_HOME
-		# Dirty hack with openssl dynamic library to compile
-		cp /opt/puppetlabs/puppet/lib/libssl.so /usr/local/ssl/lib
+		./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --with-apr=/usr/ --with-java-home=$JAVA_HOME --with-ssl=yes --prefix=/usr/local/apr
 		make && make install
-		rm /usr/local/ssl/lib/libssl.so
 		cd ../../../..
 
 		# Copy conf files
@@ -85,7 +81,7 @@ else
 			then
 			echo "Setting DCEVM as Java hot swap runtime"
 			mkdir -p $JAVA_HOME/jre/lib/amd64/dcevm
-			cp $SETUP/tomcat/dcevm/*.* $JAVA_HOME/jre/lib/amd64/dcevm
+			cp $SETUP/tomcat/dcevm/1.8.0_162/*.* $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/hotswap/hotswap-agent-1.3.0.jar /usr/share/tomcat/lib
 		fi
 
