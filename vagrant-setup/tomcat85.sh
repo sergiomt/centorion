@@ -65,7 +65,7 @@ else
 			echo "Upgrading openssl to 1.1.1"
 			source $SETUP/openssl111.sh
 		fi
-		./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --with-apr=/usr/ --with-java-home=$JAVA_HOME --with-ssl=yes --prefix=/usr/local/apr
+		./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --with-apr=/usr/ --with-java-home=$JAVA_HOME --with-ssl=/usr/local/ssl --prefix=/usr/local/apr
 		make && make install
 		cd ../../../..
 
