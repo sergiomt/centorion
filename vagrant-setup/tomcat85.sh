@@ -61,9 +61,9 @@ else
 		if [[ $OPENSSLVERSION == "OpenSSL 1.0.1"* ]]
 			then
 			# Native libraries require OpenSSL 1.0.2 but CentOS 7.3 comes with 1.0.1
-			# so upgrade OpenSSL to 1.1.1 before compiling
-			echo "Upgrading openssl to 1.1.1"
-			source $SETUP/openssl111.sh
+			# so upgrade OpenSSL to 1.1.0 before compiling
+			echo "Upgrading openssl to 1.1.0"
+			source $SETUP/openssl110.sh
 		fi
 		./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --with-apr=/usr/ --with-java-home=$JAVA_HOME --with-ssl=yes --prefix=/usr/local/apr
 		make && make install
