@@ -7,7 +7,7 @@ This allows the distribution of virtual machines with very small file size (unde
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
-- [CentOS 7.3](#centos-73) + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
+- [CentOS 7.3](#centos-73) + VirtualBox Additions 5.1.xx
 - [Git](#git)
 - Mercurial with HGK and Extension Queues
 
@@ -23,7 +23,7 @@ Then it is possible to install selectively the following applications.
 - [DCEVM](#dcevm) (requires Java 8)
 - [Django 1.11.10](#django-11110)
 - [Docker](#docker)
-- [Eclipse 4.7 Oxygen](#eclipse-47-oxygen)
+- [Eclipse 4.8 Photon](#eclipse-48-photon)
 - [Editix XML Editor](#editix-xml-ediotr)
 - [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
@@ -180,6 +180,24 @@ To fully automate application installation on machine creation, add the desired 
 
 -------------------------------------------------------------------------------
 
+# HOW TO REBUILD THE BASE BOX
+
+A VirtualBox base box is required at Vagrant file vs.vm.box_url
+
+If a box is not available, it can be created using [Packer](https://www.packer.io/intro/index.html).
+
+For building the base box, download [download Packer](https://www.packer.io/downloads.html) then change to the /packer subdirectory of CentOrion.
+
+Execute:
+
+`packer build -var-file=variables-centos-7.3.json vagrant-centos.json`
+
+This will create a base box name `vagrant-centos-73.box` that can be referenced from Vagrantfile.
+
+Read more on Vagrant provisioners [here](https://www.packer.io/docs/provisioners/shell.html).
+
+-------------------------------------------------------------------------------
+
 # CENTOS 7.3
 
 The password for **root** and **vagrant** users is **vagrant**
@@ -330,9 +348,9 @@ To disable start on boot do
 
 -------------------------------------------------------------------------------
 
-# ECLIPSE 4.7 Oxygen
+# ECLIPSE 4.8 Photon
 
-[Installation Script](vagrant-setup/eclipse47.sh)
+[Installation Script](vagrant-setup/eclipse48.sh)
 
 Is installed at `/usr/share/eclipse`
 
@@ -870,9 +888,9 @@ RubyGems is installed at `/usr/local/rubygems`
 
 -------------------------------------------------------------------------------
 
-# SCALA 2.10 or 2.11
+# SCALA 2.10 or 2.11 or 2.12
 
-Installation Scripts [2.10](vagrant-setup/scala210.sh), [2.11](vagrant-setup/scala211.sh)
+Installation Scripts [2.10](vagrant-setup/scala210.sh), [2.11](vagrant-setup/scala211.sh), [2.12](vagrant-setup/scala212.sh)
 
 -------------------------------------------------------------------------------
 
