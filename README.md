@@ -27,7 +27,7 @@ Then it is possible to install selectively the following applications.
 - [Editix XML Editor](#editix-xml-ediotr)
 - [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
-- [Java 8.0 + JAI 1.1.3](#java-180_05--jai-113)
+- [Java 8.0 + JAI 1.1.3](#java-180_162--jai-113)
 - [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
 - [HBase 1.1.2](#hbase-112) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
@@ -560,11 +560,11 @@ Start it with `idea` from any location (the symbolic link points to /usr/share/i
 
 -------------------------------------------------------------------------------
 
-# JAVA 1.8.0_05 + JAI 1.1.3
+# JAVA 1.8.0_162 + JAI 1.1.3
 
 [Installation Script](vagrant-setup/java80.sh)
 
-By default, it is installed at `/usr/java/jdk1.8.0_05`
+By default, it is installed at `/usr/java/jdk1.8.0_162`
 
 To change the minor version which is installed, edit the installation script and change JDK, RPM and OTN variables.
 
