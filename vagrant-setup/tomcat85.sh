@@ -72,10 +72,9 @@ else
 		# Copy conf files
 		cd /usr/share/tomcat/conf
 		echo "Copying .conf files"
-		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml ./conf
-		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties ./conf
-		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/log4j2.xml ./conf
-		chown -Rf tomcat.tomcat .
+		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml .
+		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties .
+		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/log4j2.xml .
 
 		# Use dcevm for dynamic class reloading on development if available
 		if [ -d "$SETUP/tomcat/dcevm" ]
@@ -85,6 +84,9 @@ else
 			cp $SETUP/tomcat/dcevm/1.8.0_162/*.* $JAVA_HOME/jre/lib/amd64/dcevm
 			cp $SETUP/tomcat/hotswap/hotswap-agent-1.3.0.jar /usr/share/tomcat/lib
 		fi
+
+		cd /usr/share/
+		chown -Rf tomcat.tomcat tomcat
 
 		echo "Opening port 8080"
 		iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
