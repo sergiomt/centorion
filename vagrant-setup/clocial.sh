@@ -23,7 +23,7 @@ else
 		echo "Configuring Clocial set up"
 
 		cd $SETUP
-		DEPENDENCIES=( httpd pgsql96 java80 db62 scala212 ant194 maven353 hadoop251 zookeeper346 hbase112 openldap24 openfire393 tomcat85 cinnamon eclipse48 )
+		DEPENDENCIES=( httpd java80 db62 scala212 ant194 maven353 hadoop251 zookeeper346 hbase112 openldap24 openfire393 cinnamon eclipse48 )
 
 		cd $SETUP
 
@@ -40,24 +40,31 @@ else
 
 		echo "Creating directories"
 
-    if containsApp "db62" "${DEPENDENCIES[@]}"
-    then
-			# Create directories for Berkeley DB files
-			mkdir -m 777 -p /opt/bdb/
-			chown tomcat /opt/bdb/
-			chgrp tomcat /opt/bdb/
-			mkdir -m 777 -p /opt/bdb/slogs
-			chown tomcat /opt/bdb/slogs
-			chgrp tomcat /opt/bdb/slogs
-			mkdir -m 777 -p /opt/bdb/bucket
-			chown tomcat /opt/bdb/bucket
-			chgrp tomcat /opt/bdb/bucket
-		fi
-
 		# Create directory for Lucene files
 		mkdir -m 766 -p /opt/lucene/clocialdev
-		chown tomcat /opt/lucene/clocialdev
-		chgrp tomcat /opt/lucene/clocialdev
+
+    if containsApp "db62" "${DEPENDENCIES[@]}"
+    then
+				# Create directories for Berkeley DB files
+				mkdir -m 777 -p /opt/bdb/
+				mkdir -m 777 -p /opt/bdb/slogs
+				mkdir -m 777 -p /opt/bdb/bucket
+		fi
+
+		if getent passwd tomcat > /dev/null 2>&1; then
+    	if containsApp "db62" "${DEPENDENCIES[@]}"
+    	then
+				chown tomcat /opt/bdb/
+				chgrp tomcat /opt/bdb/
+				chown tomcat /opt/bdb/slogs
+				chgrp tomcat /opt/bdb/slogs
+				chown tomcat /opt/bdb/bucket
+				chgrp tomcat /opt/bdb/bucket
+			fi
+
+			chown tomcat /opt/lucene/clocialdev
+			chgrp tomcat /opt/lucene/clocialdev
+		fi
 
 		# Create PostgreSQL login role for it named clocial and database named clocialdev
 		if containsApp "pgsql96" "${DEPENDENCIES[@]}"
@@ -75,7 +82,14 @@ else
 			/usr/local/bin/ldapadd -x -w secret -D "cn=Manager,dc=auth,dc=com" -f /vagrant/vagrant-setup/clocial/admin.ldif
 		fi
 
-			echo "Clocial successfully installed"
+		echo "Clocial successfully installed, rebooting to complete set up."
+
+    if containsApp "cinnamon" "${DEPENDENCIES[@]}"
+    then
+			echo "For good performance, make sure that VirtualBox Guest additions are installed and video hardware acceleration is enabled on the virtual machine."
+		fi
+		
+		shutdown
 
 		cd $PPWD
 	else
