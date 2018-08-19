@@ -1,0 +1,8 @@
+{
+  "iso_url": "http://ftp.ps.pl/pub/Linux/CentOS/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso",
+  "iso_checksum": "714acc0aefb32b7d51b515e25546835e55a90da9fb00417fbee2d03a62801efd",
+  "iso_checksum_type": "sha256",
+  "guest_additions_path": "VBoxGuestAdditions.iso",
+  "redhat_release": "7.3",
+  "disk_size": "49152"
+}

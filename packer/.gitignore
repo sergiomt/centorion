@@ -1,0 +1,6 @@
+vars.json
+packer_cache
+*.box
+.vagrant
+Vagrantfile
+VBoxGuestAdditions.iso
