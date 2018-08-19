@@ -20,8 +20,10 @@ then
 	yum -y install cinnamon
 	
 	# Microsoft core fonts
-	wget_and_cp http://www.itzgeek.com/ msttcore-fonts-2.0-3.noarch.rpm
-	rpm -Uvh $SETUP/cache/msttcore-fonts-2.0-3.noarch.rpm
+	# wget_and_cp http://www.itzgeek.com/ msttcore-fonts-2.0-3.noarch.rpm
+	# rpm -Uvh $SETUP/cache/msttcore-fonts-2.0-3.noarch.rpm
+	yum -y install curl cabextract xorg-x11-font-utils fontconfig
+	yum -y install https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 	# Additional desktop programs
 	yum -y install gnome-system-monitor

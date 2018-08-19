@@ -7,7 +7,9 @@ This allows the distribution of virtual machines with very small file size (unde
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
 
-- [CentOS 7.3](#centos-73) + VirtualBox Additions 5.1.xx
+Video aceleration requires VirtualBox Additions 5.2.18 or later
+
+- [CentOS 7.3](#centos-73)
 - [Git](#git)
 - Mercurial with HGK and Extension Queues
 
