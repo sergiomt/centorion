@@ -22,9 +22,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "CentOrion" , primary: true do |vs|
 
     # Every Vagrant virtual environment requires a box to build off of.
-    # This is CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
-    vs.vm.box = "vagrant-centos-73-x86_64-puppet"
-    vs.vm.box_url = "vagrant-centos-7.3-48G.box"
+    # This is CentOS 7.3 + VirtualBox Additions 5.1.xx
+
+    vs.vm.box = "vagrant-centos-73-x86_64"
+
+		# Local copy of CentOs 7.3 Minimal base box created with Packer
+		vs.vm.box_url = "F:\\VBoxVMs\\vagrant-centos-7.3-48G.box"
+
+		# Remote base box with CentOS 7.3 Minimal + Puppet
+    # vs.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
 
     # Vagrant will need to login once with its own insecure_private_key in order to change it at guest's ~/.ssh/authorized_keys
     vs.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
@@ -44,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.gui = true
       # Use VBoxManage to customize the VM.
       vb.customize ["modifyvm", :id, "--cpus", "2"]
-      vb.customize ["modifyvm", :id, "--memory", "6144"]
+      vb.customize ["modifyvm", :id, "--memory", "8192"]
     end
   end
 
@@ -61,7 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ms.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.customize ["modifyvm", :id, "--cpus", "2"]
-      vb.customize ["modifyvm", :id, "--memory", "2048"]
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
     end
   end
 

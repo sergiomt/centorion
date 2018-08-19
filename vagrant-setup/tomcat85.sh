@@ -70,6 +70,7 @@ else
 		cd ../../../..
 
 		# Copy conf files
+		cd /usr/share/tomcat/conf
 		echo "Copying .conf files"
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml ./conf
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties ./conf
