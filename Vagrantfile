@@ -23,7 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
     # This is CentOS 7.3 + Puppet 4.8.1 + VirtualBox Additions 5.1.xx
-    vs.vm.box = "vagrant-centos-73-x86_64-puppet"
+    vs.vm.box = "vagrant-centos-73-x86_64"
+		
+		# Local copy of CentOs 7.3 Minimal base box created with Packer
+		# vs.vm.box_url = "vagrant-centos-7.3-48G.box"
+
+		# Remote base box with CentOS 7.3 Minimal + Puppet
     vs.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
 
     # Vagrant will need to login once with its own insecure_private_key in order to change it at guest's ~/.ssh/authorized_keys
