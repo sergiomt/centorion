@@ -24,20 +24,20 @@ BDBBUCKET=/opt/bdb/bucket
 # fi
 
 # Uncomment this line for deleting all images from test bucket
-echo Deleting images from test bucket
+# echo Deleting images from test bucket
 # sudo $JAVA_HOME/bin/java -cp $FATJAR:$SHARED/*:$WEBINF/*:$M2REPO/junit/junit/4.11/junit-4.11.jar:$TARGET/test-classes -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs com.clocial.test.Blobs truncate
 
 # Uncomment this line for deleting all tables and functions at the database before re-creating it
 echo Droping datamodel
-# sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/* com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf drop database
+sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/* com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf drop database
 
 # Create Clocial datamodel
 echo Creating datamodel
-# sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/* com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf create database
+sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/* com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf create database
 
 # Populate the database specified at $TARGET/test-classes/com/clocial/test/testrdbms.cnf with test data
-echo Populating database with test data
-sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/*:$M2REPO/junit/junit/4.11/junit-4.11.jar:$TARGET/test-classes -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs com.clocial.users.UsersCreation
+# echo Populating database with test data
+# sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$SHARED/*:$WEBINF/*:$M2REPO/junit/junit/4.11/junit-4.11.jar:$TARGET/test-classes -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs com.clocial.users.UsersCreation
 
 # Uncomment to create HBase tables for InMailService
 # if [ -d "/usr/share/hbase/conf" ]
