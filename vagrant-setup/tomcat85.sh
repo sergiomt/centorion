@@ -60,10 +60,10 @@ else
 		echo "found $OPENSSLVERSION"
 		if [[ $OPENSSLVERSION == "OpenSSL 1.0.1"* ]]
 			then
-			# Native libraries require OpenSSL 1.0.2 but CentOS 7.3 comes with 1.0.1
-			# so upgrade OpenSSL to 1.1.0 before compiling
-			echo "Upgrading openssl to 1.1.0"
-			source $SETUP/openssl110.sh
+			# Native libraries require OpenSSL 1.0.2 with shared libraries but CentOS 7.3 comes with 1.0.1 so upgrade OpenSSL to 1.0.2 before compiling
+			echo "Upgrading openssl to 1.0.2"
+			rm /usr/local/bin/openssl
+			source $SETUP/openssl102.sh
 		fi
 		./configure CFLAGS=-fPIC CXXFLAGS=-fPIC --with-apr=/usr/ --with-java-home=$JAVA_HOME --with-ssl=yes --prefix=/usr/local/apr
 		make && make install
@@ -75,6 +75,8 @@ else
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/tomcat-users.xml .
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/catalina.properties .
 		cp --remove-destination /vagrant/vagrant-setup/tomcat/conf/log4j2.xml .
+		# Allow access to Tomcat Manager from the host browser
+		perl -pi -e "s/allow=\x22(.*)\x22/allow=\x22\\1|192\x5C.168\x5C.\x5Cd+\x5C.\x5Cd+\x22/g" /usr/share/tomcat/webapps/manager/META-INF/context.xml
 
 		# Use dcevm for dynamic class reloading on development if available
 		if [ -d "$SETUP/tomcat/dcevm" ]
