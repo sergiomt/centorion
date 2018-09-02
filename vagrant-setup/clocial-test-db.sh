@@ -12,7 +12,17 @@ SERVICES=$WORKSPACE/clocial/clocial-service/target/clocial-services-1.0.jar
 DEVEL=$WORKSPACE/clocial/clocial-devel/target/clocial-devel-1.0.jar
 BDBBUCKET=/opt/bdb/bucket
 
-# sudo $JAVA_HOME/bin/java -cp $FATJAR:$SHARED/*:$WEBINF/* com.knowgate.debug.DebugFile
+if [ -d "/usr/local/clocial" ]
+	then
+	echo Deleting images from test bucket
+	cd $WORKSPACE/clocial/clocial-devel
+	mvn exec:java -P blobs -Dexec.args="truncate"
+	cd $PPWD
+else
+	sudo mkdir /usr/local/clocial
+	sudo chown -R vagrant.vagrant /usr/local/clocial
+	sudo chmod 766 /usr/local/clocial
+fi
 
 # Uncomment to run Berkeley DB db_recover
 # if [ -d "$BDBBUCKET" ]
@@ -24,35 +34,29 @@ BDBBUCKET=/opt/bdb/bucket
 # 	mkdir -p $BDBBUCKET 
 # fi
 
-# Uncomment this line for deleting all images from test bucket
-echo Deleting images from test bucket
-# sudo $JAVA_HOME/bin/java -cp $SERVICES:$M2REPO/junit/junit/4.11/junit-4.11.jar:$TARGET/test-classes -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs com.clocial.test.Blobs truncate
-cd $WORKSPACE/clocial/clocial-devel
-mvn exec:java -P blobs -Dexec.args="truncate"
-cd $PPWD
-
 # Uncomment this line for deleting all tables and functions at the database before re-creating it
 echo Droping datamodel
 cd $WORKSPACE/clocial/clocial-devel
 mvn exec:java -P database -Dexec.args="/etc/clocial.cnf drop database"
 cd $PPWD
-# sudo $JAVA_HOME/bin/java -cp $DEVEL:$SERVICES com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf drop database
 
 # Create Clocial datamodel
 echo Creating datamodel
 cd $WORKSPACE/clocial/clocial-devel
 mvn exec:java -P database -Dexec.args="/etc/clocial.cnf create database"
 cd $PPWD
-# sudo $JAVA_HOME/bin/java -cp $DEVEL:$SERVICES com.clocial.datamodel.ClocialDataModelManager /etc/clocial.cnf create database
 
 # Populate the database specified at $TARGET/test-classes/com/clocial/test/testrdbms.cnf with test data
 echo Populating database with test data
+mkdir -p /opt/lucene/clocialdev/k_user_avatars
 cd $WORKSPACE/clocial/clocial-devel
 mvn -Dtest=UsersCreation test
 cd $PPWD
 
 # Uncomment to create HBase tables for InMailService
-# if [ -d "/usr/share/hbase/conf" ]
-# then
-# sudo $JAVA_HOME/bin/java -cp $DEVEL:$FATJAR:$TARGET/classes/:$SHARED/:$WEBINF/* com.clocial.inmail.InMailService create /usr/share/hbase/conf/
-# fi
+if [ -d "/usr/share/hbase/conf" ]
+then
+	cd $WORKSPACE/clocial/clocial-devel
+	mvn exec:java -P inmail -Dexec.args="create $TARGET/test-classes/com/clocial/users/testhbase.cnf"
+	cd $PPWD
+fi
