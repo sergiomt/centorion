@@ -40,5 +40,7 @@
                    base="/vagrant/workspace/clocial/clocial-scala/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
     <PostResources className="org.apache.catalina.webresources.DirResourceSet"
                    base="/vagrant/workspace/clocial/clocial-web/target/classes" internalPath="/" webAppMount="/WEB-INF/classes" />
+    <PostResources className="org.apache.catalina.webresources.DirResourceSet"
+                   base="/vagrant/workspace/clocial/clocial-web/target/lib" internalPath="/" webAppMount="/WEB-INF/lib" />
   </Resources>
 </Context>
