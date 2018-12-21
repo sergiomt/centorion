@@ -518,7 +518,7 @@ Node HTTP address is http://192.168.101.110:8042/
 
 # HBASE 2.1.0
 
-[Installation Script](vagrant-setup/hbase112.sh)
+[Installation Script](vagrant-setup/hbase210.sh)
 
 The recommended Hadoop version is [2.7.7](vagrant-setup/hadoop277.sh)
 
