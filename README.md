@@ -30,8 +30,8 @@ Then it is possible to install selectively the following applications.
 - [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_162--jai-113)
-- [Hadoop 2.5.1](#hadoop-251) (requires Java 8)
-- [HBase 1.1.2](#hbase-112) (requires Hadoop)
+- [Hadoop 2.8.5](#hadoop-285) (requires Java 8)
+- [HBase 2.1.0](#hbase-2.1.0) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
 - [Kibana 6](#kibana-6)
@@ -41,6 +41,7 @@ Then it is possible to install selectively the following applications.
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Logstash](#logstash)
 - [Maven 3.2.1](vagrant-setup/maven321.sh)
+- [MongoDB](#mongodb)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
 - [Nagios 4.1.1](#nagios-411)
 - [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
@@ -60,7 +61,7 @@ Then it is possible to install selectively the following applications.
 - [Solr 6.1.0](#solr-610)
 - [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
 - [VSFTP](vagrant-setup/vsftpd.sh)
-- [Zookeeper 3.4.6](#zookeeper-346)
+- [Zookeeper 3.4.13](#zookeeper-3413)
 
 -------------------------------------------------------------------------------
 # SETUP
@@ -493,9 +494,9 @@ To run a specific Groovy script type:
 
 -------------------------------------------------------------------------------
 
-# HADOOP 2.5.1
+# HADOOP 2.8.5
 
-[Installation Script](vagrant-setup/hadoop251.sh)
+[Installation Script](vagrant-setup/hadoop285.sh)
 
 Hadoop will be compiled from source in order to generate its native libraries.
 Protocol Buffers will be installed as a side effect of installing Hadoop.
@@ -515,9 +516,13 @@ Node HTTP address is http://192.168.101.110:8042/
 
 -------------------------------------------------------------------------------
 
-# HBASE 1.1.2
+# HBASE 2.1.0
 
 [Installation Script](vagrant-setup/hbase112.sh)
+
+The recommended Hadoop version is [2.7.7](vagrant-setup/hadoop277.sh)
+
+Older [HBase 1.1.2](vagrant-setup/hbase112.sh) requires [Hadoop 2.5.1](vagrant-setup/hadoop251.sh)
 
 It is installed in pseudo-distributed mode with unmanaged Zookeeper at
 `/usr/share/hbase`
@@ -681,6 +686,30 @@ Then uncomment the following lines, by deleting the # symbols, and add the IP ad
 As these lines will appear twice in the configuration file, so you will need to perform these steps once more.
 
 Save and exit.
+
+-------------------------------------------------------------------------------
+
+MONGODB
+
+[Installation Script](vagrant-setup/mongodb.sh)
+
+It´s installed with yum, so the exact version will depend on the repository.
+
+To install a specific release of MongoDB, change the script to specify each package individually, as in the following example:
+`sudo yum install -y mongodb-org-4.0.2 mongodb-org-server-4.0.2 mongodb-org-shell-4.0.2 mongodb-org-mongos-4.0.2 mongodb-org-tools-4.0.2`
+
+Start and stop with
+`sudo service mongod [start|stop|restart]`
+
+Verify that MongoDB has started successfully by searching for the string
+`[initandlisten] waiting for connections on port <port>`
+in /var/log/mongodb/mongod.log
+
+Optionally, start MongoDB on boot by issuing the following command:
+`sudo chkconfig mongod on`
+
+Start a mongo shell on the same host machine as the mongod. Use the --host command line option to specify the localhost address (in this case 127.0.0.1) and port that the mongod listens on:
+`mongo --host 127.0.0.1:27017`
 
 -------------------------------------------------------------------------------
 
@@ -957,9 +986,9 @@ from `JAVA_OPTS`
 
 -------------------------------------------------------------------------------
 
-# ZOOKEEPER 3.4.6
+# ZOOKEEPER 3.4.13
 
-[Installation Script](vagrant-setup/zookeeper346.sh)
+[Installation Script](vagrant-setup/zookeeper3413.sh)
 
 Runs on port 2181
 
