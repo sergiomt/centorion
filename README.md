@@ -25,7 +25,7 @@ Then it is possible to install selectively the following applications.
 - [DCEVM](#dcevm) (requires Java 8)
 - [Django 1.11.10](#django-11110)
 - [Docker](#docker)
-- [Eclipse 4.8 Photon](#eclipse-48-photon)
+- [Eclipse 4.9](#eclipse-49)
 - [Editix XML Editor](#editix-xml-ediotr)
 - [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
@@ -351,9 +351,9 @@ To disable start on boot do
 
 -------------------------------------------------------------------------------
 
-# ECLIPSE 4.8 Photon
+# ECLIPSE 4.9
 
-[Installation Script](vagrant-setup/eclipse48.sh)
+[Installation Script](vagrant-setup/eclipse49.sh)
 
 Is installed at `/usr/share/eclipse`
 
