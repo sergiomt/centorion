@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Hadoop 2.5.1 from source
+# Install Hadoop 2.8.5 from source
 
 if [ -d "/usr/share/hadoop" ]
 	then
@@ -9,7 +9,7 @@ if [ -d "/usr/share/hadoop" ]
 
 else
 
-	echo "Installing Hadoop 2.5.1..."
+	echo "Installing Hadoop 2.8.5..."
 
 	SETUP="/vagrant/vagrant-setup"
 	source $SETUP/include.sh
@@ -17,16 +17,16 @@ else
 	PPWD=$PWD
 	cd /usr/share
 
-	HADOOP=hadoop-2.5.1
+	HADOOP=hadoop-2.8.5
 
 	if [ -f "/usr/local/lib/libhadoop.so" ]
 	then
 		echo "Hadoop native libraries found at /usr/local/lib"
 	else
-		if [ -f "/vagrant/vagrant-setup/hadoop/native/2.5.1/libhadoop.so" ]
+		if [ -f "/vagrant/vagrant-setup/hadoop/native/2.8.5/libhadoop.so" ]
 		then
 				echo "Using precompiled native libraries in cache"
-				cp -u $SETUP/hadoop/native/2.5.1/*.* /usr/local/lib
+				cp -u $SETUP/hadoop/native/2.8.5/*.* /usr/local/lib
 				ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so /usr/local/lib/libjvm.so
 				ldd /usr/local/lib/libhadoop.so
 		else
@@ -42,9 +42,9 @@ else
 					echo "Installing Protocol Buffers"
 					source $SETUP/protobuf250.sh
 				fi
-				wget_and_untar https://archive.apache.org/dist/hadoop/core/$HADOOP/ $HADOOP-src.tar.gz
+				wget_and_untar http://apache.mirror.anlx.net/hadoop/common/$HADOOP/ $HADOOP-src.tar.gz
 				cd $HADOOP-src
-				/usr/local/maven/bin/mvn install -Pnative
+				/usr/local/maven/bin/mvn install -Pnative -DskipTests=true
 				cp -u ./hadoop-common-project/hadoop-common/target/native/target/usr/local/lib/*.* /usr/local/lib
 				ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so /usr/local/lib/libjvm.so
 				ldd /usr/local/lib/libhadoop.so
@@ -56,8 +56,7 @@ else
 		fi
 	fi
 
-	# mvn package raises plenty of errors when trying to build Hadoop 2.5.1 from source
-	# so after generating native libraries download the corresponding binary distribution and install from it.
+	# After generating native libraries download the corresponding binary distribution and install from it.
 	# See http://tecadmin.net/setup-hadoop-2-4-single-node-cluster-on-linux/
 	# See http://www.alexjf.net/blog/distributed-systems/hadoop-yarn-installation-definitive-guide/
 
@@ -74,8 +73,6 @@ else
 		echo "Creating hadoop user"
 		groupadd hadoop
 		adduser hadoop -K MAIL_DIR=/dev/null -g hadoop
-		# password login is disabled at /etc/ssh/sshd_config
-		# echo -e "Hadoop251\nHadoop251\n" | passwd hadoop
 	fi
 
 	# hadoop user must be authorized for SSH
