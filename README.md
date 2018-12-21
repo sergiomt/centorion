@@ -31,7 +31,7 @@ Then it is possible to install selectively the following applications.
 - [Erlang](#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_162--jai-113)
 - [Hadoop 2.8.5](#hadoop-285) (requires Java 8)
-- [HBase 2.1.0](#hbase-2.1.0) (requires Hadoop)
+- [HBase 2.1.0](#hbase-210) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
 - [Kibana 6](#kibana-6)
