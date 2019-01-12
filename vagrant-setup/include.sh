@@ -6,7 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # There is a .sh script for each app
-AVAILABLE_APPS=( ant194 ads200 androidstudio301 cassandra39 cinnamon db60 db61 db62 dcevm django docker eclipse47 eclipse48 editix elasticsearch6 erlang groovy24 hadoop251 hadoop285 hbase112 hbase210 httpd intellij34 java80 johntheripper180 kibana6 kotlin lamp logstash6 maven321 maven353 mysql nagios411 nodejs622 openfire393 openldap24 openssl102 openssl110 oracle11g2 play226 phppgadmin pgsql93 pgsql96 protobuf250 python276 ruby187 ruby226 sbt013 scala210 scala211 scala212 sdkman selenium242 solr610 spark152 tomcat80 tomcat85 vsftpd zookeeper3413 )
+AVAILABLE_APPS=( ant194 ads200 androidstudio301 cassandra39 cinnamon db60 db61 db62 dcevm80 django docker eclipse47 eclipse48 editix elasticsearch6 erlang groovy24 hadoop251 hadoop285 hbase112 hbase210 httpd intellij34 java80 java90 java11 johntheripper180 kibana6 kotlin lamp logstash6 maven321 maven353 mysql nagios411 nodejs622 openfire393 openldap24 openssl102 openssl110 oracle11g2 play226 phppgadmin pgsql93 pgsql96 protobuf250 python276 ruby187 ruby226 sbt013 scala210 scala211 scala212 sdkman selenium242 solr610 spark152 tomcat80 tomcat85 vsftpd zookeeper3413 )
 
 SETUP="/vagrant/vagrant-setup"
 DOWNLOAD_PROXY=http://www.knowgate.com/shared/

@@ -15,9 +15,11 @@ CATALINA_HOME=/usr/share/tomcat
 # -Djava.library.path=/usr/share/db-6.2.32/build_unix/.libs are Berkeley DB libraries
 # -Djava.library.path=/usr/share/hbase/lib/native/Linux-amd64-64 are Hadoop libraries
 # -Dlog4j.configurationFile=/usr/share/tomcat/conf/log4j2.xml is Log4J configuration file
-# -XX:HotswapDeoptClassPath='com.package1,com.package2,sun.reflect.Generated' to hot swap only certain packages
+# -XXaltjvm=dcevm to specify an alternative JVM (only for Java 8)
+# -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.3.0.jar=autoHotswap=true,disablePlugin=Tomcat,disablePlugin=Proxy to load Java HotSwap Agent
+# -XX:HotswapDeoptClassPath='com.package1,com.package2,com.sun.proxy.$Proxy,sun.reflect.Generated' to hot swap only certain packages
 # -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9009 for remote debugging
-JAVA_OPTS="-Xms512m -Dcatalina.home=$CATALINA_HOME -Djava.library.path=/usr/local/apr/lib:/usr/share/hbase/lib/native/Linux-amd64-64:/usr/share/db-6.2.32/build_unix/.libs -Dlog4j.configurationFile=/usr/share/tomcat/conf/log4j2.xml -XXaltjvm=dcevm -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.3.0.jar=autoHotswap=true"
+JAVA_OPTS="-Xms512m -Dcatalina.home=$CATALINA_HOME -Djava.library.path=/usr/local/apr/lib:/usr/share/hbase/lib/native/Linux-amd64-64:/usr/share/db-6.2.32/build_unix/.libs -Dlog4j.configurationFile=/usr/share/tomcat/conf/log4j2.xml"
 export JAVA_OPTS
 
 case $1 in

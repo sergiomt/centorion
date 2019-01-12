@@ -30,6 +30,8 @@ Then it is possible to install selectively the following applications.
 - [Elasticsearch 6](#elasticsearch-6-with-x-pack)
 - [Erlang](#erlang)
 - [Java 8.0 + JAI 1.1.3](#java-180_162--jai-113)
+- [Java 9.0](#java-90)
+- [Java 11.0](#java-110)
 - [Hadoop 2.8.5](#hadoop-285) (requires Java 8)
 - [HBase 2.1.0](#hbase-210) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
@@ -305,7 +307,13 @@ and after the script finishes executing reboot the guest virtual machine.
 
 # DCEVM
 
-Usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
+For JDK 11 there is a [full integrated JDK](https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases)
+instead of using -XXaltjvm=dcevm option.
+
+For Java 9 there is a JDK in [HotswapProjects](https://github.com/HotswapProjects/openjdk-jdk9/releases/tag/jdk9-b94-dcevm-beta)
+
+For Java 8, usually, it is not necessary to recompile [DCEVM](https://dcevm.github.io/)
+using [dcevm80.sh](vagrant-setup/dcevm80.sh)
 because the JVM binaries for JDK 1.8.0_05, 1.8.0_112 and 1.8.0_162 are already
 precompiled at [tomcat/dcevm](vagrant-setup/tomcat/dcevm)
 
@@ -573,7 +581,29 @@ Start it with `idea` from any location (the symbolic link points to /usr/share/i
 
 By default, it is installed at `/usr/java/jdk1.8.0_162`
 
+Java 8 setup changes both /default and /latest symlinks of installed Java version.
+
 To change the minor version which is installed, edit the installation script and change JDK, RPM and OTN variables.
+
+-------------------------------------------------------------------------------
+
+# JAVA 9.0
+
+[Installation Script](vagrant-setup/java90.sh)
+
+Java 9 setup changes /latest but not /default symlink of installed Java version.
+
+It is installed at `/usr/java/jdk-9.0.4`
+
+-------------------------------------------------------------------------------
+
+# JAVA 11.0
+
+[Installation Script](vagrant-setup/java11.sh)
+
+Java 11 setup changes /latest but not /default symlink of installed Java version.
+
+It is installed at `/usr/java/jdk-11.0.1`
 
 -------------------------------------------------------------------------------
 
