@@ -23,10 +23,10 @@ else
 	then
 		echo "Hadoop native libraries found at /usr/local/lib"
 	else
-		if [ -f "/vagrant/vagrant-setup/hadoop/native/libhadoop.so" ]
+		if [ -f "/vagrant/vagrant-setup/hadoop/native/2.5.1/libhadoop.so" ]
 		then
 				echo "Using precompiled native libraries in cache"
-				cp -u $SETUP/hadoop/native/*.* /usr/local/lib
+				cp -u $SETUP/hadoop/native/2.5.1/*.* /usr/local/lib
 				ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so /usr/local/lib/libjvm.so
 				ldd /usr/local/lib/libhadoop.so
 		else

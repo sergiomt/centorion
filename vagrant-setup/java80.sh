@@ -59,7 +59,19 @@ else
 	fi
 	ln -s $JDK/jre jre
 
-	# Required only if there was a previous Java 7 installation that isbeing replaced
+	cd $JAVA
+	if [ -L "default" ]
+	then
+		unlink default > /dev/null 2>&1
+	fi
+	ln -s $JDK default
+	if [ -L "latest" ]
+	then
+		unlink latest > /dev/null 2>&1
+	fi
+	ln -s $JDK latest
+
+	# Required only if there was a previous Java 7 installation that is being replaced
 	# BINS=( java keytool orbd pack200 rmid rmiregistry servertool tnameserv unpack200 )
 	# for NM in "${BINS[@]}"
 	# do
