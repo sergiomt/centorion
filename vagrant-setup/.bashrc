@@ -1,4 +1,4 @@
-export JAVA_HOME=/usr/java/latest
+export JAVA_HOME=/usr/java/default
 export ANT_HOME=/usr/local/ant
 export M2_HOME=/usr/local/maven
 export M2=$M2_HOME/bin
