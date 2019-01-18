@@ -35,6 +35,7 @@ Then it is possible to install selectively the following applications.
 - [Hadoop 2.8.5](#hadoop-285) (requires Java 8)
 - [HBase 2.1.0](#hbase-210) (requires Hadoop)
 - [IntelliJ IDEA 3.4 Community](#intellij-idea-34-community)
+- [Jenkins](#jenkins)
 - [John The Ripper 1.8.0](#john-the-ripper-180)
 - [Kibana 6](#kibana-6)
 - [Kotlin](#kotlin) (requires SDKMAN)
@@ -607,7 +608,22 @@ It is installed at `/usr/java/jdk-11.0.1`
 
 -------------------------------------------------------------------------------
 
-JOHN THE RIPPER 1.8.0
+# JENKINS
+
+[Installation Script](vagrant-setup/jenkins.sh)
+
+Start and stop with
+`sudo systemctl [start|stop|status] jenkins`
+
+It runs at port 8087.
+
+Access through http://192.168.101.110:8087
+
+Its configuration is at `/etc/sysconfig/jenkins`
+
+-------------------------------------------------------------------------------
+
+# JOHN THE RIPPER 1.8.0
 
 [Installation Script](vagrant-setup/johntheripper180.sh)
 
