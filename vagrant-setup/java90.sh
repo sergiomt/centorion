@@ -14,6 +14,8 @@ else
 	source /vagrant/vagrant-setup/include.sh
 
 	# Install Java 9
+	# Can also be downloaded from
+	# http://download.java.net/java/GA/jdk9/9/binaries/jdk-9+181_linux-x64_bin.tar.gz
 
 	RPM=c2514751926b4512b076cc82f959763f/jdk-9.0.4_linux-x64_bin.rpm
 	OTN=otn/java/jdk/9.0.4+11
