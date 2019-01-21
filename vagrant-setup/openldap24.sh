@@ -31,33 +31,33 @@ else
 			export CPPFLAGS="-D_REENTRANT -I/usr/share/$BDB/build_unix"
 			export LDFLAGS="-L/usr/share/$BDB/build_unix/.libs"
 			export LD_LIBRARY_PATH="/usr/share/$BDB/build_unix/.libs"
-	
+
 			./configure --enable-wrappers --enable-ppolicy
 			make depend
 			make
 			make install
-	
+
 			mkdir -p /usr/local/etc/openldap/slapd.d
 			mkdir -p /usr/local/var/auth-data/logs
-		
+
 			# Create slapd.ldif file for auth.com
 			echo -e "# http://docs.oracle.com/cd/E17076_04/html/api_reference/C/configuration_reference.html\n# http://sepp.oetiker.ch/subversion-1.4.6-rp/ref/toc.html\n\n# Cache 5Mb\nset_cachesize 0 5242880 1\n\n# Transaction Log settings\nset_lg_regionmax 262144\nset_lg_bsize 2097152\nset_lk_detect DB_LOCK_DEFAULT\nset_flags DB_TXN_NOSYNC\nset_lg_dir logs" > /usr/local/var/auth-data/DB_CONFIG
 			cp $SETUP/ldap/slapd2.ldif /usr/local/etc/openldap/slapd.ldif
 			/usr/local/sbin/slapadd -d -1 -F /usr/local/etc/openldap/slapd.d -n 0 -l /usr/local/etc/openldap/slapd.ldif
 			/usr/local/sbin/slapadd -d -1 -F /usr/local/etc/openldap/slapd.d -n 0 -l /usr/local/etc/openldap/schema/cosine.ldif
 			/usr/local/sbin/slapadd -d -1 -F /usr/local/etc/openldap/slapd.d -n 0 -l /usr/local/etc/openldap/schema/inetorgperson.ldif
-	
+
 			# Create /etc/init.d/slapd [start|stop|restart]
 			cp $SETUP/ldap/init.d/slapd /etc/init.d/slapd
 			chmod 755 /etc/init.d/slapd
 			# Start slapd at boot
 			chkconfig --level 234 slapd on
-	
+
 			# Install PHP LDAP Admin
 			HTTPD=`which httpd`
 			if [[ $HTTPD == "*no httpd*" ]]
 				then
-		  	echo "No httpd service found, skipping phpldapadmin setup"
+				echo "No httpd service found, skipping phpldapadmin setup"
 			else
 				yum install -y phpldapadmin
 				perl -pi -e "s/(\x2F\x2F)?\s*\x24servers->setValue\x28'login','base',array\x28\x29\x29/\x24servers->setValue\x28'login','base',array\x28'dc=auth,dc=com'\x29\x29/g" /etc/phpldapadmin/config.php
@@ -68,20 +68,31 @@ else
 				perl -pi -e "s/Require local/Require all granted/g" /etc/httpd/conf.d/phpldapadmin.conf
 				systemctl restart httpd.service
 		fi
-	
+
 			iptables -A INPUT -p tcp --dport 389 -j ACCEPT
 			service iptables save
 			systemctl restart iptables
-	
+
 			# Start slapd server
 			/etc/init.d/slapd start
 			/usr/local/bin/ldapadd -x -w secret -D "cn=Manager,dc=auth,dc=com" -f /vagrant/vagrant-setup/ldap/auth.ldif
 			/usr/local/bin/ldapadd -x -w secret -D "cn=Manager,dc=auth,dc=com" -f /vagrant/vagrant-setup/ldap/admin.ldif
-		
-		  # Verify access to the LDAP server
+
+			# # Add password policy overlay
+			# # already included in slapd.ldif
+			# # https://tobru.ch/openldap-password-policy-overlay/
+			# # Load the ppolicy schema into OLC
+			# /usr/local/bin/ldapmodify -w secret -D "cn=root,cn=config" -W -a -f /usr/local/etc/openldap/schema/ppolicy.ldif
+			# # Load the module
+			# /usr/local/bin/ldapmodify -w secret -D "cn=root,cn=config" -W -a -f /vagrant/vagrant-setup/ppolicymodule.ldif
+			# # Configure ppolicy overlay
+			# /usr/local/bin/ldapmodify -D "cn=root,cn=config" -W -a -f /vagrant/vagrant-setup/ppolicyoverlay.ldif
+			# # The policy itself has already been loaded by auth.ldif
+
+			# Verify access to the LDAP server
 			/usr/local/bin/ldapsearch -x -b "" -s base "(objectclass=*)" namingContexts
 			/usr/local/bin/ldapsearch -x -h localhost -b "dc=auth,dc=com"
-	
+
 		else
 			echo "OpenLDAP setup must be installed as root. Type 'sudo ./openldap24.sh' for executing the script."
 		fi
