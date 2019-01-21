@@ -52,6 +52,7 @@ Then it is possible to install selectively the following applications.
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
 - [Openshift 3.7.1](#openshift-371)
 - [Oracle Express 11g2](#oracle-11g)
+- [Oracle 12c](#oracle-12c)
 - [phpPgAdmin 5.1.2](#phppgadmin)
 - [Play Framework 2.2.6](#play-framework-226)
 - [PostgreSQL 9.3 or 9.6 + PostGIS 2.0 or 2.4](#postgresql-93-or-96)
@@ -201,6 +202,38 @@ Execute:
 This will create a base box name `vagrant-centos-73.box` that can be referenced from Vagrantfile.
 
 Read more on Vagrant provisioners [here](https://www.packer.io/docs/provisioners/shell.html).
+
+-------------------------------------------------------------------------------
+
+# HOW TO ADD SWAP SPACE
+
+Some applications, i.e. Oracle need a swap space bigger than the default of 1279 Mb.
+
+If you need to increase the swap space do the following:
+
+With the VM halted, you must add a new virtual hard disk from Virtualbox by right clicking on the machine and then Configuration -> Storage.
+Click on the icon of a hard drive with a + sign and add a new disk of 2Gb fixed size.
+
+After adding the new hard disk do `vagrant up machine_name`
+
+Once logged in type:
+
+`sudo vgdisplay`
+this will display the volume group information showing something like:
+VG Name **cl**
+
+Then execute
+`sudo fdisk -l`
+to list the available drives.
+You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
+
+Now execute:
+`
+sudo pvcreate /dev/sdb
+sudo vgextend cl /dev/sdb
+sudo lvextend -L+2G /dev/cl/swap
+`
+this will add 2Gb to the swap space.
 
 -------------------------------------------------------------------------------
 
@@ -865,36 +898,49 @@ Before running the install script you must have an Oracle OTN account to downloa
 http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
 and save it at `/vagrant/vagrant-setup/cache`
 
+You can also fully automate the download by adding an `?AuthParam=XXXXXXXXXX_HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH` to the URL.
+The `AuthParam` value can be seen in the download URL used after you authenticate in Oracle OTN.
+
 Oracle Database needs a swap space of at least 2048 Mb which is more that the default of 1279 Mb that comes out of the box. 
-So before you begin and with the VM halted, you must add a new virtual hard disk from Virtualbox by right clicking on the machine and then Configuration -> Storage.
-Click on the icon of a hard drive with a + sign and add a new disk of 2Gb fixed size.
+To increase the swap space follow these [instructions](#how-to-add-swap-space).
 
-After adding the new hard disk do `vagrant up machine_name`
-
-Once logged in type:
-
-`sudo vgdisplay`
-this will display the volume group information showing something like:
-VG Name **cl**
-
-Then execute
-`sudo fdisk -l`
-to list the available drives.
-You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
-
-Now execute:
-`
-sudo pvcreate /dev/sdb
-sudo vgextend cl /dev/sdb
-sudo lvextend -L+2G /dev/cl/swap
-`
-this will add 2Gb to the swap space.
-
-Now you can start installation by running the provided Bash script.
+After increasing the swap space you can start installation by running the Bash script provided.
 
 ## Install
 
 [Installation Script](vagrant-setup/oracle11g2.sh)
+
+## Post installation configuration
+
+As part of the installation process, the script will automatically initiate oracle-xe configure which will interactively ask you questions about which ports must be used and whether Oracle must start on boot or not.
+
+If you are using a GUI like Cinnamon then you can also install **SQL Developer**.
+As for the database, you need an OTN account to download SQL Developer from
+http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html
+Then install it with
+`rpm -Uhv sqldeveloper-(build number)-1.noarch.rpm`
+
+-------------------------------------------------------------------------------
+
+# ORACLE 12C
+
+## Prerequisites
+
+Before running the install script you must have an Oracle OTN account to download
+https://download.oracle.com/otn/linux/oracle12c/122010/linux_zser64_12201_database.zip
+and save it at `/vagrant/vagrant-setup/cache`
+
+You can also fully automate the download by adding an `?AuthParam=XXXXXXXXXX_HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH` to the URL.
+The `AuthParam` value can be seen in the download URL used after you authenticate in Oracle OTN.
+
+Oracle Database needs a swap space of at least 2048 Mb which is more that the default of 1279 Mb that comes out of the box. 
+To increase the swap space follow these [instructions](#how-to-add-swap-space).
+
+After increasing the swap space you can start installation by running the Bash script provided.
+
+## Install
+
+[Installation Script](vagrant-setup/oracle12c2.sh)
 
 ## Post installation configuration
 

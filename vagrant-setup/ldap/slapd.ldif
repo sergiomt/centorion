@@ -39,6 +39,7 @@ objectClass: olcSchemaConfig
 cn: schema
 
 include: file:///usr/local/etc/openldap/schema/core.ldif
+include: file:///usr/local/etc/openldap/schema/ppolicy.ldif
 
 # Global settings applied to all the other databases
 dn: olcDatabase=frontend,cn=config
@@ -112,3 +113,7 @@ olcAccess: to *
 	by self write
 	by dn.base="cn=Admin,dc=auth,dc=com" write
 	by * read
+
+#-- Load overlay
+overlay ppolicy
+ppolicy_default "cn=default,ou=Policies,dc=auth,dc=com"
