@@ -9,25 +9,3 @@ dn: ou=Policies,dc=auth,dc=com
 ou: Policies
 description: All users in Clocial
 objectClass: organizationalUnit
-
-# Password policy
-# see http://www.zytrax.com/books/ldap/ch6/ppolicy.html
-dn: cn=default,ou=Users,dc=auth,dc=com
-objectClass: top
-objectClass: device
-objectClass: pwdPolicy
-cn: default
-pwdAttribute: userPassword
-pwdMaxAge: 0
-pwdExpireWarning: 0
-pwdInHistory: 0
-pwdCheckQuality: 0
-pwdMinLength: 0
-pwdMaxFailure: 0
-pwdLockout: FALSE
-pwdLockoutDuration: 86400
-pwdGraceAuthNLimit: 0
-pwdFailureCountInterval: 0
-pwdMustChange: FALSE
-pwdAllowUserChange: TRUE
-pwdSafeModify: FALSE
