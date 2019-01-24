@@ -6,9 +6,6 @@ dn: cn=schema,cn=config
 objectClass: olcSchemaConfig
 cn: schema
 
-include: file:///usr/local/etc/openldap/schema/core.ldif
-include: file:///usr/local/etc/openldap/schema/ppolicy.ldif
-
 dn: olcDatabase=frontend,cn=config
 objectClass: olcDatabaseConfig
 olcDatabase: frontend
@@ -17,8 +14,16 @@ olcAccess: to * by * read
 dn: olcDatabase=config,cn=config
 objectClass: olcDatabaseConfig
 olcDatabase: config
-olcRootPW: {SSHA}XKYnrjvGT3wZFQrDD5040US592LxsdLy
-olcAccess: to * by * none
+olcRootDN: cn=root,cn=config
+# Hash value for "secret" generated with slappasswd -s secret
+olcRootPW: {SSHA}ZKKuqbEKJfKSXhUbHG3fG8MDn9j1v4QN
+# olcAccess: to * by * none
+olcAccess: to *
+  by dn.exact="cn=root,cn=config" manage
+  by * none
+
+include: file:///usr/local/etc/openldap/schema/core.ldif
+include: file:///usr/local/etc/openldap/schema/ppolicy.ldif
 
 #######################################################################
 # BDB database definitions
@@ -50,4 +55,4 @@ olcAccess: to *
 dn: olcOverlay=ppolicy,olcDatabase={1}bdb,cn=config
 objectclass: olcPPolicyConfig
 olcOverlay: ppolicy
-olcPPolicyDefault: cn=default,ou=Policies,dc=auth,dc=com
+olcPPolicyDefault: cn=passwordDefault,ou=Policies,dc=auth,dc=com
