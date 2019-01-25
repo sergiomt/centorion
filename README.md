@@ -854,7 +854,11 @@ server are both running on the same machine.
 
 [Installation Script](vagrant-setup/openldap24.sh)
 
-OpenLDAP is compiled with TCP Wrappers and using Berkeley DB 6.2 as database.
+OpenLDAP is compiled with TCP Wrappers and using MDB as database.
+
+Berkeley DB 6.2 (HDB) can also be used by editing [slapd2.ldif](vagrant-setup/ldap/slapd2.ldif) and [ppolicyoverlay.ldif](vagrant-setup/ldap/ppolicyoverlay.ldif).
+
+A password policy is set with an SSHA password hashing scheme.
 
 If HTTPD is installed then OpenLDAP script installs phpLDAPAdmin as well
 which can be accessed through:

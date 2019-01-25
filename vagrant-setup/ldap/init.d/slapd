@@ -13,11 +13,21 @@ echo "starting slapd server"
 ;;
 stop)
 echo "stopping slapd server"
-kill -INT `cat /usr/local/var/run/slapd.pid`
+if [ -f "cat /usr/local/var/run/slapd.pid" ]
+then
+	kill -INT `cat /usr/local/var/run/slapd.pid`
+else
+	kill -9 `pidof slapd`
+fi
 ;;
 restart)
 echo "stopping slapd server"
-kill -INT `cat /usr/local/var/run/slapd.pid`
+if [ -f "cat /usr/local/var/run/slapd.pid" ]
+then
+	kill -INT `cat /usr/local/var/run/slapd.pid`
+else
+	kill -9 `pidof slapd`
+fi
 echo "starting slapd server"
 /usr/local/libexec/slapd -F /usr/local/etc/openldap/slapd.d
 ;;
