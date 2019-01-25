@@ -26,33 +26,66 @@ include: file:///usr/local/etc/openldap/schema/core.ldif
 include: file:///usr/local/etc/openldap/schema/ppolicy.ldif
 
 #######################################################################
-# BDB database definitions
+# BDB/HDB database definitions
 #######################################################################
 
-dn: olcDatabase=bdb,cn=config
+# dn: olcDatabase=bdb,cn=config
+# objectClass: olcDatabaseConfig
+# objectClass: olcBdbConfig
+# olcDatabase: bdb
+# olcSuffix: dc=auth,dc=com
+# olcRootDN: cn=Manager,dc=auth,dc=com
+# olcRootPW: secret
+# olcDbDirectory: /usr/local/var/auth-data
+# olcDbCachesize: 1000
+# olcDbIDLcacheSize: 3000
+# olcDbSearchStack: 8
+# olcDbIndex: objectClass,ou,cn,sn,uid,email eq
+# olcAccess: to attrs=userPassword
+#   by self write
+#   by anonymous auth
+#   by dn.base="cn=Manager,dc=auth,dc=com" write
+#   by * none
+# olcAccess: to *
+#   by self write
+#   by anonymous search
+#   by dn.base="cn=Manager,dc=auth,dc=com" write
+#   by * read
+ 
+# dn: olcOverlay=ppolicy,olcDatabase={1}bdb,cn=config
+# objectclass: olcPPolicyConfig
+# olcOverlay: ppolicy
+# olcPPolicyDefault: cn=passwordDefault,ou=Policies,dc=auth,dc=com
+
+#######################################################################
+# MDB database definitions
+#######################################################################
+
+dn: olcDatabase=mdb,cn=config
 objectClass: olcDatabaseConfig
-objectClass: olcBdbConfig
-olcDatabase: bdb
+objectClass: olcMdbConfig
+olcDatabase: mdb
 olcSuffix: dc=auth,dc=com
+olcDbDirectory: /usr/local/var/auth-data
 olcRootDN: cn=Manager,dc=auth,dc=com
 olcRootPW: secret
-olcDbDirectory: /usr/local/var/auth-data
-olcDbCachesize: 1000
-olcDbIDLcacheSize: 3000
-olcDbSearchStack: 8
-olcDbIndex: objectClass,ou,cn,sn,uid,email eq
-olcAccess: to attrs=userPassword
-  by self write
-  by anonymous auth
-  by dn.base="cn=Manager,dc=auth,dc=com" write
-  by * none
+olcDbIndex: objectClass eq
+olcLastMod: TRUE
+olcMonitoring: TRUE
+olcDbEnvFlags: writemap
+olcDBNoSync: TRUE
 olcAccess: to *
   by self write
   by anonymous search
   by dn.base="cn=Manager,dc=auth,dc=com" write
   by * read
+olcAccess: to attrs=userPassword
+  by dn="cn=Manager,dc=auth,dc=com" write
+  by anonymous auth
+  by self write
+  by * none
 
-dn: olcOverlay=ppolicy,olcDatabase={1}bdb,cn=config
+dn: olcOverlay=ppolicy,olcDatabase={1}mdb,cn=config
 objectclass: olcPPolicyConfig
 olcOverlay: ppolicy
 olcPPolicyDefault: cn=passwordDefault,ou=Policies,dc=auth,dc=com

@@ -38,7 +38,7 @@ else
 			export LD_LIBRARY_PATH="/usr/share/$BDB/build_unix/.libs"
 
 			# ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --libexecdir=/usr/lib --disable-static --disable-debug --with-tls=openssl --with-cyrus-sasl --enable-dynamic --enable-crypt --enable-spasswd  --enable-slapd --enable-modules --enable-rlookups --enable-backends=mod --disable-ndb --disable-sql --disable-shell --disable-bdb --disable-hdb --enable-overlays=mod
-			./configure --enable-wrappers --enable-ppolicy --disable-hdb --disable-mdb --disable-ndb --disable-sql
+			./configure --enable-wrappers --enable-ppolicy --enable-mdb --disable-bdb --disable-hdb --disable-sql
 			make depend
 			make
 			make install
