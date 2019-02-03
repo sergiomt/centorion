@@ -9,6 +9,7 @@ The default install creates a minimal CentOS 7 virtual machine to start building
 
 - [CentOS 7.3](#centos-73)
 - [Git](#git)
+- OpenSSL 1.0.2
 - Mercurial with HGK and Extension Queues
 
 Video aceleration, which is highly recommended if using Cinnamon, requires VirtualBox Additions 5.2.18 or later.
