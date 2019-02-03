@@ -1,0 +1,3 @@
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1
+export ORACLE_SID=SE2
+export ORACLE_BASE=/var/lib/oracle/12.2.0.1

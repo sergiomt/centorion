@@ -947,11 +947,27 @@ After increasing the swap space you can start installation by running the Bash s
 
 ## Install
 
-[Installation Script](vagrant-setup/oracle12c2.sh)
+The setup runs in silent mode. The install, database and listener parameters are specified in [response files](vagrant-setup/oracle/database/12.2.0.1).
+
+The pre-configured database name is **ORCL** the pre-configured instance name is **SE2**
+
+The password for **SYS** and SYSTEM users is **manager**
+
+Start and stop databse with
+
+`su oracle -c "/u01/app/oracle/product/12.2.0.1/bin/dbstart $ORACLE_HOME"`
+
+`su oracle -c "/u01/app/oracle/product/12.2.0.1/bin/dbshut $ORACLE_HOME"`
+
+LISTENER is pre-configured on 192.168.101.110:1521
+
+Start and stop listener with:
+
+`su oracle -c "/u01/app/oracle/product/12.2.0.1/bin/lsnrctl [start|stop]"`
+
+[Installation Script](vagrant-setup/oracle12c.sh)
 
 ## Post installation configuration
-
-As part of the installation process, the script will automatically initiate oracle-xe configure which will interactively ask you questions about which ports must be used and whether Oracle must start on boot or not.
 
 If you are using a GUI like Cinnamon then you can also install **SQL Developer**.
 As for the database, you need an OTN account to download SQL Developer from
