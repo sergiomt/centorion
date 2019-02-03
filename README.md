@@ -5,15 +5,15 @@ A Vagrantfile plus a set of Bash scripts to full automate the configuration of a
 
 This allows the distribution of virtual machines with very small file size (under 15Mb) compared to the tens of gigabytes required for a VM image.
 
-The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine.
-
-Video aceleration requires VirtualBox Additions 5.2.18 or later
+The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine. This minimal machine contains:
 
 - [CentOS 7.3](#centos-73)
 - [Git](#git)
 - Mercurial with HGK and Extension Queues
 
-Then it is possible to install selectively the following applications.
+Video aceleration, which is highly recommended if using Cinnamon, requires VirtualBox Additions 5.2.18 or later.
+
+It is possible to install selectively the following applications.
 
 - [Android Studio 3.0.1](#android-studio-301)
 - [Ant 1.9.4](#ant-194)
@@ -78,7 +78,7 @@ Then it is possible to install selectively the following applications.
 
 4. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
-	* Optional. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
+	* **Optional**. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
 	* From your host command line do
 		`SET HTTP_PROXY=http://_XXX.XXX.XXX.XXX_:_port_`
 		`SET HTTPS_PROXY=ttp://_XXX.XXX.XXX.XXX_:_port_`
@@ -107,13 +107,15 @@ Then it is possible to install selectively the following applications.
 
 	`https://github.com/sergiomt/centorion/archive/master.zip`
 
-6. Optional (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
+6. **Optional** (but it is cumbersome to change later). The base box define not only the operating system but also other parameters like initial disk space and swap file size. The minimal box has 15Gb disk space and 1.2Gb of swap. These figures are insufficient for certain applications like Oracle. Therefore, it is convenient to replace the default base box with another one larger. This is achieved by changing the **vs.vm.box_url** property in `Vagrantfile`. See the [base boxes section](#how-to-rebuild-the-base-box) for more information.
 
-7. Optional (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+7. **Optional** (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-8. Optional. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+8. **Optional** (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-9. Open a command prompt at the directory of this README file and type:
+9. **Optional**. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+
+10. Open a command prompt at the directory of this README file and type:
 
 	`vagrant up CentOrion`
 
@@ -124,7 +126,7 @@ Then it is possible to install selectively the following applications.
 
 	`vagrant up openshift-master openshift-node1`
 
-10. In the meantime, add the line
+11. In the meantime, add the line
 	`192.168.101.110 centorion`
 	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
@@ -134,20 +136,20 @@ Then it is possible to install selectively the following applications.
 
 	`192.168.101.112 openshift-node1`
 
-11. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+12. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh CentOrion`
 
 	or for connecting using PuTTY read
 	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-12. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
+13. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
-13. The guest machine has the private IP address 192.168.101.110
+14. The guest machine has the private IP address 192.168.101.110
 
-14. The base directory in the host is by default a shared folder between host and guest.
+15. The base directory in the host is by default a shared folder between host and guest.
 
-15. Optional. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
+16. **Optional**. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 ## Troubleshooting
 
@@ -189,7 +191,7 @@ To fully automate application installation on machine creation, add the desired 
 
 # HOW TO REBUILD THE BASE BOX
 
-A VirtualBox base box is required at Vagrant file vs.vm.box_url
+A VirtualBox base box is required at Vagrant file **vs.vm.box_url**
 
 If a box is not available, it can be created using [Packer](https://www.packer.io/intro/index.html).
 
