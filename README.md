@@ -951,9 +951,13 @@ The setup runs in silent mode. The install, database and listener parameters are
 
 The pre-configured database name is **ORCL** the pre-configured instance name is **SE2**
 
-The password for **SYS** and SYSTEM users is **manager**
+The password for UNIX **oracle** user is **0rclPasswd**
 
-Start and stop databse with
+The password for Oracle **SYS** and **SYSTEM** users is **manager**
+
+ORACLE_HOME is /u01/app/oracle/product/12.2.0.1
+
+Start and stop database with
 
 `su oracle -c "/u01/app/oracle/product/12.2.0.1/bin/dbstart $ORACLE_HOME"`
 
