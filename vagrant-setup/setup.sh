@@ -46,7 +46,7 @@ mkdir -p $SETUP/cache/yum
 perl -pi -e "s/cachedir=\x2Fvar\x2Fcache\x2Fyum\x2F\x24basearch\x2F\x24releasever/cachedir=\x2Fvagrant\x2Fvagrant-setup\x2Fcache\x2Fyum\x2F\x24basearch\x2F\x24releasever/g" /etc/yum.conf
 perl -pi -e "s/keepcache=0/keepcache=1/g" /etc/yum.conf
 
-# PostgreSQL and Datastax Cassandra repositories
+# Datastax Cassandra repositories
 cp ./yum/*.repo /etc/yum.repos.d/
 
 cp ./yum/RPM-GPG* /etc/pki/rpm-gpg/
