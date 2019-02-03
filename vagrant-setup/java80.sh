@@ -43,10 +43,14 @@ else
 		wget http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jdk.bin -P $SETUP/cache
 		chmod u+x -P $SETUP/cache/jai-1_1_3-lib-linux-amd64-jdk.bin
 	fi
-	cd $JDK
-	echo "Installing JAI 1.1.3"
-	JDK=
-	echo -e "y\n" | $SETUP/cache/jai-1_1_3-lib-linux-amd64-jdk.bin
+	if [ -f "$SETUP/cache/jai-1_1_3-lib-linux-amd64-jdk.bin" ]
+	then
+		cd $JDK
+		echo "Installing JAI 1.1.3"
+		echo -e "y\n" | $SETUP/cache/jai-1_1_3-lib-linux-amd64-jdk.bin
+	else
+		echo "Warning. Failed to download JAI. Skiping its installation!"	
+	fi
 
 	cd /etc/alternatives
 	if [ -L "jre" ]
