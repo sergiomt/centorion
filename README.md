@@ -196,13 +196,13 @@ A VirtualBox base box is required at Vagrant file **vs.vm.box_url**
 
 If a box is not available, it can be created using [Packer](https://www.packer.io/intro/index.html).
 
-For building the base box, download [download Packer](https://www.packer.io/downloads.html) then change to the /packer subdirectory of CentOrion.
+For building the base box, download [download Packer](https://www.packer.io/downloads.html) then change to the [/packer](packer) subdirectory of CentOrion.
 
 Execute:
 
-`packer build -var-file=variables-centos-7.3.json vagrant-centos.json`
+`packer build -var-file=variables-centos-7.5.json vagrant-centos.json`
 
-This will create a base box name `vagrant-centos-73.box` that can be referenced from Vagrantfile.
+This will create a base box name `vagrant-centos-75.box` that can be referenced from Vagrantfile.
 
 Read more on Vagrant provisioners [here](https://www.packer.io/docs/provisioners/shell.html).
 
