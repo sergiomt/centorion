@@ -190,6 +190,24 @@ To fully automate application installation on machine creation, add the desired 
 
 -------------------------------------------------------------------------------
 
+# HOW TO INSTALL VIRTUAL BOX GUEST ADDITIONS
+
+See [VirtualBox Guest Additions on CentOS 7.5](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/)
+
+Execute from the command line:
+
+`yum update kernel*`
+
+Reboot the virtual machine and execute:
+
+`sudo yum install gcc kernel-devel kernel-headers dkms make bzip2 perl`
+`mkdir /media/VirtualBoxGuestAdditions`
+`mount -r /dev/cdrom /media/VirtualBoxGuestAdditions`
+`cd /media/VirtualBoxGuestAdditions`
+`./VBoxLinuxAdditions.run`
+
+-------------------------------------------------------------------------------
+
 # HOW TO REBUILD THE BASE BOX
 
 A VirtualBox base box is required at Vagrant file **vs.vm.box_url**
