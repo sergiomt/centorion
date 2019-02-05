@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 if [[ $EUID -eq 0 ]]
@@ -39,7 +38,7 @@ then
 	systemctl set-default graphical.target
 
 	# Change background
-	cp /vagrant/vagrant-setup/cinnamon/cylon-wallpaper-1920x1080.jpg /usr/share/backgrounds/gnome/Cylon.jpg
+	cp $SETUP/cinnamon/cylon-wallpaper-1920x1080.jpg /usr/share/backgrounds/gnome/Cylon.jpg
 	gsettings set org.cinnamon.desktop.background picture-uri "file:///usr/share/backgrounds/gnome/Cylon.jpg"
   su vagrant -c "gsettings set org.cinnamon.desktop.background picture-uri \"file:///usr/share/backgrounds/gnome/Cylon.jpg\""
 	echo "Cinnamon successfully instaled. Please reboot the machine to complete setup."
