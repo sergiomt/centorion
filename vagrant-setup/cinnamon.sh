@@ -30,9 +30,11 @@ then
 	yum -y install gnome-terminal
 	yum -y install gedit
 	yum -y install firefox
-  sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-  sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-  sudo yum -y install sublime-text
+  
+  # sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+  # sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+  # sudo yum -y install sublime-text
+
 	# yum -y groupinstall gnome-desktop
 
 	systemctl set-default graphical.target
