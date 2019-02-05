@@ -201,9 +201,13 @@ Execute from the command line:
 Reboot the virtual machine and execute:
 
 `sudo yum install gcc kernel-devel kernel-headers dkms make bzip2 perl
+
 mkdir /media/VirtualBoxGuestAdditions
+
 mount -r /dev/cdrom /media/VirtualBoxGuestAdditions
+
 cd /media/VirtualBoxGuestAdditions
+
 ./VBoxLinuxAdditions.run`
 
 -------------------------------------------------------------------------------
