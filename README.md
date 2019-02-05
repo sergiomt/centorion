@@ -976,8 +976,14 @@ Start and stop listener with:
 If you are using a GUI like Cinnamon then you can also install **SQL Developer**.
 As for the database, you need an OTN account to download SQL Developer from
 http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html
-Then install it with
+
+Then install it with:
+
 `rpm -Uhv sqldeveloper-(build number)-1.noarch.rpm`
+
+You may want to add the JDBC driver to Maven repo with:
+
+`mvn install:install-file -Dfile=/vagrant/vagrant-setup/oracle/jdbc/12.1.0.2/ojdbc7-12.1.0.2.0.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2.0 -Dpackaging=jar`
 
 -------------------------------------------------------------------------------
 
