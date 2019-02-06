@@ -75,34 +75,13 @@ It is possible to install selectively the following applications.
 
 2. Ensure that you have an ssh client in your host. If your host is Linux most probably is already there. If your host is Windows then install PuTTY, Cygwin or Git to get an ssh client as a side effect. Check that ssh executable is in your PATH.
 
-3. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.1 or higher.
+3. [Install Oracle Virtual Box](https://www.virtualbox.org/wiki/Downloads) 5.2.18 or higher.
 
 4. [Install Vagrant](https://www.vagrantup.com/downloads.html) 1.9 or higher.
 
-	* **Optional**. If you are using a proxy with basic authentication (not NTLM), you will have to configure it for Bundler and Vagrant.
-	* From your host command line do
-		```
-		SET HTTP_PROXY=http://_XXX.XXX.XXX.XXX_:_port_
-		SET HTTPS_PROXY=ttp://_XXX.XXX.XXX.XXX_:_port_
-		SET HTTP_PROXY_USER=_proxyuser_
-		SET HTTPS_PROXY_USER=_proxyuser_
-		SET HTTP_PROXY_PASS=_userpasswd_
-		SET HTTPS_PROXY_PASS=_userpasswd_
-		```
-		on a Windows host, or
-		```export HTTP_PROXY=http://_XXX.XXX.XXX.XXX_:_port_
-		
-		export HTTPS_PROXY=ttp://_XXX.XXX.XXX.XXX_:_port_
-		export HTTP_PROXY_USER=_proxyuser_
-		export HTTPS_PROXY_USER=_proxyuser_
-		export HTTP_PROXY_PASS=_userpasswd_
-		export HTTPS_PROXY_PASS=_userpasswd_
-		```
-		on a Linux host.
-	* From the command line `vagrant plugin install vagrant-proxyconf-1.5.2.gem`
-	* Last edit Vagrantfile and change config.proxy.http, config.proxy.https and config.proxy.no_proxy values to the right IP and port and user/password.
- 
-5. Download source from GitHub, if you have Git installed in your host then do :
+5. **Optional**. If you are using a proxy with basic authentication (not NTLM), read the [proxy configuration section](doc/PROXY_CONFIG.md).
+
+6. Download source from GitHub, if you have Git installed in your host then do :
 
 	`git clone https://github.com/sergiomt/centorion.git`
 
@@ -112,15 +91,15 @@ It is possible to install selectively the following applications.
 
 	`https://github.com/sergiomt/centorion/archive/master.zip`
 
-6. **Optional** (but it is cumbersome to change later). The base box define not only the operating system but also other parameters like initial disk space and swap file size. The minimal box has 15Gb disk space and 1.2Gb of swap. These figures are insufficient for certain applications like Oracle. Therefore, it is convenient to replace the default base box with another one larger. This is achieved by changing the **vs.vm.box_url** property in `Vagrantfile`. See the [base boxes section](#how-to-rebuild-the-base-box) for more information.
+7. **Optional** (but it is cumbersome to change later). The base box define not only the operating system but also other parameters like initial disk space and swap file size. The minimal box has 15Gb disk space and 1.2Gb of swap. These figures are insufficient for certain applications like Oracle. Therefore, it is convenient to replace the default base box with another one larger. This is achieved by changing the **vs.vm.box_url** property in `Vagrantfile`. See the [base boxes section](#how-to-rebuild-the-base-box) for more information.
 
-7. **Optional** (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
+8. **Optional** (you can do this later). If you are going to install a graphical user interface then edit Vagrantfile and set [vb.gui = true](https://www.vagrantup.com/docs/virtualbox/configuration.html).
 
-8. **Optional** (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
+9. **Optional** (you can do this later). If you are going to use an SSH key then copy then SSH key (id_dsa or id_rsa) authorized for your Git repository at vagrant-setup/.ssh/
 
-9. **Optional**. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
+10. **Optional**. Edit `setup.sh` file and set what applications will be installed by default by changing `INSTALLED_APPS`.
 
-10. Open a command prompt at the directory of this README file and type:
+11. Open a command prompt at the directory of this README file and type:
 
 	`vagrant up CentOrion`
 
@@ -131,8 +110,10 @@ It is possible to install selectively the following applications.
 
 	`vagrant up openshift-master openshift-node1`
 
-11. In the meantime, add the line
+12. In the meantime, add the line
+
 	`192.168.101.110 centorion`
+
 	to your host machine hosts file which will be at `/etc/hosts` in Linux or at `C:\Windows\Sytem32\drivers\etc\hosts` in Windows.
 
 	If you are setting up an Openshift cluster then add at hosts:
@@ -141,40 +122,20 @@ It is possible to install selectively the following applications.
 
 	`192.168.101.112 openshift-node1`
 
-12. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
+13. After creating the virtual machine move to its base directory in the host and connect to guest by doing:
 
 	`vagrant ssh CentOrion`
 
 	or for connecting using PuTTY read
 	[Connect to your Vagrant VM withPuTTY](https://github.com/Varying-Vagrant-Vagrants/VVV/wiki/Connect-to-Your-Vagrant-Virtual-Machine-with-PuTTY).
 
-13. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
+14. Once logged into the Vagrant VM, from directory `/vagrant/vagrant-setup` run the selected Bash (.sh) scripts for installing the desired applications. For example, a basic Tomcat 8 server deployment could consist of: java80.sh, maven321.sh and tomcat80.sh. The order of execution of the scripts is important.
 
-14. The guest machine has the private IP address 192.168.101.110
+15. The guest machine has the private IP address **192.168.101.110**
 
-15. The base directory in the host is by default a shared folder between host and guest.
+16. The base directory in the host is by default a shared folder between host and guest.
 
-16. **Optional**. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
-
-## Troubleshooting
-
-In case you have made any change to Vagrantfile then validate it with:
-
-	`vagrant validate`
-
-In case you need a full debug trace during VM creation you may use:
-
-	`vagrant up machine_name -- debug > vagrant_debug.log 2>&1`
-
-For watching your SSH configuration use:
-
-	`vagrant ssh-config`
-
-For trying to stablish an SSH connection with debug enabled use:
-
-	`vagrant ssh -- -vvv`
-
-At Vagrantfile, set `vb.gui = true` enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
+17. **Optional**. To save some disk space after install, you can delete the files at `/vagrant/vagrant-setup/cache` This is not recommended if you are going to create, destroy, re-create the virtual machine more than once because the set up scripts keep a local copy of downloaded packages, so with cache the second time that you create your VM the process will be much faster and use far less bandwidth.
 
 -------------------------------------------------------------------------------
 
@@ -191,72 +152,6 @@ Some applications require others so order of installation is important.
 Most of the scripts will either inform you about missing dependencies on other scripts or install the required dependencies themselves.
 
 To fully automate application installation on machine creation, add the desired script names to `INSTALLED_APPS` variable in [setup.sh](vagrant-setup/setup.sh)
-
--------------------------------------------------------------------------------
-
-# HOW TO INSTALL VIRTUAL BOX GUEST ADDITIONS
-
-See [VirtualBox Guest Additions on CentOS 7.5](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/).
-
-Execute:
-
-```
-sudo yum install gcc kernel-devel kernel-headers dkms make bzip2 perl
-mkdir /media/VirtualBoxGuestAdditions
-mount -r /dev/cdrom /media/VirtualBoxGuestAdditions
-cd /media/VirtualBoxGuestAdditions
-./VBoxLinuxAdditions.run
-```
-
--------------------------------------------------------------------------------
-
-# HOW TO REBUILD THE BASE BOX
-
-A VirtualBox base box is required at Vagrant file **vs.vm.box_url**
-
-If a box is not available, it can be created using [Packer](https://www.packer.io/intro/index.html).
-
-For building the base box, download [download Packer](https://www.packer.io/downloads.html) then change to the [/packer](packer) subdirectory of CentOrion.
-
-Execute:
-
-`packer build -var-file=variables-centos-7.5.json vagrant-centos.json`
-
-This will create a base box name `vagrant-centos-75.box` that can be referenced from Vagrantfile.
-
-Read more on Vagrant provisioners [here](https://www.packer.io/docs/provisioners/shell.html).
-
--------------------------------------------------------------------------------
-
-# HOW TO ADD SWAP SPACE
-
-Some applications, i.e. Oracle need a swap space bigger than the default of 1279 Mb.
-
-If you need to increase the swap space do the following:
-
-With the VM halted, you must add a new virtual hard disk from Virtualbox by right clicking on the machine and then Configuration -> Storage.
-Click on the icon of a hard drive with a + sign and add a new disk of 2Gb fixed size.
-
-After adding the new hard disk do `vagrant up machine_name`
-
-Once logged in type:
-
-`sudo vgdisplay`
-this will display the volume group information showing something like:
-VG Name **cl**
-
-Then execute
-`sudo fdisk -l`
-to list the available drives.
-You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
-
-Now execute:
-`
-sudo pvcreate /dev/sdb
-sudo vgextend cl /dev/sdb
-sudo lvextend -L+2G /dev/cl/swap
-`
-this will add 2Gb to the swap space.
 
 -------------------------------------------------------------------------------
 
