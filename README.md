@@ -1,18 +1,19 @@
--------------------------------------------------------------------------------
 # ![CentOrion](cylon-icon.png "CentOrion") CentOrion
 
 A Vagrantfile plus a set of Bash scripts to full automate the configuration of a software development or server Linux VM.
 
-This allows the distribution of virtual machines with very small file size (under 15Mb) compared to the tens of gigabytes required for a VM image.
+This allows the distribution of virtual machines with small file size (under 200Mb) compared to the tens of gigabytes required for a VM image.
 
 The default install creates a minimal CentOS 7 virtual machine to start building a server or a development machine. This minimal machine contains:
 
-- [CentOS 7.3](#centos-73)
+- [CentOS 7.5](#centos-75)
 - [Git](#git)
 - OpenSSL 1.0.2
 - Mercurial with HGK and Extension Queues
 
 Video aceleration, which is highly recommended if using Cinnamon, requires VirtualBox Additions 5.2.18 or later.
+
+## Machine contents
 
 It is possible to install selectively the following applications.
 
@@ -155,7 +156,7 @@ To fully automate application installation on machine creation, add the desired 
 
 -------------------------------------------------------------------------------
 
-# CENTOS 7.3
+# CENTOS 7.5
 
 The password for **root** and **vagrant** users is **vagrant**
 
