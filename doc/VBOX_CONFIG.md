@@ -59,9 +59,10 @@ to list the available drives.
 You should get in the list **/dev/hdb** or **/dev/sdb** depending on whether you are using spinning or solid states physical drives.
 
 Now execute:
-`
+```
 sudo pvcreate /dev/sdb
 sudo vgextend cl /dev/sdb
 sudo lvextend -L+2G /dev/cl/swap
-`
+```
+
 this will add 2Gb to the swap space.
