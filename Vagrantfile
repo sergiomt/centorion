@@ -118,6 +118,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   puppet.manifest_file  = "site.pp"
   # end
 
+  # Share additional folders
+  # config.vm.synced_folder "host_folder_name", "/home/vagrant/guest_folder_name", type: "virtualbox", group: "vagrant", owner: "vagrant"
+
+  # Enable symlinks in shared folders
+  # config.vm.provider "virtualbox" do |config|
+  #   config.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+  # end
+
+  # Port forwarding
+  # config.vm.network "forwarded_port", guest: 1521, host: 1521, auto_correct: true
+
   # Proxy configuration 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = "http://proxyuser:proxypasswd@XXX.XXX.XXX.XXXX:port"
