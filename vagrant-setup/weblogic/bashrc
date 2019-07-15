@@ -1,0 +1,6 @@
+
+export MW_HOME=/u01/app/oracle/middleware
+export WLS_HOME=$MW_HOME/wlserver
+export WL_HOME=$WLS_HOME
+export JAVA_HOME=/usr/java/default
+export PATH=$JAVA_HOME/bin:$PATH

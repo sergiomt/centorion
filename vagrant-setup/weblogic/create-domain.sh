@@ -1,0 +1,13 @@
+export ADMIN_HOST=wlsadmin
+export NM_PORT=5556
+export MS_PORT=7002
+export DEBUG_PORT=8453
+export CONFIG_JVM_ARGS=-Dweblogic.security.SSL.ignoreHostnameVerification=true
+export DOMAIN_NAME=base_domain
+export DOMAIN_HOME=/u01/oracle/user_projects/domains/base_domain
+export ADMIN_PORT=7001
+export ADMIN_PASSWORD=welcome01
+export CLUSTER_NAME=Cluster
+export debugFlag=true
+export PRODUCTION_MODE=dev
+export PATH='/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/u01/software/wls12210/oracle_common/common/bin/:/u01/weblogic/bin'
