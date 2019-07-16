@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.oracle.weblogic</groupId>
+  <artifactId>weblogic-maven-plugin</artifactId>
+  <versioning>
+    <release>10.3.6.0</release>
+    <versions>
+      <version>10.3.6.0</version>
+    </versions>
+    <lastUpdated>20190311155537</lastUpdated>
+  </versioning>
+</metadata>

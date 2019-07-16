@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Mar 11 16:55:37 CET 2019
+weblogic-maven-plugin-10.3.6.0.jar>=
+weblogic-maven-plugin-10.3.6.0.pom>=

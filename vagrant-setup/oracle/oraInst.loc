@@ -1,2 +1,2 @@
-inventory_loc=/u01/app/oraInventory
+inventory_loc=/u01/app/inventory
 inst_group=oinstall
