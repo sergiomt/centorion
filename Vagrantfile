@@ -22,14 +22,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "CentOrion" , primary: true do |vs|
 
     # Every Vagrant virtual environment requires a box to build off of.
-    # This is CentOS 7.5 + VirtualBox Additions 5.1.xx
-    vs.vm.box = "vagrant-centos-75-x86_64"
+    # This is CentOS 7.5 + VirtualBox Guest Additions 5.1.18
+    # vs.vm.box = "vagrant-centos-75-x86_64"
+    # Local copy of CentOs 7.5 Minimal base box created with Packer may need to preffix with full path like C:\\VBoxVMs\\
+    # vs.vm.box_url = "vagrant-centos-7.5-48G.box"
 
-    # Local copy of CentOs 7.5 Minimal base box created with Packer
-    vs.vm.box_url = "vagrant-centos-7.5-48G.box"
+    # This is CentOS 7.6 without VirtualBox Guest Additions
+    vs.vm.box = "centos/7"
+    config.vm.box = "centos/7"
+    config.vm.box_version = "1902.01"
 
-    # Remote base box with CentOS 7.3 Minimal + Puppet
-    # vs.vm.box_url = "https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.3/vagrant-centos-7.3.box"
+    # Parameters for VirtualBox Guest Additions plug-in
+    # Do not check for VirtualBox Guest Additions updates
+    config.vbguest.auto_update = false
+    # do NOT download the iso file from a webserver
+    config.vbguest.no_remote = true
 
     # Vagrant will need to login once with its own insecure_private_key in order to change it at guest's ~/.ssh/authorized_keys
     vs.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', "vagrant-setup/keys/centorion_openssh.key"]
@@ -46,10 +53,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     vs.vm.provider "virtualbox" do |vb|
       # Enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
-      vb.gui = true
+      vb.gui = false
       # Use VBoxManage to customize the VM.
-      vb.customize ["modifyvm", :id, "--cpus", "4"]
-      vb.customize ["modifyvm", :id, "--memory", "8192"]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
     end
   end
 
