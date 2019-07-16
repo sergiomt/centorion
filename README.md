@@ -11,7 +11,7 @@ The default install creates a minimal CentOS 7 virtual machine to start building
 - OpenSSL 1.0.2
 - Mercurial with HGK and Extension Queues
 
-Video aceleration, which is highly recommended if using Cinnamon, requires VirtualBox Additions 5.2.18 or later.
+Video aceleration, which is highly recommended if using Cinnamon, requires [VirtualBox Additions](doc/VBOX_CONFIG.md) 5.2.18 or later.
 
 ## Machine contents
 
@@ -45,11 +45,11 @@ It is possible to install selectively the following applications.
 - [Groovy 2.4.13](#groovy-2413) (requires Java 8)
 - [LAMP](#lamp) (MySQL + PHP + phpMyAdmin)
 - [Logstash](#logstash)
-- [Maven 3.2.1](vagrant-setup/maven321.sh)
+- [Maven 3.5.3](vagrant-setup/maven353.sh)
 - [MongoDB](#mongodb)
 - [MySQL 5.6 + phpMyAdmin](#mysql-5639)
 - [Nagios 4.1.1](#nagios-411)
-- [NodeJS 6.2.2 + Bower + Express](#nodejs-622)
+- [NodeJS + Bower + Express](#nodejs-8122)
 - [Open Fire 3.9.3](#open-fire-393)
 - [OpenLDAP 2.4 + phpLDAPAdmin](#openldap-24)
 - [Openshift 3.7.1](#openshift-371)
@@ -67,6 +67,7 @@ It is possible to install selectively the following applications.
 - [Solr 6.1.0](#solr-610)
 - [Tomcat 8.0 or 8.5](#tomcat-80-or-85)
 - [VSFTP](vagrant-setup/vsftpd.sh)
+- [Weblogic 12.2.1.3](#weblogic-12)
 - [Zookeeper 3.4.13](#zookeeper-3413)
 
 -------------------------------------------------------------------------------
@@ -640,6 +641,16 @@ See also [Running Logstash from the Command Line](https://www.elastic.co/guide/e
 
 -------------------------------------------------------------------------------
 
+# MAVEN 3.5.3
+
+[Installation Script](vagrant-setup/maven353.sh)
+
+Is installed at /usr/local/maven
+
+A symbolic link is created so that /home/vagrant/.m2 actually stores files at /vagrant/vagrant-setup/.m2 This way the Maven repository can be shared between the host and the guest.
+
+-------------------------------------------------------------------------------
+
 # NAGIOS 4.1.1
 
 [Installation Script](vagrant-setup/nagios411.sh)
@@ -728,9 +739,9 @@ for allowing access to phpMyAdmin from outside local host
 
 -------------------------------------------------------------------------------
 
-# NODEJS 6.2.2
+# NodeJS 8.12.2
 
-[Installation Script](vagrant-setup/nodejs622.sh)
+Installation Scripts [8.12.2](vagrant-setup/nodejs812.sh), [6.2.2](vagrant-setup/nodejs622.sh)
 
 Typescript quickstart files can be found at /vagrant/vagrant-setup/angular2
 
@@ -1024,6 +1035,22 @@ Tomcat uses DCEVM as runtime for dynamic class reloading.
 To use standard JRE edit [init.d/tomcat](vagrant-setup/tomcat/init.d/tomcat) and remove
 `-XXaltjvm=dcevm -javaagent:/usr/share/tomcat/lib/hotswap-agent-1.1.0.jar=autoHotswap=true`
 from `JAVA_OPTS`
+
+-------------------------------------------------------------------------------
+
+# WEBLOGIC 12
+
+The offline Weblogic install package fmw_12.2.1.3.0_wls_Disk1_1of1.zip must be put at /vagrant/vagrant-setup/cache before begining installation
+
+Installation Script [12.2.1.3](vagrant-setup/weblogic12.sh)
+
+Is installed and runs with user **oracle** password **0rclPasswd**
+
+The domain created by default is **wldomain** user **weblogic** password **welcome01**
+
+The console can be accessed through http://192.168.101.110:7001/console
+
+To start and stop WebLogic use the `startWebLogic.sh` and `stoWebLogic.sh` scripts at `/u01/app/oracle/config/domains/wldomain/bin/`
 
 -------------------------------------------------------------------------------
 
