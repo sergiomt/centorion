@@ -1,5 +1,7 @@
 # Troubleshooting
 
+## Vagrantfile
+
 In case you have made any change to Vagrantfile then validate it with:
 
 `vagrant validate`
@@ -17,3 +19,16 @@ For trying to stablish an SSH connection with debug enabled use:
 `vagrant ssh -- -vvv`
 
 At Vagrantfile, set `vb.gui = true` enable the GUI of VirtualBox and see whether the VM is waiting for input on startup
+
+## Grub
+
+In case you need to change grub configuration, for example to edit boot command line, do:
+
+`sudo vi /etc/default/grub`
+
+Change the properties as required and then execute
+
+`sudo grub2-mkconfig -o /boot/grub2/grub.cfg`
+
+`sudo grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg`
+

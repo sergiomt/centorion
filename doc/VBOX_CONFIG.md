@@ -4,9 +4,16 @@
 
 ## INSTALL VIRTUAL BOX GUEST ADDITIONS
 
-See [VirtualBox Guest Additions on CentOS 7.5](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/).
+If your CentOS image does not include VirtualBox Guest Additions then download the version of Guest Additions that matches exactly your installed VirtualBox version from [here](http://download.virtualbox.org/virtualbox/) rename it to VBoxGuestAdditions.iso and place it in the same directory as Virtualbox.exe is which for Windows typically is C:\Program Files\VirtualBox.
 
-Execute:
+The easiest way to get VirtualBox Guest Additions is by mean of using the [vagrant-vbguest plugin](https://github.com/dotless-de/vagrant-vbguest).
+Just install the plugin before you do vagrant up
+
+`vagrant plugin install vagrant-vbguest`
+
+See also [VirtualBox Guest Additions on CentOS 7.5](https://www.if-not-true-then-false.com/2010/install-virtualbox-guest-additions-on-fedora-centos-red-hat-rhel/).
+
+To manully install or upgrade do:
 
 ```
 sudo yum install gcc kernel-devel kernel-headers dkms make bzip2 perl
@@ -15,6 +22,14 @@ mount -r /dev/cdrom /media/VirtualBoxGuestAdditions
 cd /media/VirtualBoxGuestAdditions
 ./VBoxLinuxAdditions.run
 ```
+
+The kernel-headers and kernel-devel must match exactly the version of your installed kernel.
+In order to check this do:
+`uname -r` 
+and
+`rpm -q kernel-devel`
+If the versions don't match then `yum remove` kernel-devel and kernel-headers and `yum install`again with the exact version required.
+
 
 -------------------------------------------------------------------------------
 
