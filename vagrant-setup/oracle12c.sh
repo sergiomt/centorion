@@ -48,22 +48,23 @@ else
 			else
 				echo "Creating user oracle"
 				useradd -d /u01/oracle -K MAIL_DIR=/dev/null -g oinstall oracle
-				usermod -a -G dba oracle
-				usermod -a -G oper oracle
 				echo -e "0rclPasswd\n0rclPasswd\n" | passwd oracle
 				cp $SETUP/oracle/bashrc /u01/oracle/.bashrc
 			fi
-	
+
+			usermod -a -G dba oracle
+			usermod -a -G oper oracle
+
 			mkdir -p /u01/app/oracle/middleware
 			mkdir -p /u01/app/oracle/config/domains
 			mkdir -p /u01/app/oracle/config/applications
 			mkdir -p /u01/app/oracle/product/12.2.0.1/network/log/
 			mkdir -p /var/lib/oracle/12.2.0.1/data
 			mkdir -p /var/lib/oracle/12.2.0.1/recovery
-	
+
 			chown -R oracle:oinstall /var/lib/oracle
 			chmod -R 775 /var/lib/oracle
-	
+
 			cd /u01/app/oracle/
 			unzip $SETUP/cache/linuxx64_12201_database.zip
 	
@@ -71,20 +72,20 @@ else
 			chmod -R 775 /u01
 	
 			cd database
-			su oracle -c "./runInstaller -ignorePrereq -silent -responseFile $SETUP/oracle/12.2.0.1/database/db_install.rsp"
+			su oracle -c "./runInstaller -ignorePrereq -silent -responseFile $SETUP/oracle/database/12.2.0.1/db_install.rsp"
 	
 			export ORACLE_HOME=/u01/app/oracle/product/12.2.0.1
 			export ORACLE_SID=SE2
 			export ORACLE_BASE=/var/lib/oracle/12.2.0.1
-	
+
 			cd /u01/app/inventory/
 			./orainstRoot.sh
 			cd /u01/app/oracle/product/12.2.0.1
 			./root.sh
-	
+
 			cd bin
-			su oracle -c "./dbca -silent -createDatabase -responseFile $SETUP/oracle/12.2.0.1/database/dbca.rsp"
-	
+			su oracle -c "./dbca -silent -createDatabase -responseFile $SETUP/oracle/database/12.2.0.1/dbca.rsp"
+
 			if [[ ! $(iptables -nL | grep "dpt:1521") ]]
 			then
 				iptables -A INPUT -p tcp --dport 1521 -j ACCEPT
@@ -92,7 +93,9 @@ else
 				systemctl restart iptables
 			fi
 	
-			cp $SETUP/oracle/12.2.0.1/database/listener.ora $ORACLE_HOME/network/admin
+			cp $SETUP/oracle/database/12.2.0.1/listener.ora $ORACLE_HOME/network/admin
+			chown oracle:oinstall $ORACLE_HOME/network/admin/listener.ora
+
 			su oracle -c "./lsnrctl start"
 	
 		else
